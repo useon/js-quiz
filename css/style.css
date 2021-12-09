@@ -1,0 +1,91 @@
+/* 공통 */
+.header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 50px;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: cadetblue;
+}
+
+.footer {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+}
+
+p {
+    padding: 10px;
+}
+
+article {
+    padding: 20px;
+}
+
+/* index.html */
+.section-index {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 700px;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* test.html */
+.section-test {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 700px;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer {
+    background-color: darkorchid;
+}
+
+.box-question {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.question-box {
+    width: 300px;
+    height: 200px;
+    background-color: cornflowerblue;
+}
+
+/* result.html */
+
+.section-result {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 400px;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-chart {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 400px;
+    top: 50px;
+    justify-content: center;
+    align-items: center;
+}
