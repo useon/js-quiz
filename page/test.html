@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../css/reset.css">
     <!-- css -->
     <link rel="stylesheet" href="../css/style.css">
+    <!-- 테스트 css 파일(충돌 X) -->
+    <link rel="stylesheet" href="../css/visible&invisivle.css">
     <!-- 테스트 스타일 적용 -->
     <style></style>
 </head>
@@ -25,13 +27,8 @@
         <article class="timer">
             타이머
         </article>
-
-        <article class="box-question">
-            <!-- 시작버튼 있어야 할까요?
-            <input class="input-box" type="button">
-                시작!!
-            </input> -->
-
+        <input id="btn-init" class="input-box visible m-3 p-2" type="button" value="시작!!"/>
+        <article class="invisible box-question">
             <div class="question-box">
                 문제 출력 박스
             </div>
@@ -52,7 +49,8 @@
         <p>프로젝트 정보</p>
         ...
     </footer>
-    <script src="../script.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/test-init.js"></script>
 </body>
 
 
