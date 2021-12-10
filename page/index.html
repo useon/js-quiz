@@ -18,19 +18,23 @@
 </head>
 
 <body>
+    <video autoplay muted loop id="myVideo">
+        <source src="../images/Bokeh - 9036.mp4" type="video/mp4">
+    </video>
     <header class="header">헤더</header>
     <section class="section-index">
-        <h1>javascript test에 오신것을 환영합니다.</h1>
-        <p class="p-index">
-            javascript test 해볼까요
-        </p>
+        <div class="box-manual">
+            <p>JS 퀴즈에 오신것을 환영합니다.</p>
+            <input id="btn-menual" class="visible" type="button" value="다음">
+        </div>
         <a href="test.html" type="button" class="btn btn-warning">문제 풀러가기</a>
     </section>
     <footer class="footer">
         <p>프로젝트 정보</p>
         ...
     </footer>
-    <script src="../script.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/index-menual.js"></script>
 </body>
 
 </html>
