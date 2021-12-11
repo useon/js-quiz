@@ -104,7 +104,7 @@ article {
     align-items: center;
 }
 
-#btn-menual {
+.btn-menual {
     position: absolute;
     border: none;
     width: 80px;
@@ -115,7 +115,7 @@ article {
     translate: 5s all;
 }
 
-#btn-menual:hover {
+.btn-menual:hover {
     color: red;
     border-radius: 0px 0px 50px 0px;
 }
@@ -144,9 +144,12 @@ article {
 }
 
 .question-box {
-    width: 300px;
-    height: 200px;
-    background-color: cornflowerblue;
+    width: 400px;
+    height: 300px;
+    background-color: rgb(133, 173, 248);
+    border-radius: 20px;
+    padding: 50px;
+    margin: 0px 0px 30px 0;
 }
 
 /* result.html */
