@@ -1,0 +1,221 @@
+[
+  {
+    "category": "단항연산자",
+    "patterns": [
+      {
+        "operators": [ "+", "-" ],
+        "forms": [
+          { "type": "number", "0": [-9, -1] },
+          { "type": "string", "0": [-9, 9] }
+        ]
+      },
+      {
+        "operators": [ "!", "!!" ],
+        "forms": [
+          { "type": "boolean" },
+          { "type": "number", "0": [-9, 9] },
+          { "type": "string", "0": [-9, 9], "1": true, "2": true },
+          { "type": "array", "0": [0, 1], "1": [0, 1] },
+          { "type": "object", "0": [0, 1] }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "연산자1개",
+    "patterns": [
+      {
+        "operators": [ "+" ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "string", "0": [0, 9], "1": true }
+          ],
+          [
+            { "type": "string", "0": [0, 9], "1": true },
+            { "type": "number", "0": [0, 9] }
+          ],
+          [
+            { "type": "string", "0": [0, 9], "1": true },
+            { "type": "string", "0": [0, 9], "1": true }
+          ],
+          [
+            { "type": "array", "0": [0, 3], "1": [0, 3] },
+            { "type": "array", "0": [0, 3], "1": [0, 3] }
+          ]
+        ]
+      },
+      {
+        "operators": [ "-" ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "string", "0": [0, 9] }
+          ],
+          [
+            { "type": "string", "0": [0, 9] },
+            { "type": "number", "0": [0, 9] }
+          ],
+          [
+            { "type": "string", "0": [0, 9] },
+            { "type": "string", "0": [0, 9] }
+          ]
+        ]
+      },
+      {
+        "operators": [ "*" ],
+        "forms": [
+          [
+            { "type": "string", "0": [0, 5] },
+            { "type": "string", "0": [0, 5] }
+          ],
+          [
+            { "type": "string", "0": [0, 5] },
+            { "type": "number", "0": [0, 5] }
+          ],
+          [
+            { "type": "array", "0": [1, 3], "1": [1, 2] },
+            { "type": "number", "0": [2, 3] }
+          ]
+        ]
+      },
+      {
+        "operators": [ "/" ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "string", "0": [0, 5] }
+          ],
+          [
+            { "type": "string", "0": [0, 9] },
+            { "type": "number", "0": [0, 5] }
+          ]
+        ]
+      },
+      {
+        "operators": [ "/" ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "string", "3": true }
+          ],
+          [
+            { "type": "string", "0": [0, 9] },
+            { "type": "number", "2": true }
+          ]
+        ]
+      },
+      {
+        "operators": [ "%", "**" ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "number", "0": [2, 3] }
+          ]
+        ]
+      },
+      {
+        "operators": [ ">", "<" ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "string", "0": [0, 9] }
+          ],
+          [
+            { "type": "string", "0": [0, 9] },
+            { "type": "number", "0": [0, 9] }
+          ],
+          [
+            { "type": "string", "1": true },
+            { "type": "string", "1": true }
+          ]
+        ]
+      },
+      {
+        "operators": [ "==", "!=" ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "boolean" }
+          ],
+          [
+            { "type": "boolean" },
+            { "type": "number", "0": [0, 9] }
+          ],
+          [
+            { "type": "string", "0": [0, 9], "1": true, "2": true },
+            { "type": "boolean" }
+          ],
+          [
+            { "type": "boolean" },
+            { "type": "string", "0": [0, 9], "1": true, "2": true }
+          ]
+        ]
+      },
+      {
+        "operators": [ "===", "!==" ],
+        "options": { "identical": true },
+        "forms": [
+          { "type": "array", "0": [0, 2], "1": [0, 2] },
+          { "type": "object", "0": [0, 2] }
+        ]
+      },
+      {
+        "operators": [ "&&", "||" ],
+        "options": { "permutation": true },
+        "forms": [
+          { "type": "boolean" },
+          { "type": "number", "0": [-1, 1] },
+          { "type": "string", "0": [-1, 1], "1": true, "2": true },
+          { "type": "array", "0": [0, 2], "1": [0, 2] },
+          { "type": "object", "0": [0, 2] }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "연산자2개",
+    "patterns": [
+      {
+        "operators": [
+          [ "+", "-" ],
+          [ "*", "%", "/", "**" ]
+        ],
+        "forms": [
+          [
+            { "type": "number", "0": [0, 9] },
+            { "type": "string", "0": [0, 9] }
+          ],
+          [
+            { "type": "number", "0": [2, 2] },
+            { "type": "string", "0": [2, 2] }
+          ]
+        ]
+      },
+      {
+        "operators": [
+          [ "&&", "||" ],
+          [ "&&", "||" ]
+        ]
+      },
+      {
+        "operators": [
+          [ "+", "*" ],
+          [ "===", "!==" ]
+        ]
+      }
+    ]
+  },
+  {
+    "category": "연산자3개",
+    "patterns": [
+      {
+        "operators": [
+          [ ">", "<", "===", "!==" ],
+          [ "&&", "||" ],
+          [ ">", "<", "===", "!==" ]
+        ]
+      }
+    ]
+  }
+]
