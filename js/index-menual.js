@@ -1,6 +1,7 @@
-document
-    .querySelector("#btn-menual")
-    .addEventListener("click", nextMenual);
+const nextButton = document.querySelector(".btn-menual");
+
+// 다음 버튼 이벤트 리스너
+nextButton.addEventListener("click", nextMenual);
 
 let menualArr = [
     "JS 입문과 관련된 문제를 준비했습니다.",
@@ -17,18 +18,8 @@ function nextMenual() {
         menualArr[menualCount];
     menualCount++;
     console.log(menualCount);
+    // 마지막 메뉴얼일때 다음 버튼 삭제
     if (menualCount == menualArr.length) {
-        document
-            .querySelector(".visible")
-            .classList.replace("visible", "invisible");
+        nextButton.remove();
     }
-}
-
-function toggleToVisible() {
-    document
-        .querySelector(".invisible")
-        .classList.replace("invisible", "visible");
-    document
-        .querySelector(".visible")
-        .classList.replace("visible", "invisible");
 }
