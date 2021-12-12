@@ -1,26 +1,28 @@
 var right = 0;
 var wrong = 0;
 
-const resBtn = document.querySelector(".showResult");
 const resRight = document.querySelector(".right");
 const resWrong = document.querySelector(".wrong");
+const showBtn = document.querySelector(".showResult");
 
-resBtn.addEventListener("click", showResult());
-
+// 로컬스토리지에서 데이터 불러오기
 function getData() {
-  // 구현중
+  questions = JSON.parse(localStorage.getItem("questions"));
+  inpAnswers = JSON.parse(localStorage.getItem("inpAnswers"));
 }
 
-function showResult() {
+// 결과
+showBtn.addEventListener("click", function showResult() {
   getData();
   console.log(questions, inpAnswers);
   calResult();
   resRight.innerHTML = "맞은 개수 : " + right;
   resWrong.innerHTML = "틀린 개수 : " + wrong;
-}
+});
 
+// 맞은 개수, 틀린 개수 계산
 function calResult() {
   for (let i = 0; i < inpAnswers.length; i++) {
-    inpAnswers[i] == isAnswer(questions[i]) ? (right += 1) : (wrong += 1);
+    isAnswer(questions[i], inpAnswers[i]) ? (right += 1) : (wrong += 1);
   }
 }
