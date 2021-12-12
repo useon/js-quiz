@@ -84,11 +84,11 @@
         "forms": [
           [
             { "type": "number", "0": [0, 9] },
-            { "type": "string", "0": [0, 5] }
+            { "type": "string", "3": true }
           ],
           [
             { "type": "string", "0": [0, 9] },
-            { "type": "number", "0": [0, 5] }
+            { "type": "number", "2": true }
           ]
         ]
       },
