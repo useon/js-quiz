@@ -19,7 +19,7 @@ const object = function (obj) {
 };
 
 const copy = function (target) {
-  if (target instanceof Array) {
+  if (Array.isArray(target)) {
     return [...target];
   } else if (typeof target === 'object') {
     return {...target};
