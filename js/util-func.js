@@ -15,7 +15,7 @@ const object = function (obj) {
   const arr = [];
   Object.entries(obj)
     .forEach(([ key, value ]) => arr.push(`${key}: ${value}`));
-  return `{${arr.join(', ')}}`;
+  return `({${arr.join(', ')}})`;
 };
 
 const copy = function (target) {

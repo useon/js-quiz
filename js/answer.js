@@ -46,6 +46,9 @@ const isCorrectArray = function (value, answer) {
     .join(',');
 };
 
+// 지금은 key든 value든 따옴표 여부에 상관없이 안에 값만 맞으면 ok인데,
+// 만약에 value가 문자열인 경우 answer에서 따옴표를 붙이지 않으면 틀린 것으로 처리해야 함!
+// (그러나 지금 당장은 배열의 value로는 숫자만 들어가게 되어있어서 상관 X)
 const isCorrectObject = function (value, answer) {
   if (!checkStartEnd(answer, '{', '}')) return false;
   const entries = Object.entries(value);
