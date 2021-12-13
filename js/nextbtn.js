@@ -5,7 +5,20 @@ var inpAnswers = [];
 let inpAnswer = document.querySelector('.input-box');
 
 nextBtn.addEventListener('click', next);
+
+// input 에 keydown 이벤트 연결
+inpAnswer.addEventListener('keydown', enterKeydown);
+
+// 엔터키 입력 시 문제 제출 -> 다음 문제 출력
+function enterKeydown(e) {
+  if (e.key == 'Enter') {
+    next();
+  }
+}
+
 function next() {
+  // 답란이 비어있다면 실행 X
+  if (checkEmpty()) return;
   fetch('/data/data.json')
     .then((response) => response.json())
     .then((data) => {
@@ -17,8 +30,23 @@ function next() {
   // 사용자 입력 데이터 저장
   inpAnswers.push(inpAnswer.value);
 
+  // 답란 비우기
+  clearInputBox();
   // test code
   // console.log(questions, inpAnswers);
+}
+
+// 답란이 비어있는지 체크
+function checkEmpty() {
+  if (inpAnswer.value === '') {
+    inpAnswer.focus();
+    return true;
+  }
+  return false;
+}
+
+function clearInputBox() {
+  inpAnswer.value = '';
 }
 
 // 최종 제출시 로컬스토리지에 데이터 저장 (버튼 클릭으로 테스트 -> 타이머 종료 구현시 수정)
