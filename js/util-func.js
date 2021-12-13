@@ -1,3 +1,14 @@
+const convertToString = function (value) {
+  const type = typeof value;
+  switch (type) {
+    case 'number': return num(value);
+    case 'string': return str(value);
+    case 'object':
+      if (Array.isArray(value)) return arr(value);
+      return object(value);
+  }
+};
+
 const num = function (number) {
   if (number < 0) return `(${number})`;
   return number;

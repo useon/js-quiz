@@ -29,8 +29,8 @@ const getFunction = function (expression, paramType) {
     case 'REDUCE': {
       const rand = randNum(0, 3);
       switch (rand) {
-        case 0: return `function (acc, v) { return acc + v; }`;
-        case 1: return `function (acc, v, i) { return acc + i; }`;
+        case 0: return `function (acc, v) {\n  return acc + v;\n}`;
+        case 1: return `function (acc, v, i) {\n  return acc + i;\n}`;
         case 2: return `(acc, v) => acc + v`;
         case 3: return `(acc, v, i) => acc + i`;
       }
@@ -39,8 +39,8 @@ const getFunction = function (expression, paramType) {
       const rand = randNum(0, 4);
       switch (rand) {
         case 0: return '';
-        case 1: return 'function (a, b) { return a - b; }';
-        case 2: return 'function (a, b) { return b - a; }';
+        case 1: return 'function (a, b) {\n  return a - b;\n}';
+        case 2: return 'function (a, b) {\n  return b - a;\n}';
         case 3: return '(a, b) => a - b';
         case 4: return '(a, b) => b - a';
       }
@@ -49,8 +49,8 @@ const getFunction = function (expression, paramType) {
 
   const rand = randNum(0, 4);
   switch (rand) {
-    case 0: return `function (v) { return v ${expression}; }`;
-    case 1: return `function (v, i) { return i ${expression}; }`;
+    case 0: return `function (v) {\n  return v ${expression};\n}`;
+    case 1: return `function (v, i) {\n  return i ${expression};\n}`;
     case 2: return `(v) => v ${expression}`;
     case 3: return `v => v ${expression}`;
     case 4: return `(v, i) => i ${expression}`;
@@ -107,7 +107,7 @@ const getParameters = function (arrays, arrLength, data) {
           return getString({ 4: true });
         case 'REDUCE':
           if (i === 0) return getCallback(paramType, data); 
-          return randElem(INITIAL_ACC);
+          return convertToString(randElem(INITIAL_ACC));
         default:
           return getCallback(paramType, data);
       }
