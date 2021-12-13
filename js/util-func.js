@@ -76,6 +76,7 @@ const getString = function (form) {
   if (form[1]) candidate.push(randElem(ALPHABET));
   if (form[2]) candidate.push(randElem(FALSY));
   if (form[3]) candidate.push(randElem(DIVISOR));
+  if (form[4]) candidate.push(randElem(SEPARATOR));
   return str(randElem(candidate));
 };
 
