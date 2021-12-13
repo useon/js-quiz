@@ -197,12 +197,6 @@
           [ "&&", "||" ],
           [ "&&", "||" ]
         ]
-      },
-      {
-        "operators": [
-          [ "+", "*" ],
-          [ "===", "!==" ]
-        ]
       }
     ]
   },
@@ -214,6 +208,142 @@
           [ ">", "<", "===", "!==" ],
           [ "&&", "||" ],
           [ ">", "<", "===", "!==" ]
+        ]
+      }
+    ]
+  },
+  {
+    "category": "배열메소드",
+    "patterns": [
+      {
+        "methods": [ "slice" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 9] }
+            ],
+            "lengthRange": [2, 6],
+            "forms": [
+              { "count": 1, "params": [ "INT_INDEX", "M_INT_INDEX" ] },
+              { "count": 2, "params": [ "INT_INDEX", "M_INT_INDEX" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "concat" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 9] }
+            ],
+            "lengthRange": [0, 5],
+            "forms": [
+              { "count": 1, "params": [ "NUMBER", "ARRAY" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "reverse" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 9] }
+            ],
+            "lengthRange": [2, 5],
+            "forms": [
+              { "count": 0 }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "join" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 9] }
+            ],
+            "lengthRange": [2, 5],
+            "forms": [
+              { "count": 1, "params": [ "SEPARATOR" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "map" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 9] }
+            ],
+            "lengthRange": [1, 6],
+            "forms": [
+              { "count": 1, "params": [ "MAP" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "reduce" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 9] }
+            ],
+            "lengthRange": [2, 6],
+            "forms": [
+              { "count": 2, "params": [ "REDUCE" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "sort" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 50] }
+            ],
+            "lengthRange": [2, 6],
+            "forms": [
+              { "count": 1, "params": [ "SORT" ] }
+            ]
+          },
+          {
+            "array": [
+              { "type": "string", "0": [0, 50] }
+            ],
+            "lengthRange": [2, 6],
+            "forms": [
+              { "count": 1, "params": [ "SORT" ] }
+            ]
+          },
+          {
+            "array": [
+              { "type": "string", "1": true }
+            ],
+            "lengthRange": [2, 6],
+            "forms": [
+              { "count": 1, "params": [ "SORT" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "filter", "some", "every", "find" ],
+        "arrays": [
+          {
+            "array": [
+              { "type": "number", "0": [0, 9] }
+            ],
+            "lengthRange": [2, 6],
+            "forms": [
+              { "count": 1, "params": [ "CONDITION" ] }
+            ]
+          }
         ]
       }
     ]
