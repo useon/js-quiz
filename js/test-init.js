@@ -20,6 +20,10 @@ function testInit() {
       let question = getQuestion(data);
       questionBox.innerHTML = question;
       questions.push(question);
+
+      // 아래에 정답 출력 (테스트용)
+      const rightAnswerBox = document.querySelector('.right-answer-test');
+      rightAnswerBox.innerHTML = `정답 : ${eval(question)}`;
     });
 }
 
