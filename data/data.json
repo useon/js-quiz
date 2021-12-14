@@ -352,7 +352,46 @@
   {
     "category": "문자열메서드",
     "patterns": [
-  
+      {
+        "methods": [ "indexOf" ],
+        "strings": [
+          {
+            "string": [],
+            "lengthRange": [3, 8],
+            "forms": [
+              { "count": 1, "params": [ "INDEXOF" ] },
+              { "count": 2, "params": [ "INDEXOF" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "slice" ],
+        "strings": [
+          {
+            "string": [],
+            "lengthRange": [3, 8],
+            "forms": [
+              { "count": 0 },
+              { "count": 1, "params": [ "INT_INDEX", "M_INT_INDEX" ] },
+              { "count": 2, "params": [ "INT_INDEX", "M_INT_INDEX" ] }
+            ]
+          }
+        ]
+      },
+      {
+        "methods": [ "split" ],
+        "strings": [
+          {
+            "string": [ ".", "/" ],
+            "lengthRange": [4, 9],
+            "forms": [
+              { "count": 1, "params": [ "SPLIT" ] },
+              { "count": 2, "params": [ "SPLIT" ] }
+            ]
+          }
+        ]
+      },
       {
         "methods": [ "replace" ],
         "strings": [
