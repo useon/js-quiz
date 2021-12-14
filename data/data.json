@@ -213,7 +213,7 @@
     ]
   },
   {
-    "category": "배열메소드",
+    "category": "배열메서드",
     "patterns": [
       {
         "methods": [ "slice" ],
@@ -224,6 +224,7 @@
             ],
             "lengthRange": [2, 6],
             "forms": [
+              { "count": 0 },
               { "count": 1, "params": [ "INT_INDEX", "M_INT_INDEX" ] },
               { "count": 2, "params": [ "INT_INDEX", "M_INT_INDEX" ] }
             ]
@@ -342,6 +343,25 @@
             "lengthRange": [2, 6],
             "forms": [
               { "count": 1, "params": [ "CONDITION" ] }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "문자열메서드",
+    "patterns": [
+  
+      {
+        "methods": [ "replace" ],
+        "strings": [
+          {
+            "string": [ ".", "/", "A", "B", "C", "D", "E" ],
+            "lengthRange": [4, 8],
+            "forms": [
+              { "count": 2, "params": [ "REPLACE" ] },
+              { "count": 2, "params": [ "REGEX" ] }
             ]
           }
         ]
