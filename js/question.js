@@ -201,6 +201,22 @@ const getStringQuestion = function ({ patterns }, data) {
   return `${str(qString)}.${method}(${qParams.join(', ')})`;
 };
 
+const getIndexQuestion = function ({ patterns }) {
+  const rand = randNum(0, patterns.length - 1);
+  const iter = patterns[rand];
+  const length = randNum(...iter.lengthRange);
+  let qIter;
+  if (iter.array) {
+    qIter = arr([...Array(length)]
+      .map(() => getValue(randElem(iter.array))));
+  } else {
+    qIter = str([...Array(length)]
+    .map(() => randElem([ randNum(0, 9), randElem(ALPHABET) ]))
+    .join(''));
+  }
+  return `${qIter}[${randNum(-1, length)}]`;
+};
+
 const getQuestion = function (data) {
   const randQuestion = randElem(data);
   const { category } = randQuestion;
@@ -217,6 +233,8 @@ const getQuestion = function (data) {
       return getArrayQuestion(randQuestion, data);
     case '문자열메서드':
       return getStringQuestion(randQuestion, data);
+    case '인덱스':
+      return getIndexQuestion(randQuestion);
   }
 };
 
