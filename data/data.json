@@ -398,5 +398,21 @@
         ]
       }
     ]
+  },
+  {
+    "category": "인덱스",
+    "patterns": [
+      {
+        "array": [
+          { "type": "number", "0": [0, 9] },
+          { "type": "string", "1": true }
+        ],
+        "lengthRange": [2, 5]
+      },
+      {
+        "string": [],
+        "lengthRange": [3, 6]
+      }
+    ]
   }
 ]
