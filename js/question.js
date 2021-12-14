@@ -81,9 +81,10 @@ const getCallback = function (paramType, data) {
   }
 };
 
-const getParameters = function (arrays, arrLength, data) {
-  const { forms } = randElem(arrays);
+const getParameters = function (iters, iter, data) {
+  const { forms } = randElem(iters);
   const { count, params } = randElem(forms);
+  const { length } = iter;
   if (!count) return [];
   
   const paramType = randElem(params);
@@ -92,12 +93,12 @@ const getParameters = function (arrays, arrLength, data) {
     .map((_, i) => {
       switch (paramType) {
         case 'INT_INDEX':
-          if (count > 1 && i > 0) return randNum(lastParam, arrLength - 1);
-          lastParam = randNum(0, arrLength - 1);
+          if (count > 1 && i > 0) return randNum(lastParam, length - 1);
+          lastParam = randNum(0, length - 1);
           return lastParam;
         case 'M_INT_INDEX':
           if (count > 1 && i > 0) return randNum(lastParam, -1);
-          lastParam = randNum(-arrLength, -1);
+          lastParam = randNum(-length, -1);
           return lastParam;
         case 'NUMBER':
           return randNum(0, 5);
@@ -108,6 +109,27 @@ const getParameters = function (arrays, arrLength, data) {
         case 'REDUCE':
           if (i === 0) return getCallback(paramType, data); 
           return convertToString(randElem(INITIAL_ACC));
+        case 'INDEXOF':
+          if (i === 1) return randNum(1, length - 1);
+          return str(iter[randNum(0, length - 1)]);
+        case 'SPLIT':
+          if (i === 1) return randNum(1, length - 1);
+          return str(iter[randNum(0, length - 1)]);
+        case 'REPLACE': {
+          if (i === 1) return getString({ 0: [0, 9], 1: true });
+          const rand = randNum(0, length - 2);
+          return str(iter.slice(rand, rand + randNum(1, 2)));
+        }          
+        case 'REGEX': {
+          if (i === 1) return getString({ 0: [0, 9], 1: true });
+          const rand = randNum(0, 3);
+          switch (rand) {
+            case 0: return `/${iter.slice(rand, rand + randNum(1, 2))}/`;
+            case 1: return `/${iter.slice(rand, rand + randNum(1, 2))}/g`;
+            case 2: return `/${iter.slice(rand, rand + randNum(1, 2)).toLowerCase()}/i`;
+            case 3: return `/${iter.slice(rand, rand + randNum(1, 2)).toLowerCase()}/gi`;
+          }
+        }
         default:
           return getCallback(paramType, data);
       }
@@ -160,15 +182,23 @@ const getArrayQuestion = function ({ patterns }, data) {
   const { methods, arrays } = randElem(patterns);
   const method = randElem(methods);
   const { array, lengthRange } = randElem(arrays);
-  const arrLength = randNum(...lengthRange);
-  // array 안에 있는 타입 정보로 배열을 만들어 줌
-  const qArray = [...Array(arrLength)]
+  const length = randNum(...lengthRange);
+  const qArray = [...Array(length)]
     .map(() => getValue(randElem(array)));
-  // forms 중에 하나를 랜덤하게 뽑음.
-  // 랜덤하게 뽑은 form의 count와 params를 넘겨서 매개변수에 들어갈 값들을 getParameters를 통해 받아온다.
-  const qParams = getParameters(arrays, arrLength, data);
-  // 질문 반환
+  const qParams = getParameters(arrays, qArray, data);
   return `${arr(qArray)}.${method}(${qParams.join(', ')})`;
+};
+
+const getStringQuestion = function ({ patterns }, data) {
+  const { methods, strings } = randElem(patterns);
+  const method = randElem(methods);
+  const { string = [], lengthRange } = randElem(strings);
+  const length = randNum(...lengthRange);
+  const qString = [...Array(length)]
+    .map(() => randElem([ randNum(0, 9), randElem(ALPHABET) ].concat(randArray(string, 1))))
+    .join('');
+  const qParams = getParameters(strings, qString, data);
+  return `${str(qString)}.${method}(${qParams.join(', ')})`;
 };
 
 const getQuestion = function (data) {
@@ -183,8 +213,10 @@ const getQuestion = function (data) {
       return getTwoOperatorsQuestion(randQuestion, data);
     case '연산자3개':
       return getThreeOperatorsQuestion(randQuestion, data);
-    case '배열메소드':
+    case '배열메서드':
       return getArrayQuestion(randQuestion, data);
+    case '문자열메서드':
+      return getStringQuestion(randQuestion, data);
   }
 };
 
