@@ -22,7 +22,7 @@ function enterKeydown(e) {
 // 틀렸을 때 정답 띄우기
 function showRightAnswer() {
   // 타이머 일시정지
-  // timerPause();
+  pauseTimer();
 
   // 버튼 비활성화
   nextBtn.setAttribute('disabled', true);
@@ -44,6 +44,8 @@ function successCheck() {
 }
 
 function next() {
+  // 타이머 재시작
+  startTimer();
   // 버튼 활성화
   nextBtn.removeAttribute('disabled');
   // 정답박스 접기
