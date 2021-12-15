@@ -5,6 +5,7 @@ var inpAnswers = [];
 let inpAnswer = document.querySelector('.input-box');
 let okBtn = document.querySelector('.btn-ok');
 let rightAnswerBox = document.querySelector('.right-answer-box');
+let answerOutput = document.querySelector('.right-answer');
 
 nextBtn.addEventListener('click', successCheck);
 okBtn.addEventListener('click', next);
@@ -67,7 +68,7 @@ function showQuestion() {
       questions.push(question);
 
       // 정답박스 준비 (테스트용)
-      rightAnswerBox.innerHTML = `정답 : ${eval(question)}`;
+      answerOutput.innerHTML = `정답 : ${eval(question)}`;
     });
 }
 
