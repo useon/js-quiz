@@ -12,7 +12,7 @@ okBtn.addEventListener('click', next);
 // input 에 keydown 이벤트 연결
 inpAnswer.addEventListener('keydown', enterKeydown);
 
-// 엔터키 입력 시 문제 제출 -> 다음 문제 출력
+// 엔터키 입력 시 문제 제출
 function enterKeydown(e) {
   if (e.key == 'Enter') {
     successCheck();
@@ -36,7 +36,7 @@ function successCheck() {
   // 정답 체크 분기 (미완성)
   // 첫번째 분기 : 정답일때
   // else : 오답일때 정답보여주기
-  if (0) {
+  if (isAnswer(questionBox.innerText, inpAnswer.value)) {
     next();
   } else {
     showRightAnswer();
