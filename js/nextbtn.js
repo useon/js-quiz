@@ -22,13 +22,7 @@ function enterKeydown(e) {
 
 // 틀렸을 때 정답 띄우기
 function showRightAnswer() {
-<<<<<<< HEAD
-	// 타이머 일시정지
-	// timerPause();
-=======
-  // 타이머 일시정지
-  pauseTimer();
->>>>>>> 5b365b7a99e9b3b65d891d3946e9cffca811830e
+	pauseTimer()
 
 	// 버튼 비활성화
 	nextBtn.setAttribute('disabled', true)
@@ -50,12 +44,12 @@ function successCheck() {
 }
 
 function next() {
-  // 타이머 재시작
-  startTimer();
-  // 버튼 활성화
-  nextBtn.removeAttribute('disabled');
-  // 정답박스 접기
-  rightAnswerBox.style.height = null;
+	// 타이머 재시작
+	startTimer()
+	// 버튼 활성화
+	nextBtn.removeAttribute('disabled')
+	// 정답박스 접기
+	rightAnswerBox.style.height = null
 
 	// 다음문제 출력
 	showQuestion()
