@@ -28,6 +28,8 @@ showBtn.addEventListener('click', function showResult() {
 function calResult() {
 	for (let i = 0; i < inpAnswers.length; i++) {
 		isAnswer(questions[i], inpAnswers[i]) ? (right += 1) : (wrong += 1)
+
+		// 결과 테이블 생성
 		const q = document.createElement('td')
 		q.textContent = questions[i]
 		const a = document.createElement('td')
