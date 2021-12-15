@@ -16,7 +16,6 @@ let menualCount = 0;
 function nextMenual() {
   document.querySelector('.box-manual > p').innerHTML = menualArr[menualCount];
   menualCount++;
-  console.log(menualCount);
   // 마지막 메뉴얼일때 다음 버튼 삭제
   if (menualCount == menualArr.length) {
     nextButton.remove();

@@ -1,7 +1,9 @@
 const timer = document.querySelector('.timer');
-const startBtn = document.querySelector('#btn-init');
-const nextBtn = document.querySelector('.btn-next');
-okBtn = document.querySelector('.btn-ok');
+
+// 제출버튼
+const submitBtn = document.querySelector('.btn-submit');
+// 오답 확인버튼
+const wrongConfirmBtn = document.querySelector('.btn-confirm');
 let interval;
 
 // centisecond 단위로 입력하면 됩니다
@@ -10,6 +12,8 @@ let TIME = 18000;
 
 // 타이머 일시정지
 function pauseTimer() {
+  // 우진 테스트 : 정답 후 오답시 실행됨
+  console.log('pauseTimer()실행');
   clearInterval(interval);
 }
 
@@ -39,11 +43,11 @@ function updateTimer() {
   `;
 
   TIME--;
-  
+
   if (minute === 0 && second === 0 && centisecond === 0) {
     pauseTimer();
   }
 }
 
 startBtn.addEventListener('click', startTimer);
-// okBtn.addEventListener('click', startTimer);
+// wrongConfirmBtn.addEventListener('click', startTimer);

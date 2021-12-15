@@ -29,29 +29,25 @@
 		<header class="header">헤더</header>
 		<section class="section-test">
 			<article class="timer">타이머</article>
-			<input id="btn-init" class="btn-init visible m-3 p-2" type="button" value="시작!!" />
+			<input id="btn-" class="btn-start visible m-3 p-2" type="button" value="시작!!" />
 			<article class="invisible box-question">
 				<div class="question-box">문제 출력 박스</div>
 
 				<div class="answer-wrap">
 					<label for="user-answer"></label>
 					<input class="input-box" id="user-answer" type="text" placeholder="답 입력 박스" />
-					<input class="btn-next" type="button" value="제출" />
+					<input class="btn-submit" type="button" value="제출" />
 				</div>
 				<!-- 틀릴경우 정답 출력 -->
 				<div class="right-answer-box">
 					<span class="right-answer">정답은 ㅁㅁㅁ입니다.</span>
-					<input class="btn-ok" type="button" value="확인" />
+					<input class="btn-confirm" type="button" value="확인" />
 				</div>
 
 				<button class="go-result">그만 풀래!(지승)</button>
 				<!-- 최종제출버튼은 없엉. 타임아웃 시 result page로 이동 -->
 			</article>
 		</section>
-
-		<!-- 테스트 할 때 사용 -->
-		<a href="result.html">result.html로 이동(테스트)</a>
-
 		<footer class="footer">
 			<p>프로젝트 정보</p>
 			...
@@ -61,9 +57,9 @@
 		<script src="../js/question.js"></script>
 		<script src="../js/answer.js"></script>
 		<script src="../js/script.js"></script>
-		<script src="../js/test-init.js"></script>
+    <script src="../js/testStart.js"></script>
 		<script src="../js/timer.js"></script>
 		<!-- <script src="../js/result.js"></script> -->
-		<script src="../js/nextBtn.js"></script>
+		<script src="../js/nextQuestion.js"></script>
 	</body>
 </html>

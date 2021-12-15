@@ -1,16 +1,17 @@
 const questionBox = document.querySelector('.question-box');
-const initButton = document.querySelector('.btn-init');
+// timer.js 에 선언되어 있던것 가져옴.(선후관계)
+const startBtn = document.querySelector('.btn-start');
 
 // 시작버튼 이벤트 리스너
-initButton.addEventListener('click', testInit);
+startBtn.addEventListener('click', testStart);
 
-function testInit() {
+function testStart() {
   // 타이머 시작 timer.js > line: 37 에 이미 정의됨
   // startTimer();
 
   // .question-box 렌더링
   toggleToVisible();
-  initButton.remove();
+  startBtn.remove();
 
   // 첫 문제 .question-box 에 출력
   // 데이터 로드 > 출력
