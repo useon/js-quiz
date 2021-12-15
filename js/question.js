@@ -242,4 +242,8 @@ const getQuestion = function (data) {
 // test.html에서 console에 문제 출력
 fetch("/data/data.json")
   .then((response) => response.json())
-  .then(data => console.log(getQuestion(data)));
+  .then(data => {
+    const question = getQuestion(data);
+    console.log(`문제: ${question}`);
+    console.log(`정답: ${getAnswer(question)}`);
+  });

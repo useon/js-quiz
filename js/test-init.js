@@ -22,7 +22,7 @@ function testInit() {
       questions.push(question);
 
       // 첫문제 정답박스 준비
-      answerOutput.innerHTML = `정답 : ${eval(question)}`;
+      rightAnswerOutput.innerHTML = `정답 : ${getAnswer(question)}`;
     });
 }
 

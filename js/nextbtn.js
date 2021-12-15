@@ -5,7 +5,7 @@ var inpAnswers = [];
 let inpAnswer = document.querySelector('.input-box');
 let okBtn = document.querySelector('.btn-ok');
 let rightAnswerBox = document.querySelector('.right-answer-box');
-let answerOutput = document.querySelector('.right-answer');
+let rightAnswerOutput = document.querySelector('.right-answer');
 
 nextBtn.addEventListener('click', successCheck);
 okBtn.addEventListener('click', next);
@@ -15,7 +15,7 @@ inpAnswer.addEventListener('keydown', enterKeydown);
 // 엔터키 입력 시 문제 제출 -> 다음 문제 출력
 function enterKeydown(e) {
   if (e.key == 'Enter') {
-    next();
+    successCheck();
   }
 }
 
@@ -68,7 +68,7 @@ function showQuestion() {
       questions.push(question);
 
       // 정답박스 준비 (테스트용)
-      answerOutput.innerHTML = `정답 : ${eval(question)}`;
+      rightAnswerOutput.innerHTML = `정답 : ${getAnswer(question)}`;
     });
 }
 

@@ -80,3 +80,19 @@ const isAnswer = function (question, input) {
       }
   }
 };
+
+const getAnswer = function (question) {
+  const value = eval(question);
+  switch (typeof value) {
+    case 'boolean':
+    case 'number':
+    case 'undefined':
+      return value + '';
+    case 'string':
+      return str(value);
+    case 'object':
+      if (value === null) return 'null'
+      if (Array.isArray(value)) return arr(value);
+      return object(value);
+  }
+};
