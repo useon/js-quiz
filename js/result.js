@@ -24,7 +24,7 @@ showBtn.addEventListener('click', function showResult() {
 	resWrong.innerHTML = '틀린 개수 : ' + wrong
 	myScore.innerHTML = '내 점수 : ' + right + '/' + (right + wrong)
 
-	// 버튼 누르면 사라지게
+	// 버튼 누르면 사라지게 하기
 	viewRes.removeChild(showBtn)
 	const resultTxt = document.createElement('h1')
 	resultTxt.textContent = '결과'
