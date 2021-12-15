@@ -21,8 +21,8 @@ function testInit() {
       questionBox.innerHTML = question;
       questions.push(question);
 
-      // 아래에 정답 출력 (테스트용)
-      const rightAnswerBox = document.querySelector('.right-answer-test');
+      // 첫문제 정답박스 준비
+      const rightAnswerBox = document.querySelector('.right-answer-box');
       rightAnswerBox.innerHTML = `정답 : ${eval(question)}`;
     });
 }
