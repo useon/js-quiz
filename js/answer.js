@@ -92,7 +92,10 @@ const getAnswer = function (question) {
       return str(value);
     case 'object':
       if (value === null) return 'null'
-      if (Array.isArray(value)) return arr(value);
+      if (Array.isArray(value)) return arr(value.map(v => {
+        if (typeof v === 'string') return str(v);
+        return v;
+      }));
       return object(value);
   }
 };
