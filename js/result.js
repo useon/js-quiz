@@ -3,6 +3,7 @@ let wrong = 0
 
 const resRight = document.querySelector('.right')
 const resWrong = document.querySelector('.wrong')
+const viewRes = document.querySelector('.viewResult')
 const showBtn = document.querySelector('.showResult')
 const myScore = document.querySelector('.score')
 const resTable = document.querySelector('tbody')
@@ -22,6 +23,12 @@ showBtn.addEventListener('click', function showResult() {
 	resRight.innerHTML = '맞은 개수 : ' + right
 	resWrong.innerHTML = '틀린 개수 : ' + wrong
 	myScore.innerHTML = '내 점수 : ' + right + '/' + (right + wrong)
+
+	// 버튼 누르면 사라지게
+	viewRes.removeChild(showBtn)
+	const resultTxt = document.createElement('h1')
+	resultTxt.textContent = '결과'
+	viewRes.appendChild(resultTxt)
 })
 
 // 맞은 개수, 틀린 개수 계산. 결과 테이블 출력
