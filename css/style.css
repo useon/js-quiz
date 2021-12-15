@@ -199,13 +199,36 @@ article {
   height: 50px;
   background-color: steelblue;
   border: none;
-  margin: -7px;
+  margin: 0 -7px;
   padding: 0;
   border-radius: 0 0 20px 0;
 }
 
-.btn-next:hover {
+/* .btn-next:hover {
   background-color: cornflowerblue;
+} */
+
+.right-answer-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  margin: 20px auto;
+  padding: 0px;
+  background-color: white;
+  height: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: height 0.3s ease-out;
+  box-shadow: inset 0px 0px 3px 3px tomato;
+}
+
+.right-answer-box span {
+  margin: 20px;
+  width: fit-content;
+}
+
+.right-answer-box input {
 }
 
 /* result.html */
