@@ -23,7 +23,7 @@ function testInit() {
 
       // 첫문제 정답박스 준비
       const rightAnswerBox = document.querySelector('.right-answer-box');
-      rightAnswerBox.innerHTML = `정답 : ${eval(question)}`;
+      rightAnswerBox.innerHTML = `정답 : ${getAnswer(question)}`;
     });
 }
 
