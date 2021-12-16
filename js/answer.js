@@ -56,7 +56,7 @@ const isCorrectObject = function (value, answer) {
     .slice(1, answer.length - 1)
     .split(',')
     .map(v => v.trim().split(':').map(v => deleteQuotes(v.trim())))
-    .every(([ k, v ], i) => k === entries[i][0] && v === entries[i][1] + '');
+    .every(([ k, v ], i) => k === entries?.[i]?.[0] && v === entries?.[i]?.[1] + '');
 };
 
 // 정답 여부를 boolean으로 반환함
@@ -96,6 +96,7 @@ const getAnswer = function (question) {
         if (typeof v === 'string') return str(v);
         return v;
       }));
-      return object(value);
+      const obj = object(value);
+      return obj.slice(1, obj.length - 1);
   }
 };

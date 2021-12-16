@@ -67,6 +67,16 @@ const randArray = function (array, count) {
   return tempArray;
 };
 
+const shuffle = function () {
+  const arrayCopy = copy(this);
+  const output = [];
+  while (arrayCopy.length) {
+    output.push(arrayCopy.splice(randNum(0, arrayCopy.length - 1), 1)[0]);
+  }
+  return output;
+};
+Array.prototype.shuffle = shuffle;
+
 
 
 const getBoolean = function () {
