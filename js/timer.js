@@ -9,11 +9,9 @@ let interval;
 // centisecond 단위로 입력하면 됩니다
 // TIME = 18000 -> time limit 3분으로 설정
 
-// 타이머 일시정지
-function pauseTimer() {
-  // 우진 테스트 : 정답 후 오답시 실행됨
-  console.log('pauseTimer()실행');
-  clearInterval(interval);
+// 타이머 리셋 (남은 시간을 3분으로 설정)
+function resetTimer() {
+  TIME = 18000;
 }
 
 // 타이머 시작 (리셋 및 시간줄이기)
@@ -23,18 +21,17 @@ function startTimer() {
   // 10ms(10centisecond)마다 updateTimer 실행
 }
 
+// 타이머 일시정지
+function pauseTimer() {
+  clearInterval(interval);
+}
+
 // 타이머 재시작
 function reStartTimer() {
   if (interval) {
     clearInterval(interval);
   }
   interval = setInterval(updateTimer, 10);
-  // 10ms(10centisecond)마다 updateTimer 실행
-}
-
-// 타이머 리셋 (남은 시간을 3분으로 설정)
-function resetTimer() {
-  TIME = 18000;
 }
 
 // 타이머 업데이트 (시간 html에 표시 및 남은시간 줄이기)

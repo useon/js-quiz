@@ -10,31 +10,21 @@ const rightAnswerOutput = document.querySelector('.right-answer');
 
 submitBtn.addEventListener('click', successCheck);
 wrongConfirmBtn.addEventListener('click', next);
-// input 에 keydown 이벤트 연결
+// input 에 엔터키 이벤트 연결
 inpAnswer.addEventListener('keydown', enterKeydown);
 
-// 엔터키 입력 시 문제 제출
+// 엔터키 입력 시 문제 제출 (오답보여줄때 작동 안되도록 수정필요)
 function enterKeydown(e) {
   if (e.key == 'Enter') {
     successCheck();
   }
 }
 
-// 틀렸을 때 정답 띄우기
-function showRightAnswer() {
-  pauseTimer();
-  // 버튼 비활성화
-  submitBtn.setAttribute('disabled', true);
-  // 정답박스 열기
-  rightAnswerBox.style.height = '100px';
-}
-
+// 제출
 function successCheck() {
   // 답란이 비어있다면 실행 X
-  if (checkEmpty()) return;
-  // 정답 체크 분기 (미완성)
-  // 첫번째 분기 : 정답일때
-  // else : 오답일때 정답보여주기
+  if (isEmpty()) return;
+  // 정/오답 분기
   if (isAnswer(questionBox.innerText, inpAnswer.value)) {
     next();
   } else {
@@ -42,6 +32,7 @@ function successCheck() {
   }
 }
 
+// 정답일 경우
 function next() {
   // 타이머 재시작
   reStartTimer();
@@ -49,15 +40,25 @@ function next() {
   submitBtn.removeAttribute('disabled');
   // 정답박스 접기
   rightAnswerBox.style.height = null;
-
   // 다음문제 출력
   showQuestion();
-  // 사용자 입력 데이터 저장
-  inpAnswers.push(inpAnswer.value);
   // 답란 비우기
   clearInputBox();
+  // 사용자 입력 데이터 저장
+  inpAnswers.push(inpAnswer.value);
 }
 
+// 오답일 경우
+function showRightAnswer() {
+  // 타이머 정지
+  pauseTimer();
+  // 제출버튼 비활성화
+  submitBtn.setAttribute('disabled', true);
+  // 정답박스 열기
+  rightAnswerBox.style.height = '100px';
+}
+
+// 테스트용
 console.log(rightAnswers);
 
 // 문제 출력
@@ -77,7 +78,7 @@ function showQuestion() {
 }
 
 // 답란이 비어있는지 체크
-function checkEmpty() {
+function isEmpty() {
   if (inpAnswer.value === '') {
     inpAnswer.focus();
     return true;
@@ -85,6 +86,7 @@ function checkEmpty() {
   return false;
 }
 
+// 입력란 초기화
 function clearInputBox() {
   inpAnswer.value = '';
 }
