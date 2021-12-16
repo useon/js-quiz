@@ -8,7 +8,6 @@ let interval;
 
 // centisecond 단위로 입력하면 됩니다
 // TIME = 18000 -> time limit 3분으로 설정
-let TIME = 18000;
 
 // 타이머 일시정지
 function pauseTimer() {
@@ -20,6 +19,15 @@ function pauseTimer() {
 // 타이머 시작 (리셋 및 시간줄이기)
 function startTimer() {
   resetTimer();
+  interval = setInterval(updateTimer, 10);
+  // 10ms(10centisecond)마다 updateTimer 실행
+}
+
+// 타이머 재시작
+function reStartTimer() {
+  if (interval) {
+    clearInterval(interval);
+  }
   interval = setInterval(updateTimer, 10);
   // 10ms(10centisecond)마다 updateTimer 실행
 }

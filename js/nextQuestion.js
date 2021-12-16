@@ -44,7 +44,7 @@ function successCheck() {
 
 function next() {
   // 타이머 재시작
-  startTimer();
+  reStartTimer();
   // 버튼 활성화
   submitBtn.removeAttribute('disabled');
   // 정답박스 접기
