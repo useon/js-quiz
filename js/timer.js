@@ -1,13 +1,13 @@
 const timer = document.querySelector('.timer');
 
 // 제출버튼
-const submitBtn = document.querySelector('.btn-submit');
+// const submitBtn = document.querySelector('.btn-submit');
 // 오답 확인버튼
-const wrongConfirmBtn = document.querySelector('.btn-confirm');
+// const wrongConfirmBtn = document.querySelector('.btn-confirm');
 let interval;
 
 // centisecond 단위로 입력하면 됩니다
-// TIME = 18000 -> time limit 3분으로 설정
+let TIME = 18000; // -> time limit 3분으로 설정
 
 // 타이머 리셋 (남은 시간을 3분으로 설정)
 function resetTimer() {
@@ -54,5 +54,6 @@ function updateTimer() {
   }
 }
 
-startBtn.addEventListener('click', startTimer);
+// questionPage로 옮기겠습니당
+// startBtn.addEventListener('click', startTimer);
 // wrongConfirmBtn.addEventListener('click', startTimer);
