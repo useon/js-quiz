@@ -7,3 +7,4 @@ const SEPARATOR = [ ',', ' ' ];
 const SIMPLE_OPERATOR = [ '+', '-', '*', '%' ];
 const INITIAL_ACC = [ 0, '' ];
 const COMPARISON_OPERATOR = [ '>', '<', '>=', '<=' ];
+const FUNCTION_NAME = [ 'foo', 'bar', 'baz', 'qux' ];

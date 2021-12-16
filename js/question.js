@@ -24,7 +24,7 @@ const getExpression = function (operator, pattern, customForms = false, isRight 
   return `${left} ${operator} ${right}`;
 };
 
-const getFunction = function (expression, paramType) {
+const getFunction = function (expression, paramType, options) {
   switch (paramType) {
     case 'REDUCE': {
       const rand = randNum(0, 3);
@@ -47,14 +47,25 @@ const getFunction = function (expression, paramType) {
     }
   }
 
-  const rand = randNum(0, 4);
-  switch (rand) {
-    case 0: return `function (v) {\n  return v ${expression};\n}`;
-    case 1: return `function (v, i) {\n  return i ${expression};\n}`;
-    case 2: return `(v) => v ${expression}`;
-    case 3: return `v => v ${expression}`;
-    case 4: return `(v, i) => i ${expression}`;
+  if (!options) {
+    const rand = randNum(0, 4);
+    switch (rand) {
+      case 0: return `function (v) {\n  return v ${expression};\n}`;
+      case 1: return `function (v, i) {\n  return i ${expression};\n}`;
+      case 2: return `(v) => v ${expression}`;
+      case 3: return `v => v ${expression}`;
+      case 4: return `(v, i) => i ${expression}`;
+    }
   }
+
+  const { type, name } = options;
+  const indentedExp = expression.split('\n').map(v => '  ' + v).join('\n');
+  if (type) {
+    return `const ${name} = () => {\n${indentedExp}\n}`;
+  } else {
+    return `function ${name}() {\n${indentedExp}\n}`;
+  }
+  
 };
 
 const getCallback = function (paramType, data) {
@@ -217,6 +228,44 @@ const getIndexQuestion = function ({ patterns }) {
   return `${qIter}[${randNum(-1, length)}]`;
 };
 
+const getDeclaration = function (name, value) {
+  const rand = randNum(0, 6);
+  switch (rand) {
+    case 0: return `var ${name};`;
+    case 1: return `var ${name} = ${value};`;
+    case 2: return `let ${name};`
+    case 3: return `let ${name} = ${value};`;
+    case 4: return `var ${name} = ${value};`;
+    case 5: return `var ${name} = ${value};`;
+    case 6: return `var ${name} = ${value};`;
+  }
+};
+
+const getScopeQuestion = function ({ patterns }) {
+  const { global, local, order } = randElem(patterns);
+  const options = {
+    type: randNum(0, 1),
+    name: randElem(FUNCTION_NAME)
+  }
+  const [ globalCount, localCount ] = [ randNum(...global), randNum(...local) ];
+  const varValue = randRange(0, 9, globalCount + localCount);
+  if (varValue.length === 1) varValue = [varValue];
+  let valueIndex = 0;
+  const globalVar = ALPHABET.slice(0, globalCount);
+  const localVar = ALPHABET.slice(0, localCount);
+  const globalTop = randArray(globalVar, randNum(0, globalVar.length));
+  globalTop.forEach(top => globalVar.splice(globalVar.findIndex(v => v === top), 1));
+  const globalBottom = globalVar;
+  const returnValue = `\nreturn ${randElem(globalTop.concat(globalBottom))};`;
+  const globalTopExp = globalTop.map(name => getDeclaration(name, varValue[valueIndex++])).join('\n');
+  const globalBottomExp = globalBottom.map(name => getDeclaration(name, varValue[valueIndex++])).join('\n');
+  const funcExp = getFunction(localVar.map(name => getDeclaration(name, varValue[valueIndex++])).join('\n') + returnValue, null, options);
+  const tryCatchExp = `try {\n  ${options.name}();\n}  catch {\n  'error'\n}`;
+  const expressions = { globalTopExp, funcExp, globalBottomExp, tryCatchExp };
+  return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
+  //return `${global}\n${getFunction(local + returnValue, null, options)}\n\n${options.name}();`;
+};
+
 const getQuestion = function (data) {
   const randQuestion = randElem(data);
   const { category } = randQuestion;
@@ -235,6 +284,8 @@ const getQuestion = function (data) {
       return getStringQuestion(randQuestion, data);
     case '인덱스':
       return getIndexQuestion(randQuestion);
+    case '스코프':
+      return getScopeQuestion(randQuestion);
   }
 };
 
