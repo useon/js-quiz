@@ -151,7 +151,7 @@ article {
   color: black;
 }
 
-.btn-init {
+.btn-start {
   top: 40%;
   position: absolute;
   background-color: white;
@@ -194,7 +194,7 @@ article {
   border: none;
 }
 
-.btn-next {
+.btn-submit {
   width: 80px;
   height: 50px;
   background-color: steelblue;
@@ -251,4 +251,37 @@ article {
   top: 50px;
   justify-content: center;
   align-items: center;
+}
+
+.section-result {
+  padding-top: 100px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+table {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: antiquewhite;
+}
+
+th {
+  font-weight: 500;
+  background-color: #7ea4a7;
+}
+
+td {
+  width: 200px;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 30px;
+  padding-bottom: 10px;
 }
