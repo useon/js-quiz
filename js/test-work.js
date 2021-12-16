@@ -3,6 +3,8 @@ const questions = [];
 const inpAnswers = [];
 const rightAnswers = [];
 
+let isPause = false;
+
 // 시작 > 출력 > input > 제출 > 정답박스 > 오답확인
 const startBtn = document.querySelector('.btn-start');
 const questionBox = document.querySelector('.question-box');
@@ -29,7 +31,9 @@ function testStart() {
 // 엔터키 입력 시 문제 제출 (오답보여줄때 작동 안되도록 수정필요)
 function enterKeydown(e) {
   if (e.key == 'Enter') {
-    successCheck();
+    // 정지상태라면 엔터 -> next()
+    if (isPause) next();
+    else successCheck();
   }
 }
 
@@ -51,6 +55,7 @@ function successCheck() {
 function next() {
   // 타이머 재시작 > 버튼 활성화 > 정답박스 접기 > 다음문제 출력
   reStartTimer();
+  isPause = false;
   submitBtn.removeAttribute('disabled');
   rightAnswerBox.style.height = null;
   showQuestion();
@@ -61,6 +66,7 @@ function next() {
 function showRightAnswer() {
   // 타이머 정지 > 제출버튼 비활성화 > 정답박스 열기
   pauseTimer();
+  isPause = true;
   submitBtn.setAttribute('disabled', true);
   rightAnswerBox.style.height = '100px';
   // 정답박스 준비 (테스트용)
