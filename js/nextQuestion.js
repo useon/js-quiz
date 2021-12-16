@@ -56,6 +56,8 @@ function showRightAnswer() {
   submitBtn.setAttribute('disabled', true);
   // 정답박스 열기
   rightAnswerBox.style.height = '100px';
+  // 정답박스 준비 (테스트용)
+  rightAnswerOutput.innerHTML = `정답 : ${getAnswer(questions[questions.length - 1])}`;
 }
 
 // 테스트용
@@ -72,8 +74,6 @@ function showQuestion() {
       questions.push(question);
       rightAnswers.push(getAnswer(question));
       console.log(rightAnswers);
-      // 정답박스 준비 (테스트용)
-      rightAnswerOutput.innerHTML = `정답 : ${getAnswer(question)}`;
     });
 }
 
