@@ -241,38 +241,20 @@ const getDeclaration = function (name, value) {
   }
 };
 
-const getReturnValue = function (varArr, func) {
-  if (func) {
-    if (varArr.length < 2) {
-      const rand = randNum(0, 4);
-      const var1 = randElem(varArr);
-      if (rand === 0) return `return ${var1} + ${func}();`;
-      if (rand === 1) return `return ${func}() + ${var1};`;
-      if (rand === 2) return `return ${func}() && ${var1};`;
-      if (rand === 3) return `return ${var1} && ${func}();`;
-      return `return ${func}() || ${var1};`;
-    }
-
-    const rand = randNum(0, 4);
-    const [ var1, var2 ] = randArray(varArr, 2).sort();
-    if (rand === 0) return `return ${var1} + ${func}() + ${var2};`;
-    if (rand === 1) return `return ${func}() && ${var1} && ${var2};`;
-    if (rand === 2) return `return ${func}() || ${var1} && ${var2};`;
-    if (rand === 3) return `return ${func}() && ${var1} || ${var2};`;
-    return `return ${func}() || ${var1} || ${var2};`;
-  }
-
-  const rand = randNum(0, 3);
+const getReturnValue = function (varArr) {
+  console.log(varArr);
+  const rand = randNum(0, 1);
   if (rand || varArr.length < 2) return `return ${randElem(varArr)};`;
-  else {
-    const [ var1, var2 ] = randArray(varArr, 2).sort();
-    if (rand === 1) return `return ${var1} + ${var2};`;
-    if (rand === 2) return `return ${var1} && ${var2};`;
-    return `return ${var1} || ${var2};`;
-  }
+  const [ var1, var2 ] = randArray(varArr, 2).sort();
+  return `return ${var1} + ${var2};`
 };
 
-const getExpressions = function (global, local, options) {
+const getScopeQuestion = function ({ patterns }) {
+  const { global, local, order } = randElem(patterns);
+  const options = {
+    type: randNum(0, 1),
+    name: randElem(FUNCTION_NAME)
+  };
   const [ globalCount, localCount ] = [ randNum(...global), randNum(...local) ];
   const varValue = randRange(0, 9, globalCount + localCount);
   if (varValue.length === 1) varValue = [varValue];
@@ -282,48 +264,12 @@ const getExpressions = function (global, local, options) {
   const globalTop = randArray(globalVar, randNum(0, globalVar.length));
   globalTop.forEach(top => globalVar.splice(globalVar.findIndex(v => v === top), 1));
   const globalBottom = globalVar;
-  const returnValue = getReturnValue([...new Set([ ...globalTop, ...globalBottom ])], options.func);
-  const globalTopExp = globalTop
-    .map(name => getDeclaration(name, varValue[valueIndex++]))
-    .join('\n');
-  const globalBottomExp = globalBottom
-    .map(name => getDeclaration(name, varValue[valueIndex++]))
-    .join('\n');
-  const funcExp = getFunction(
-    localVar
-      .map(name => getDeclaration(name, varValue[valueIndex++]))
-      .insert(returnValue, randNum(0, localVar.length - 1))
-      .join('\n'),
-    null, options);
-  return { globalTopExp, funcExp, globalBottomExp };
-}
-
-const getScopeQuestion = function ({ patterns }) {
-  const { global, local, local2, order } = randElem(patterns);
-
-  if (local2) {
-    const [ name1, name2 ] = randArray(FUNCTION_NAME, 2);
-    const options = {
-      type: randNum(0, 1),
-      name: name1,
-      func: name2
-    };
-    const options2 = {
-      type: randNum(0, 1),
-      name: name2
-    };
-    const func2Exp = getExpressions(global, local2, options2).funcExp;
-    const tryCatchExp = `try {\n  ${options.name}();\n} catch {\n  'error'\n}`;
-    const expressions = { tryCatchExp, func2Exp, ...getExpressions(global, local, options) };
-    return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
-  }
-  
-  const options = {
-    type: randNum(0, 1),
-    name: randElem(FUNCTION_NAME)
-  };
+  const returnValue = getReturnValue([...new Set([ ...globalTop, ...globalBottom ])]);
+  const globalTopExp = globalTop.map(name => getDeclaration(name, varValue[valueIndex++])).shuffle().join('\n');
+  const globalBottomExp = globalBottom.map(name => getDeclaration(name, varValue[valueIndex++])).shuffle().join('\n');
+  const funcExp = getFunction(localVar.map(name => getDeclaration(name, varValue[valueIndex++])).concat(returnValue).shuffle().join('\n'), null, options);
   const tryCatchExp = `try {\n  ${options.name}();\n} catch {\n  'error'\n}`;
-  const expressions = { tryCatchExp, ...getExpressions(global, local, options) };
+  const expressions = { globalTopExp, funcExp, globalBottomExp, tryCatchExp };
   return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
 };
 
