@@ -421,35 +421,35 @@
     "category": "스코프",
     "patterns": [
       {
-        "global": [1, 2],
+        "global": [1, 3],
         "local": [1, 2],
         "order": [ "globalTop", "func", "globalBottom", "tryCatch" ]
       },
       {
-        "global": [1, 3],
-        "local": [1, 3],
+        "global": [1, 4],
+        "local": [1, 2],
         "order": [ "globalTop", "tryCatch", "globalBottom", "func" ]
       },
       {
-        "global": [1, 3],
-        "local": [1, 3],
+        "global": [1, 4],
+        "local": [1, 2],
         "order": [ "func", "globalTop", "tryCatch", "globalBottom" ]
       },
       {
-        "global": [1, 3],
-        "local": [1, 3],
+        "global": [1, 4],
+        "local": [1, 2],
         "order": [ "tryCatch", "globalTop", "func", "globalBottom" ]
       },
       {
-        "global": [1, 3],
-        "local": [1, 3],
+        "global": [1, 4],
+        "local": [1, 2],
         "local2": [1, 2],
         "order": [ "globalTop", "func", "func2", "globalBottom", "tryCatch" ]
       },
       {
-        "global": [1, 3],
-        "local": [1, 3],
-        "local2": [1, 3],
+        "global": [1, 4],
+        "local": [1, 2],
+        "local2": [1, 2],
         "order": [ "globalTop", "func2", "func", "globalBottom", "tryCatch" ]
       }
     ]
