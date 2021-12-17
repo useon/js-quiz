@@ -377,7 +377,7 @@
         "methods": [ "split" ],
         "strings": [
           {
-            "string": [ ".", "/" ],
+            "string": [ "." ],
             "lengthRange": [4, 9],
             "forms": [
               { "count": 1, "params": [ "SPLIT" ] },
@@ -390,7 +390,7 @@
         "methods": [ "replace" ],
         "strings": [
           {
-            "string": [ ".", "/", "A", "B", "C", "D", "E" ],
+            "string": [ ".", "A", "B", "C", "D", "E" ],
             "lengthRange": [4, 8],
             "forms": [
               { "count": 2, "params": [ "REPLACE" ] },
