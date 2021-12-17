@@ -16,8 +16,7 @@
           { "type": "number", "0": [-9, 9] },
           { "type": "string", "0": [-9, 9], "1": true, "2": true },
           { "type": "array", "0": [0, 1], "1": [0, 1] },
-          { "type": "object", "0": [0, 1] },
-          { "type": "falsy" }
+          { "type": "object", "0": [0, 1] }
         ]
       }
     ]
@@ -161,8 +160,7 @@
           { "type": "number", "0": [-1, 1] },
           { "type": "string", "0": [-1, 1], "1": true, "2": true },
           { "type": "array", "0": [0, 2], "1": [0, 2] },
-          { "type": "object", "0": [0, 2] },
-          { "type": "falsy" }
+          { "type": "object", "0": [0, 2] }
         ]
       }
     ]
@@ -439,18 +437,6 @@
         "global": [1, 3],
         "local": [1, 3],
         "order": [ "tryCatch", "globalTop", "func", "globalBottom" ]
-      },
-      {
-        "global": [1, 3],
-        "local": [1, 3],
-        "local2": [1, 2],
-        "order": [ "globalTop", "func", "func2", "globalBottom", "tryCatch" ]
-      },
-      {
-        "global": [1, 3],
-        "local": [1, 3],
-        "local2": [1, 3],
-        "order": [ "globalTop", "func2", "func", "globalBottom", "tryCatch" ]
       }
     ]
   }

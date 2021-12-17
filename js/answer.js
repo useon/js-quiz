@@ -26,7 +26,7 @@ const isCorrectNumber = function (value, answer) {
 const isCorrectString = function (value, answer) {
   const isSingle = checkStartEnd(answer, '\'', '\'');
   const isDouble = checkStartEnd(answer, '\"', '\"');
-  const isBacktick = checkStartEnd(answer, '`', '`');
+  const isBacktick = checkStartEnd(string, '`', '`');
   if (!(isSingle || isDouble || isBacktick)) return false;
   return value === answer.slice(1, answer.length - 1);
 };
