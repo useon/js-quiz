@@ -5,7 +5,8 @@ const checkStartEnd = function (string, start, end) {
 const deleteQuotes = function (string) {
   const isSingle = checkStartEnd(string, '\'', '\'');
   const isDouble = checkStartEnd(string, '\"', '\"');
-  if (!(isSingle || isDouble)) return string;
+  const isBacktick = checkStartEnd(string, '`', '`');
+  if (!(isSingle || isDouble || isBacktick)) return string;
   return string.slice(1, string.length - 1);
 };
 
@@ -25,7 +26,8 @@ const isCorrectNumber = function (value, answer) {
 const isCorrectString = function (value, answer) {
   const isSingle = checkStartEnd(answer, '\'', '\'');
   const isDouble = checkStartEnd(answer, '\"', '\"');
-  if (!(isSingle || isDouble)) return false;
+  const isBacktick = checkStartEnd(answer, '`', '`');
+  if (!(isSingle || isDouble || isBacktick)) return false;
   return value === answer.slice(1, answer.length - 1);
 };
 

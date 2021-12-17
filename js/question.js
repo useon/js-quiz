@@ -141,11 +141,60 @@ const getParameters = function (iters, iter, data) {
             case 3: return `/${iter.slice(rand, rand + randNum(1, 2)).toLowerCase()}/gi`;
           }
         }
+        case 'MATCH': {
+          const numbers = iter.match(/[0-9]/g) ?? [];
+          const strings = iter.match(/[a-z]/g) ?? [];
+          const all = [ ...new Set([ ...numbers, ...strings ]) ];
+          let regex;
+
+          if (all.length <= 2) {
+            const rand = randNum(0, 4);
+            switch (rand) {
+              case 0: return `/${'.'.repeat(randNum(1, 3))}/g`;
+              case 1: return `/${randElem(all)}{1,2}/g`;
+              case 2: return `/${randElem(all)}{2}/g`;
+              case 3: return `/${randElem(all)}{2,}/g`;
+              case 4: return `/${randElem(all)}+/g`;
+            }
+          }
+
+          const rand = randNum(0, 14);
+          const [ r1, r2 ] = randArray(all, 2);
+          switch (rand) {
+            case 0: return `/${'.'.repeat(randNum(1, 3))}/g`;
+            case 1: return `/${randElem(all)}+/g`;
+            case 2: return `/${r1}|${r2}/g`;
+            case 3: return `/${randArray(all, randNum(1, 3)).sort().join('')}/g`;
+            case 4: return getRegex('a-z');
+            case 5: return getRegex('0-9');
+            case 6: return getRegex('\\d');
+            case 7: return getRegex('\\D');
+            case 8: return `/[a-z][0-9]/g`;
+            case 9: return `/[0-9][a-z]/g`;
+            case 10: return `/[0-9]?[a-z]/g`;
+            case 11: return `/[0-9][a-z]?/g`;
+            case 12: return `/[a-z]?[0-9]/g`;
+            case 13: return `/[a-z][0-9]?/g`;
+            case 14: return getRegex('a-z0-9');
+          }
+        }
         default:
           return getCallback(paramType, data);
       }
     });
 };
+
+const getRegex = function (regex) {
+  const rand = randNum(0, 5);
+  switch (rand) {
+    case 0: return `/[${regex}]/g`;
+    case 1: return `/[${regex}]+/g`;
+    case 2: return `/[^${regex}]/g`;
+    case 3: return `/^[${regex}]/g`;
+    case 4: return `/[${regex}]$/g`;
+    case 5: return `/[^${regex}]+/g`;
+  }
+}
 
 
 const getUnaryOperatorQuestion = function ({ patterns }) {
@@ -241,20 +290,38 @@ const getDeclaration = function (name, value) {
   }
 };
 
-const getReturnValue = function (varArr) {
-  console.log(varArr);
-  const rand = randNum(0, 1);
+const getReturnValue = function (varArr, func) {
+  if (func) {
+    if (varArr.length < 2) {
+      const rand = randNum(0, 4);
+      const var1 = randElem(varArr);
+      if (rand === 0) return `return ${var1} + ${func}();`;
+      if (rand === 1) return `return ${func}() + ${var1};`;
+      if (rand === 2) return `return ${func}() && ${var1};`;
+      if (rand === 3) return `return ${var1} && ${func}();`;
+      return `return ${func}() || ${var1};`;
+    }
+
+    const rand = randNum(0, 4);
+    const [ var1, var2 ] = randArray(varArr, 2).sort();
+    if (rand === 0) return `return ${var1} + ${func}() + ${var2};`;
+    if (rand === 1) return `return ${func}() && ${var1} && ${var2};`;
+    if (rand === 2) return `return ${func}() || ${var1} && ${var2};`;
+    if (rand === 3) return `return ${func}() && ${var1} || ${var2};`;
+    return `return ${func}() || ${var1} || ${var2};`;
+  }
+
+  const rand = randNum(0, 3);
   if (rand || varArr.length < 2) return `return ${randElem(varArr)};`;
-  const [ var1, var2 ] = randArray(varArr, 2).sort();
-  return `return ${var1} + ${var2};`
+  else {
+    const [ var1, var2 ] = randArray(varArr, 2).sort();
+    if (rand === 1) return `return ${var1} + ${var2};`;
+    if (rand === 2) return `return ${var1} && ${var2};`;
+    return `return ${var1} || ${var2};`;
+  }
 };
 
-const getScopeQuestion = function ({ patterns }) {
-  const { global, local, order } = randElem(patterns);
-  const options = {
-    type: randNum(0, 1),
-    name: randElem(FUNCTION_NAME)
-  };
+const getExpressions = function (global, local, options) {
   const [ globalCount, localCount ] = [ randNum(...global), randNum(...local) ];
   const varValue = randRange(0, 9, globalCount + localCount);
   if (varValue.length === 1) varValue = [varValue];
@@ -264,12 +331,48 @@ const getScopeQuestion = function ({ patterns }) {
   const globalTop = randArray(globalVar, randNum(0, globalVar.length));
   globalTop.forEach(top => globalVar.splice(globalVar.findIndex(v => v === top), 1));
   const globalBottom = globalVar;
-  const returnValue = getReturnValue([...new Set([ ...globalTop, ...globalBottom ])]);
-  const globalTopExp = globalTop.map(name => getDeclaration(name, varValue[valueIndex++])).shuffle().join('\n');
-  const globalBottomExp = globalBottom.map(name => getDeclaration(name, varValue[valueIndex++])).shuffle().join('\n');
-  const funcExp = getFunction(localVar.map(name => getDeclaration(name, varValue[valueIndex++])).concat(returnValue).shuffle().join('\n'), null, options);
+  const returnValue = getReturnValue([...new Set([ ...globalTop, ...globalBottom ])], options.func);
+  const globalTopExp = globalTop
+    .map(name => getDeclaration(name, varValue[valueIndex++]))
+    .join('\n');
+  const globalBottomExp = globalBottom
+    .map(name => getDeclaration(name, varValue[valueIndex++]))
+    .join('\n');
+  const funcExp = getFunction(
+    localVar
+      .map(name => getDeclaration(name, varValue[valueIndex++]))
+      .insert(returnValue, randNum(0, localVar.length - 1))
+      .join('\n'),
+    null, options);
+  return { globalTopExp, funcExp, globalBottomExp };
+}
+
+const getScopeQuestion = function ({ patterns }) {
+  const { global, local, local2, order } = randElem(patterns);
+
+  if (local2) {
+    const [ name1, name2 ] = randArray(FUNCTION_NAME, 2);
+    const options = {
+      type: randNum(0, 1),
+      name: name1,
+      func: name2
+    };
+    const options2 = {
+      type: randNum(0, 1),
+      name: name2
+    };
+    const func2Exp = getExpressions(global, local2, options2).funcExp;
+    const tryCatchExp = `try {\n  ${options.name}();\n} catch {\n  'error'\n}`;
+    const expressions = { tryCatchExp, func2Exp, ...getExpressions(global, local, options) };
+    return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
+  }
+  
+  const options = {
+    type: randNum(0, 1),
+    name: randElem(FUNCTION_NAME)
+  };
   const tryCatchExp = `try {\n  ${options.name}();\n} catch {\n  'error'\n}`;
-  const expressions = { globalTopExp, funcExp, globalBottomExp, tryCatchExp };
+  const expressions = { tryCatchExp, ...getExpressions(global, local, options) };
   return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
 };
 

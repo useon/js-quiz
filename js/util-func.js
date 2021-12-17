@@ -67,15 +67,21 @@ const randArray = function (array, count) {
   return tempArray;
 };
 
-const shuffle = function () {
-  const arrayCopy = copy(this);
-  const output = [];
-  while (arrayCopy.length) {
-    output.push(arrayCopy.splice(randNum(0, arrayCopy.length - 1), 1)[0]);
-  }
-  return output;
+//const shuffle = function () {
+//  const arrayCopy = copy(this);
+//  const output = [];
+//  while (arrayCopy.length) {
+//    output.push(arrayCopy.splice(randNum(0, arrayCopy.length - 1), 1)[0]);
+//  }
+//  return output;
+//};
+//Array.prototype.shuffle = shuffle;
+
+const insert = function (elem, index) {
+  this.splice(index, 0, elem);
+  return this;
 };
-Array.prototype.shuffle = shuffle;
+Array.prototype.insert = insert;
 
 
 
@@ -117,6 +123,15 @@ const getObject = function (form) {
   return object(obj);
 };
 
+const getFalsy = function () {
+  const rand = randNum(0, 6);
+  switch (rand) {
+    case 0: return str(FALSY[rand]);
+    case 4: return object(FALSY[rand]);
+    default: return FALSY[rand];
+  }
+}
+
 const getValue = function (form) {
   const { type } = form;
   switch (type) {
@@ -125,5 +140,6 @@ const getValue = function (form) {
     case 'array': return getArray(form);
     case 'object': return getObject(form);
     case 'boolean': return getBoolean();
+    case 'falsy': return getFalsy();
   }
 };
