@@ -398,6 +398,18 @@
             ]
           }
         ]
+      },
+      {
+        "methods": [ "match" ],
+        "strings": [
+          {
+            "string": [],
+            "lengthRange": [3, 9],
+            "forms": [
+              { "count": 1, "params": [ "MATCH" ] }
+            ]
+          }
+        ]
       }
     ]
   },

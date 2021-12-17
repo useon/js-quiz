@@ -141,11 +141,60 @@ const getParameters = function (iters, iter, data) {
             case 3: return `/${iter.slice(rand, rand + randNum(1, 2)).toLowerCase()}/gi`;
           }
         }
+        case 'MATCH': {
+          const numbers = iter.match(/[0-9]/g) ?? [];
+          const strings = iter.match(/[a-z]/g) ?? [];
+          const all = [ ...new Set([ ...numbers, ...strings ]) ];
+          let regex;
+
+          if (all.length <= 2) {
+            const rand = randNum(0, 4);
+            switch (rand) {
+              case 0: return `/${'.'.repeat(randNum(1, 3))}/g`;
+              case 1: return `/${randElem(all)}{1,2}/g`;
+              case 2: return `/${randElem(all)}{2}/g`;
+              case 3: return `/${randElem(all)}{2,}/g`;
+              case 4: return `/${randElem(all)}+/g`;
+            }
+          }
+
+          const rand = randNum(0, 14);
+          const [ r1, r2 ] = randArray(all, 2);
+          switch (rand) {
+            case 0: return `/${'.'.repeat(randNum(1, 3))}/g`;
+            case 1: return `/${randElem(all)}+/g`;
+            case 2: return `/${r1}|${r2}/g`;
+            case 3: return `/${randArray(all, randNum(1, 3)).sort().join('')}/g`;
+            case 4: return getRegex('a-z');
+            case 5: return getRegex('0-9');
+            case 6: return getRegex('\\d');
+            case 7: return getRegex('\\D');
+            case 8: return `/[a-z][0-9]/g`;
+            case 9: return `/[0-9][a-z]/g`;
+            case 10: return `/[0-9]?[a-z]/g`;
+            case 11: return `/[0-9][a-z]?/g`;
+            case 12: return `/[a-z]?[0-9]/g`;
+            case 13: return `/[a-z][0-9]?/g`;
+            case 14: return getRegex('a-z0-9');
+          }
+        }
         default:
           return getCallback(paramType, data);
       }
     });
 };
+
+const getRegex = function (regex) {
+  const rand = randNum(0, 5);
+  switch (rand) {
+    case 0: return `/[${regex}]/g`;
+    case 1: return `/[${regex}]+/g`;
+    case 2: return `/[^${regex}]/g`;
+    case 3: return `/^[${regex}]/g`;
+    case 4: return `/[${regex}]$/g`;
+    case 5: return `/[^${regex}]+/g`;
+  }
+}
 
 
 const getUnaryOperatorQuestion = function ({ patterns }) {
