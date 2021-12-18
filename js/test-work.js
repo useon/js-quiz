@@ -32,8 +32,9 @@ function testStart() {
 function enterKeydown(e) {
   if (e.key == 'Enter') {
     // 정지상태라면 엔터 -> next()
-    if (isPause) next();
-    else successCheck();
+    if (isPause) {
+      next();
+    } else successCheck();
   }
 }
 
@@ -60,6 +61,7 @@ function next() {
   rightAnswerBox.style.height = null;
   showQuestion();
   clearInputBox();
+  inpAnswer.focus();
 }
 
 // 오답일 경우
@@ -68,7 +70,7 @@ function showRightAnswer() {
   pauseTimer();
   isPause = true;
   submitBtn.setAttribute('disabled', true);
-  rightAnswerBox.style.height = '100px';
+  rightAnswerBox.style.height = '70px';
   // 정답박스 준비 (테스트용)
   rightAnswerOutput.innerHTML = `정답 : ${getAnswer(questions[questions.length - 1])}`;
 }
