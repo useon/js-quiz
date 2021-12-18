@@ -270,12 +270,12 @@ article {
   border: none;
   font-family: 'D2Coding', sans-serif;
   line-height: 25px;
-  overflow-y: scroll;
+  overflow-y: auto;
   white-space: pre-wrap;
 }
 
 .answer-wrap {
-  padding: 0;
+  display: flex;
   width: 460px;
   margin: 0 auto;
 }
@@ -286,10 +286,10 @@ article {
 
 .input-box {
   border: none;
-  width: 340px;
-  height: 50px;
+  width: 80%;
+  height: 40px;
   border-radius: 0 0 0 20px;
-  padding: 5px 20px;
+  padding: 10px 0 10px 20px;
 }
 
 .input-box:focus {
@@ -297,13 +297,11 @@ article {
 }
 
 .btn-submit {
-  width: 80px;
+  width: 20%;
   height: 60px;
   background-color: var(--color-main-1);
   color: white;
   border: none;
-  margin: 0 -7px;
-  padding: 0;
   border-radius: 0 0 20px 0;
   cursor: pointer;
   transition: 0.2s all;
@@ -396,6 +394,23 @@ h1 {
   padding-bottom: 10px;
 }
 
+.showResult2 {
+  height: 100%;
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s all;
+  font-weight: 700;
+}
+
+.showResult2:hover {
+  color: white;
+  background-color: var(--color-main-1);
+  text-shadow: 0px 0px 10px black;
+}
+
 .slider-wrap {
   width: 100%;
   display: flex;
@@ -404,6 +419,7 @@ h1 {
 }
 
 .slider-display-area {
+  border: 5px solid var(--color-main-1);
   width: 400px;
   height: 400px;
   overflow: hidden;
@@ -422,50 +438,65 @@ h1 {
   position: relative;
   overflow: hidden;
   width: 400px;
-  height: 100%;
+  height: 400px;
   background-color: white;
 }
 
 .slider_contents > div:nth-child(1) {
-  height: 70%;
-  box-shadow: inset 0 -10px 25px -10px #b3b3b3;
+  padding: 25px;
+  height: 250px;
+  border-bottom: 1px solid var(--color-main-1);
 }
 
 .slider_contents > div:nth-child(2) {
   display: flex;
   align-items: center;
-  justify-content: center;
-  float: left;
-  position: relative;
-  height: 15%;
+  justify-content: start;
+  height: 49px;
   width: 100%;
-  box-shadow: inset 0 -10px 3px -10px #b3b3b3;
+  padding-left: 20px;
+  border-bottom: 1px solid var(--color-main-1);
 }
 
 .slider_contents > div:nth-child(3) {
   display: flex;
   align-items: center;
-  justify-content: center;
-  float: right;
-  position: relative;
-  height: 15%;
+  justify-content: start;
+  height: 50px;
   width: 100%;
+  padding-left: 20px;
 }
 
-.btn-prev-slide {
+.btn-slide {
   height: 100px;
   width: 100px;
   background: none;
   border: none;
-  margin-right: 30px;
-  color: cornflowerblue;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s all;
+}
+.btn-slide:hover {
 }
 
-.btn-next-slide {
-  height: 100px;
-  width: 100px;
-  background: none;
-  border: none;
-  margin-left: 30px;
-  color: cornflowerblue;
+.btn-prev-slide:hover {
+  transform: translateX(-10%);
+}
+
+.btn-next-slide:hover {
+  transform: translateX(10%);
+}
+
+.btn-link-index {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+  background-color: var(--color-main-1);
+  transition: 0.3s all;
+}
+
+.btn-link-index:hover {
+  color: var(--color-main-1);
+  background-color: white;
 }

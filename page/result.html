@@ -15,17 +15,18 @@
   <link rel="stylesheet" href="../css/reset.css" />
   <!-- css -->
   <link rel="stylesheet" href="../css/style.css" />
+  <!-- 테스트 css 파일(충돌 X) -->
+  <link rel="stylesheet" href="../css/visible&invisivle.css" />
   <!-- 테스트 스타일 적용 -->
   <style></style>
 </head>
 
 <body>
   <div class="background">
-    <header class="header">헤더</header>
+    <header class="header">자바스크립트 퀴즈</header>
     <section class="section-result">
       <div class="viewResult">
         <button class="showResult">결과보기![지승테스트]</button>
-        <button class="showResult2">틀린 문제 복습![우진테스트]</button>
       </div>
       <p class="right"></p>
       <p class="wrong"></p>
@@ -39,15 +40,16 @@
         <tbody></tbody>
       </table>
       <div class="slider-wrap">
-        <button class="btn-prev-slide invisible" onclick="prevSlider()"><i
+        <button class="btn-slide btn-prev-slide invisible" onclick="prevSlider()"><i
             class="fas fa-chevron-left fa-3x"></i></button>
         <div class="slider-display-area">
+          <button class="showResult2">틀린 문제 복습![우진테스트]</button>
           <div class="result-slider"></div>
         </div>
-        <button class="btn-next-slide invisible" onclick="nextSlider()"><i
+        <button class="btn-slide btn-next-slide invisible" onclick="nextSlider()"><i
             class="fas fa-chevron-right fa-3x"></i></button>
       </div>
-      <a href="index.html" type="button" class="button">처음으로</a>
+      <a href="index.html" type="button" class="btn-link-index">처음으로</a>
     </section>
     <section class="section-chart">
       <!-- 상세 결과 chart.js -->
