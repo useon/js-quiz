@@ -3,14 +3,13 @@
   src: url('../fonts/D2Coding-Ver1.3.2-20180524.ttf');
   font-family: 'D2Coding', sans-serif;
 }
-
 /* root */
 :root {
-  --color-main-1: #034f5c;
-  --color-main-2: #7ea4a7;
-  --color-main-3: #e9f4f2;
-  --color-main-4: #c19d7c;
-  --color-main-5: #a8643c;
+  --color-main-1: #b7b2cb;
+  --color-main-2: #dedbea;
+  --color-main-3: #d6d1f4;
+  --color-main-4: #d4d8ea;
+  --color-main-5: #e5d8f7;
 }
 /* :root {
   --color-main-1: #c7268c;
@@ -69,21 +68,88 @@
   background-color: gray;
 }
 
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -10;
-}
-
 p {
   padding: 10px;
 }
 
 article {
   padding: 20px;
+}
+
+.background {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  background: linear-gradient(
+    124deg,
+    var(--color-main-1),
+    var(--color-main-2),
+    var(--color-main-3),
+    var(--color-main-4),
+    var(--color-main-5)
+  );
+  background-size: 1800% 1800%;
+
+  animation: rainbow 10s ease infinite;
+
+  /* 크로싱 브라우저 */
+  /* 크롬, 사파리 */
+  -webkit-animation: rainbow 8s ease infinite;
+  /* 파이어폭스 */
+  -moz-animation: rainbow 8s ease infinite;
+  /* 오페라 */
+  -o-animation: rainbow 8s ease infinite;
+  /* IE ^^ 무시하자 */
+  /* -ms-animation: rainbow 18s ease infinite; */
+}
+
+@-webkit-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+@-moz-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+@-o-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+@keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
 
 /* index.html */

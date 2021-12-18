@@ -20,49 +20,51 @@
 </head>
 
 <body>
-  <video autoplay muted loop id="myVideo">
-    <source src="../images/Bokeh - 9036.mp4" type="video/mp4" />
-  </video>
-  <header class="header">헤더</header>
-  <section class="section-result">
-    <div class="viewResult">
-      <button class="showResult">결과보기![지승테스트]</button>
-      <button class="showResult2">틀린 문제 복습![우진테스트]</button>
-    </div>
-    <p class="right"></p>
-    <p class="wrong"></p>
-    <p class="score"></p>
-    <table class="table-result">
-      <thead>
-        <th>문제</th>
-        <th>정답</th>
-        <th>나의 답</th>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <div class="slider-wrap">
-      <button class="btn-prev-slide invisible" onclick="prevSlider()"><i class="fas fa-chevron-left fa-3x"></i></button>
-      <div class="slider-display-area">
-        <div class="result-slider"></div>
+  <div class="background">
+    <header class="header">헤더</header>
+    <section class="section-result">
+      <div class="viewResult">
+        <button class="showResult">결과보기![지승테스트]</button>
+        <button class="showResult2">틀린 문제 복습![우진테스트]</button>
       </div>
-      <button class="btn-next-slide invisible" onclick="nextSlider()"><i class="fas fa-chevron-right fa-3x"></i></button>
-    </div>
-    <a href="index.html" type="button" class="button">처음으로</a>
-  </section>
-  <section class="section-chart">
-    <!-- 상세 결과 chart.js -->
-    <div class="chart">차트</div>
+      <p class="right"></p>
+      <p class="wrong"></p>
+      <p class="score"></p>
+      <table class="table-result">
+        <thead>
+          <th>문제</th>
+          <th>정답</th>
+          <th>나의 답</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="slider-wrap">
+        <button class="btn-prev-slide invisible" onclick="prevSlider()"><i
+            class="fas fa-chevron-left fa-3x"></i></button>
+        <div class="slider-display-area">
+          <div class="result-slider"></div>
+        </div>
+        <button class="btn-next-slide invisible" onclick="nextSlider()"><i
+            class="fas fa-chevron-right fa-3x"></i></button>
+      </div>
+      <a href="index.html" type="button" class="button">처음으로</a>
+    </section>
+    <section class="section-chart">
+      <!-- 상세 결과 chart.js -->
+      <div class="chart">차트</div>
 
-    <div>
-      <p>친구들도 테스트 시키기</p>
-      <!-- 공유 버튼.. -->
-      <!-- https://www.addthis.com/ -->
-    </div>
-  </section>
-  <footer class="footer">
-    <p>프로젝트 정보</p>
-    ...
-  </footer>
+      <div>
+        <p>친구들도 테스트 시키기</p>
+        <!-- 공유 버튼.. -->
+        <!-- https://www.addthis.com/ -->
+      </div>
+    </section>
+    <footer class="footer">
+      <p>프로젝트 정보</p>
+      ...
+    </footer>
+  </div>
+
   <script src="../js/script.js"></script>
   <script src="../js/result.js"></script>
   <script src="../js/answer.js"></script>
