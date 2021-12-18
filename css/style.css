@@ -93,15 +93,15 @@ article {
     var(--color-main-5)
   );
   background-size: 1800% 1800%;
-  animation: rainbow 5s ease infinite;
+  animation: rainbow 10s ease infinite;
 
   /* 크로싱 브라우저 */
   /* 크롬, 사파리 */
-  -webkit-animation: rainbow 5s ease infinite;
+  -webkit-animation: rainbow 10s ease infinite;
   /* 파이어폭스 */
-  -moz-animation: rainbow 5s ease infinite;
+  -moz-animation: rainbow 10s ease infinite;
   /* 오페라 */
-  -o-animation: rainbow 5s ease infinite;
+  -o-animation: rainbow 10s ease infinite;
   /* IE ^^ 무시하자 */
   /* -ms-animation: rainbow 18s ease infinite; */
 }
