@@ -89,7 +89,6 @@ function calResult2(resultSlider) {
 }
 
 function showResult2() {
-  showBtn2.setAttribute('disabled', true);
   btnVisible();
   getData();
   calResult2(resultSlider);
@@ -115,4 +114,5 @@ function nextSlider() {
 function btnVisible() {
   nextSlideBtn.classList.replace('invisible', 'visible');
   prevSlideBtn.classList.replace('invisible', 'visible');
+  showBtn2.classList += ' invisible';
 }
