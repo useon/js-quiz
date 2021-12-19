@@ -152,6 +152,47 @@ article {
 }
 
 /* index.html */
+/* index.html */
+@font-face {
+  font-family: 'IBMPlexSansKR-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+/* @font-face {
+  font-family: 'Goyang';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Goyang.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@keyframes runleft {
+  from {
+    padding-left: 400%;
+  }
+  to {
+    padding-left: 0%;
+  }
+}
+
+@keyframes up-down {
+  from {
+    transform: translatey(0px);
+  }
+  to {
+    transform: translatey(-10px);
+  }
+}
+
 .section-index {
   display: flex;
   flex-direction: column;
@@ -161,14 +202,55 @@ article {
   margin-top: 50px;
   justify-content: center;
   align-items: center;
+  background-color: #ffdf92;
 }
+
+.weniv_character {
+  width: 600px;
+  margin-top: 30px;
+  animation: runleft 2s linear forwards, up-down 2s linear 1s forwards;
+}
+
+.title_likelion {
+  margin-top: 50px;
+  font-family: 'DungGeunMo';
+  font-size: 20px;
+}
+
+.title_jsquiz {
+  font-size: 60px;
+  font-weight: bold;
+  margin-top: 20px;
+  width: 900px;
+  text-align: center;
+  font-family: 'DungGeunMo';
+}
+
+.btn-join {
+  margin-top: 50px;
+  padding: 30px 100px 30px 110px;
+  color: white;
+  background-color: #fdc842;
+  border-radius: 20px;
+  font-size: 70px;
+  text-decoration: none;
+  font-family: 'DungGeunMo';
+  letter-spacing: 15px;
+}
+
+.btn-join:hover {
+  transform: scale(1.1);
+  background-color: #fab70c;
+}
+
+/* test.html */
 
 .box-manual {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 400px;
+  height: 200px;
   border-radius: 50px;
   padding: 20px;
   background-color: white;
@@ -195,21 +277,6 @@ article {
   background-color: var(--color-main-1);
 }
 
-.btn-join {
-  padding: 20px;
-  margin-top: 20px;
-  color: white;
-  background-color: var(--color-main-1);
-  border-radius: 10px;
-  transition: 0.5s all;
-}
-
-.btn-join:hover {
-  color: var(--color-main-1);
-  background-color: white;
-}
-
-/* test.html */
 .section-test {
   position: relative;
   display: flex;
@@ -236,10 +303,11 @@ article {
 }
 
 .btn-start {
+  width: 150px;
   border: none;
   border-radius: 20px;
   padding: 20px;
-  top: 50%;
+  top: 70%;
   position: absolute;
   color: white;
   background-color: var(--color-main-1);

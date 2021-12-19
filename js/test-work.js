@@ -6,6 +6,7 @@ const rightAnswers = [];
 let isPause = false;
 
 // 시작 > 출력 > input > 제출 > 정답박스 > 오답확인
+const menualBox = document.querySelector('.box-manual');
 const startBtn = document.querySelector('.btn-start');
 const questionBox = document.querySelector('.question-box');
 const inpAnswer = document.querySelector('.input-box');
@@ -25,6 +26,7 @@ function testStart() {
   // UI 렌더링 > 문제 시작
   toggleToVisible();
   startBtn.remove();
+  menualBox.remove();
   next();
 }
 
