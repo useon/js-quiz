@@ -8,7 +8,7 @@ let isPause = false;
 // 시작 > 출력 > input > 제출 > 정답박스 > 오답확인
 const menualBox = document.querySelector('.box-manual');
 const startBtn = document.querySelector('.btn-start');
-const questionBox = document.querySelector('.question-box');
+const questionBox = document.querySelector('.question-area');
 const inpAnswer = document.querySelector('.input-box');
 const submitBtn = document.querySelector('.btn-submit');
 const rightAnswerBox = document.querySelector('.right-answer-box');

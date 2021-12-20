@@ -5,9 +5,9 @@
 }
 /* root */
 :root {
-  --color-main-1: #cab3a4;
-  --color-main-2: #add3b0;
-  --color-main-3: #aeb5db;
+  --color-main-1: #ffdf92;
+  --color-main-2: #fdc842;
+  --color-main-3: #fab70c;
   --color-main-4: #c6bde2;
   --color-main-5: #dab4da;
 }
@@ -55,13 +55,52 @@
 }
 
 .footer {
+  position: relative;
   display: flex;
   width: 100%;
   height: 300px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-main-1);
+  background-color: #fdc842;
   bottom: 0;
+  font-family: 'DungGeunMo';
+}
+
+.footer-title {
+  position: absolute;
+  top: 20px;
+  font-size: 30px;
+  font-weight: 500;
+  animation: font-blank 2s linear infinite;
+}
+
+.team-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  bottom: 0;
+}
+
+.team-list > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-list > div > a {
+  margin-top: 20px;
+  transition: 0.5s all;
+}
+
+.team-list > div > a:hover {
+  color: black;
+}
+
+.fa-github-square {
+  color: white;
 }
 
 a {
@@ -75,83 +114,6 @@ p {
 article {
 }
 
-.background {
-  margin-top: -50px;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  position: relative;
-  background: linear-gradient(
-    124deg,
-    var(--color-main-1),
-    var(--color-main-2),
-    var(--color-main-3),
-    var(--color-main-4),
-    var(--color-main-5)
-  );
-  background-size: 1800% 1800%;
-  animation: rainbow 10s ease infinite;
-
-  /* 크로싱 브라우저 */
-  /* 크롬, 사파리 */
-  -webkit-animation: rainbow 10s ease infinite;
-  /* 파이어폭스 */
-  -moz-animation: rainbow 10s ease infinite;
-  /* 오페라 */
-  -o-animation: rainbow 10s ease infinite;
-  /* IE ^^ 무시하자 */
-  /* -ms-animation: rainbow 18s ease infinite; */
-}
-
-@-webkit-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
-  }
-}
-@-moz-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
-  }
-}
-@-o-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
-  }
-}
-@keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
-  }
-}
-
-/* index.html */
 /* index.html */
 @font-face {
   font-family: 'IBMPlexSansKR-Bold';
@@ -177,19 +139,58 @@ article {
 
 @keyframes runleft {
   from {
-    padding-left: 400%;
+    margin-left: 180%;
   }
   to {
-    padding-left: 0%;
+    margin-left: 0%;
   }
 }
 
 @keyframes up-down {
+  0% {
+    transform: translatey(-5px);
+  }
+  50% {
+    transform: translatey(5px);
+  }
+  100% {
+    transform: translatey(-5px);
+  }
+}
+
+@keyframes up {
   from {
-    transform: translatey(0px);
+    transform: translatey(300px);
   }
   to {
-    transform: translatey(-10px);
+    transform: translatey(0px);
+  }
+}
+
+@keyframes font-blank {
+  0% {
+    color: black;
+  }
+  40% {
+    color: black;
+  }
+  41% {
+    color: white;
+  }
+  50% {
+    color: black;
+  }
+  51% {
+    color: white;
+  }
+  70% {
+    color: white;
+  }
+  71% {
+    color: black;
+  }
+  100% {
+    color: black;
   }
 }
 
@@ -199,16 +200,15 @@ article {
   width: 100%;
   height: 100vh;
   min-height: 700px;
-  margin-top: 50px;
   justify-content: center;
   align-items: center;
-  background-color: #ffdf92;
+  background-color: var(--color-main-1);
 }
 
 .weniv_character {
   width: 600px;
   margin-top: 30px;
-  animation: runleft 2s linear forwards, up-down 2s linear 1s forwards;
+  animation: runleft 2s linear forwards;
 }
 
 .title_likelion {
@@ -224,23 +224,26 @@ article {
   width: 900px;
   text-align: center;
   font-family: 'DungGeunMo';
+  animation: up-down 2s linear infinite;
 }
 
 .btn-join {
   margin-top: 50px;
-  padding: 30px 100px 30px 110px;
+  padding: 30px 80px;
   color: white;
-  background-color: #fdc842;
+  background-color: #fab70c;
   border-radius: 20px;
   font-size: 70px;
-  text-decoration: none;
   font-family: 'DungGeunMo';
-  letter-spacing: 15px;
+  letter-spacing: 10px;
+  animation: up 2s linear forwards;
+  transition: 0.5s all;
 }
 
 .btn-join:hover {
-  transform: scale(1.1);
-  background-color: #fab70c;
+  letter-spacing: 25px;
+  padding: 30px 100px;
+  background-color: #fdc842;
 }
 
 /* test.html */
@@ -265,16 +268,17 @@ article {
   height: 80px;
   right: 0;
   bottom: 0;
-  color: var(--color-main-1);
+  color: var(--color-main-2);
   cursor: pointer;
   background-color: white;
   border-radius: 50px 0px 45px 0px;
-  transition: 0.5s all;
+  transition: 0.5s background-color;
+  font-weight: 500;
 }
 
 .btn-menual:hover {
   color: white;
-  background-color: var(--color-main-1);
+  background-color: var(--color-main-2);
 }
 
 .section-test {
@@ -283,9 +287,9 @@ article {
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  margin-top: 50px;
   justify-content: center;
   align-items: center;
+  background-color: var(--color-main-1);
 }
 
 .timer {
@@ -296,7 +300,7 @@ article {
   justify-content: center;
   width: 200px;
   height: 80px;
-  background-color: rgb(235, 224, 240);
+  background-color: var(--color-main-2);
   border-radius: 10px;
   color: black;
   font-size: 32px;
@@ -310,14 +314,14 @@ article {
   top: 70%;
   position: absolute;
   color: white;
-  background-color: var(--color-main-1);
+  background-color: var(--color-main-3);
   cursor: pointer;
   z-index: 1;
   transition: 0.5s all;
 }
 
 .btn-start:hover {
-  color: var(--color-main-1);
+  color: var(--color-main-3);
   background-color: white;
 }
 
@@ -327,7 +331,7 @@ article {
   width: 100%;
 }
 
-.question-box {
+.question-area {
   display: block;
   width: 400px;
   height: 300px;
@@ -367,7 +371,7 @@ article {
 .btn-submit {
   width: 20%;
   height: 60px;
-  background-color: var(--color-main-1);
+  background-color: var(--color-main-3);
   color: white;
   border: none;
   border-radius: 0 0 20px 0;
@@ -376,7 +380,7 @@ article {
 }
 
 .btn-submit:hover {
-  background-color: var(--color-main-5);
+  background-color: var(--color-main-2);
   color: white;
 }
 
@@ -414,9 +418,9 @@ article {
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  margin-top: 50px;
   justify-content: center;
   align-items: center;
+  background-color: var(--color-main-1);
 }
 
 .section-chart {
@@ -427,10 +431,6 @@ article {
   top: 50px;
   justify-content: center;
   align-items: center;
-}
-
-.section-result {
-  padding-top: 100px;
 }
 
 table,
@@ -560,11 +560,11 @@ h1 {
   padding: 20px;
   border-radius: 20px;
   color: white;
-  background-color: var(--color-main-1);
+  background-color: var(--color-main-3);
   transition: 0.3s all;
 }
 
 .btn-link-index:hover {
-  color: var(--color-main-1);
+  color: var(--color-main-3);
   background-color: white;
 }
