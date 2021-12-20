@@ -278,15 +278,13 @@ const getIndexQuestion = function ({ patterns }) {
 };
 
 const getDeclaration = function (name, value) {
-  const rand = randNum(0, 6);
+  const rand = randNum(0, 4);
   switch (rand) {
     case 0: return `var ${name};`;
     case 1: return `var ${name} = ${value};`;
     case 2: return `let ${name};`
     case 3: return `let ${name} = ${value};`;
-    case 4: return `var ${name} = ${value};`;
-    case 5: return `var ${name} = ${value};`;
-    case 6: return `var ${name} = ${value};`;
+    case 4: return `const ${name} = ${value};`;
   }
 };
 
@@ -321,7 +319,7 @@ const getReturnValue = function (varArr, func) {
   }
 };
 
-const getExpressions = function (global, local, options) {
+const getExpressions = function (global, local, options, blockExp) {
   const [ globalCount, localCount ] = [ randNum(...global), randNum(...local) ];
   const varValue = randRange(0, 9, globalCount + localCount);
   if (varValue.length === 1) varValue = [varValue];
@@ -338,17 +336,50 @@ const getExpressions = function (global, local, options) {
   const globalBottomExp = globalBottom
     .map(name => getDeclaration(name, varValue[valueIndex++]))
     .join('\n');
-  const funcExp = getFunction(
-    localVar
-      .map(name => getDeclaration(name, varValue[valueIndex++]))
-      .insert(returnValue, randNum(0, localVar.length - 1))
-      .join('\n'),
-    null, options);
-  return { globalTopExp, funcExp, globalBottomExp };
-}
+  let funcExp;
+  if (blockExp) {
+    funcExp = getFunction(
+      [ blockExp, returnValue ].join('\n'),
+      null, options);
+    return { globalTopExp, funcExp, globalBottomExp };
+  } else {
+    funcExp = getFunction(
+      localVar
+        .map(name => getDeclaration(name, varValue[valueIndex++]))
+        .insert(returnValue, randNum(0, localVar.length - 1))
+        .join('\n'),
+      null, options);
+    return { globalTopExp, funcExp, globalBottomExp };
+  }
+  
+};
+
+const getCodeBlock = function () {
+  const count = 2;
+  const rand = randNum(0, 1);
+  const varName = ALPHABET.slice(0, count);
+  const expression = varName
+    .map(name => getDeclaration(name, randNum(0, 9)))
+    .join('\n');
+  const secondExp = expression.split('\n')[1];
+  switch (rand) {
+    case 0:
+      if (count > 1) {
+        if (expression[0] === 'c') {
+          const [ keyword, name ] = [ 'const', expression[6] ];
+          return `for (${keyword} ${name} = 0; ${name} < ${randNum(2, 5)}; ${name}++) {\n  ${secondExp}\n}`;
+        } else {
+          const [ keyword, name ] = [ expression.slice(0, 3), expression[4] ];
+          return `for (${keyword} ${name} = 0; ${name} < ${randNum(2, 5)}; ${name}++) {\n  ${secondExp}\n}`;
+        }
+      }
+    case 1: return `if (true) {\n  ${secondExp}\n}`;
+    // case 2: return `{\n  ${secondExp}\n}`;
+  }
+};
 
 const getScopeQuestion = function ({ patterns }) {
-  const { global, local, local2, order } = randElem(patterns);
+  const { global, local, local2, block, order } = randElem(patterns);
 
   if (local2) {
     const [ name1, name2 ] = randArray(FUNCTION_NAME, 2);
@@ -372,8 +403,14 @@ const getScopeQuestion = function ({ patterns }) {
     name: randElem(FUNCTION_NAME)
   };
   const tryCatchExp = `try {\n  ${options.name}();\n} catch {\n  'error'\n}`;
-  const expressions = { tryCatchExp, ...getExpressions(global, local, options) };
-  return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
+  if (block) {
+    const blockExp = getCodeBlock();
+    const expressions = { tryCatchExp, ...getExpressions(global, local, options, blockExp) };
+    return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
+  } else {
+    const expressions = { tryCatchExp, ...getExpressions(global, local, options) };
+    return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
+  }
 };
 
 const getQuestion = function (data) {
