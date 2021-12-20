@@ -101,7 +101,7 @@ const getString = function (form) {
   const candidate = [];
   if (form[0]) candidate.push(randRange(...form[0]));
   if (form[1]) candidate.push(randElem(ALPHABET));
-  if (form[2]) candidate.push(randElem(FALSY));
+  if (form[2]) candidate.push(randElem(FALSY) + '');
   if (form[3]) candidate.push(randElem(DIVISOR));
   if (form[4]) candidate.push(randElem(SEPARATOR));
   return str(randElem(candidate));
@@ -125,10 +125,12 @@ const getObject = function (form) {
 
 const getFalsy = function () {
   const rand = randNum(0, 6);
+  console.log('falsy', rand);
   switch (rand) {
     case 0: return str(FALSY[rand]);
+    case 3: return arr(FALSY[rand]);
     case 4: return object(FALSY[rand]);
-    default: return FALSY[rand];
+    default: return FALSY[rand] + '';
   }
 }
 
