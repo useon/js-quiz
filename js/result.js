@@ -31,6 +31,12 @@ showBtn.addEventListener('click', function showResult() {
 	showBtn.disabled = true;
 	showBtn.classList.remove('btn-join');
 	showBtn.innerHTML = '<h1>👏 👏 👏</h1>';
+
+	var data = firebase.database().ref('data').push({
+		nickname: '익명',
+		result: right,
+	});
+	console.log('push', data);
 });
 
 // 맞은 개수, 틀린 개수 계산
