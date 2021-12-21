@@ -208,6 +208,18 @@ p {
   }
 }
 
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .section-index {
   display: flex;
   flex-direction: column;
@@ -330,6 +342,10 @@ p {
   border-radius: 10px;
   color: black;
   font-size: 32px;
+}
+
+.bounce-bounce {
+  animation: bounce 0.5s linear infinite;
 }
 
 .btn-start {
