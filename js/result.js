@@ -88,7 +88,7 @@ function showStudy() {
   studyBtn.style.display = 'none';
   // 틀린 문제가 없을 경우
   if (!wrong) {
-    resultSlider.innerHTML = '<p>틀린 문제가 없습니다..</p>';
+    resultSlider.innerHTML = '<p>틀린 문제가 없습니다.</p>';
     return;
   }
   btnInvisible(prevSlideBtn);

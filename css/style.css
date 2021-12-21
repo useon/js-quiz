@@ -466,6 +466,7 @@ p {
   font-family: 'DungGeunMo';
   font-size: 20px;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .btn-submit:disabled {
@@ -540,6 +541,11 @@ p {
   align-items: center;
   border-radius: 100px;
   transform: translateX(-50%);
+}
+
+.go-result:hover {
+  color: #e38821;
+  background-color: white;
 }
 
 /* result.html */
@@ -626,6 +632,7 @@ h1 {
 }
 
 .slider-display-area {
+  background-color: var(--color-moniter-2);
   position: relative;
   border: 40px solid var(--color-moniter-1);
   border-radius: 20px 20px 0 0;
@@ -643,9 +650,11 @@ h1 {
 }
 
 .result-slider p {
-  width: 100%;
-  margin-top: 50%;
+  width: 95%;
+  margin-top: 45%;
   text-align: center;
+  color: white;
+  font-size: 24px;
 }
 
 .slider_contents {
