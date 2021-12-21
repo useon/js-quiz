@@ -4,12 +4,13 @@ let wrong = 0;
 const showBtn = document.querySelector('.showResult');
 const myScore = document.querySelector('.score');
 //우진테스트
-const showBtn2 = document.querySelector('.showResult2');
+const studyBtn = document.querySelector('.studyBtn');
 const resultSlider = document.querySelector('.result-slider');
-showBtn2.addEventListener('click', showResult2);
+studyBtn.addEventListener('click', showStudy);
 const sliderItemWidth = 400;
 let left = 0;
 let childCount = 0;
+let nowCount = 0;
 const nextSlideBtn = document.querySelector('.btn-next-slide');
 const prevSlideBtn = document.querySelector('.btn-prev-slide');
 
@@ -48,7 +49,7 @@ function calResult() {
 
 // 여기부터 우진테스트
 
-function calResult2(resultSlider) {
+function createStudyList(resultSlider) {
 	for (let i = 0; i < inpAnswers.length; i++) {
 		// 틀린 문제만 요소로 생성
 		if (isAnswer(questions[i], inpAnswers[i])) continue;
@@ -71,34 +72,52 @@ function calResult2(resultSlider) {
 		// 한 문제의 결과박스 슬라이더에 추가
 		resultSlider.appendChild(resultChild);
 	}
+	btnVisible(nextSlideBtn);
 	resultSlider.style.width = childCount * sliderItemWidth + 'px';
 }
 
-function showResult2() {
-	btnVisible();
+function showStudy() {
 	getData();
-	calResult2(resultSlider);
+	calResult();
+	studyBtn.style.display = 'none';
+	// 틀린 문제가 없을 경우
+	if (!wrong) {
+		resultSlider.innerHTML = '<p>틀린 문제가 없습니다..</p>';
+		return;
+	}
+	btnVisible(nextSlideBtn);
+	createStudyList(resultSlider);
 }
 function prevSlider() {
+	nowCount--;
 	left += sliderItemWidth;
-	var limit = 0;
-	if (left > limit) {
-		left = limit;
-	}
+	checkListCount();
 	resultSlider.style.left = left + 'px';
 }
 
 function nextSlider() {
+	nowCount++;
 	left -= sliderItemWidth;
-	var limit = -1 * sliderItemWidth * (childCount - 1);
-	if (left < limit) {
-		left = limit;
-	}
+	checkListCount();
 	resultSlider.style.left = left + 'px';
 }
 
-function btnVisible() {
-	nextSlideBtn.classList.replace('invisible', 'visible');
-	prevSlideBtn.classList.replace('invisible', 'visible');
-	showBtn2.classList += ' invisible';
+function checkListCount() {
+	// 마지막 카운트
+	if (nowCount === childCount - 1) {
+		btnInvisible(nextSlideBtn);
+	} else btnVisible(nextSlideBtn);
+
+	if (nowCount === 0) btnInvisible(prevSlideBtn);
+	else btnVisible(prevSlideBtn);
+}
+
+function btnVisible(btn) {
+	btn.classList.replace('invisible', 'visible');
+	btn.removeAttribute('disabled');
+}
+
+function btnInvisible(btn) {
+	btn.classList.replace('visible', 'invisible');
+	btn.setAttribute('disabled', true);
 }
