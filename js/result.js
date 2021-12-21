@@ -13,6 +13,13 @@ let childCount = 0;
 let nowCount = 0;
 const nextSlideBtn = document.querySelector('.btn-next-slide');
 const prevSlideBtn = document.querySelector('.btn-prev-slide');
+const countBox = document.querySelector('.count-box');
+const endBtn = document.querySelector('.btn-end');
+const endBox = document.querySelector('.end-box');
+const endNo = document.querySelector('.end-btn-no');
+
+endBtn.addEventListener('click', showEnd);
+endNo.addEventListener('click', offEnd);
 
 // 로컬스토리지에서 데이터 불러오기
 function getData() {
@@ -88,6 +95,7 @@ function createStudyList(resultSlider) {
 	}
 	btnVisible(nextSlideBtn);
 	resultSlider.style.width = childCount * sliderItemWidth + 'px';
+	countBox.textContent = `1 / ${childCount}`;
 }
 
 function showStudy() {
@@ -99,6 +107,7 @@ function showStudy() {
 		resultSlider.innerHTML = '<p>틀린 문제가 없습니다..</p>';
 		return;
 	}
+	btnInvisible(prevSlideBtn);
 	btnVisible(nextSlideBtn);
 	createStudyList(resultSlider);
 }
@@ -107,6 +116,7 @@ function prevSlider() {
 	left += sliderItemWidth;
 	checkListCount();
 	resultSlider.style.left = left + 'px';
+	countBox.textContent = `${nowCount + 1} / ${childCount}`;
 }
 
 function nextSlider() {
@@ -114,6 +124,7 @@ function nextSlider() {
 	left -= sliderItemWidth;
 	checkListCount();
 	resultSlider.style.left = left + 'px';
+	countBox.textContent = `${nowCount + 1} / ${childCount}`;
 }
 
 function checkListCount() {
@@ -127,11 +138,19 @@ function checkListCount() {
 }
 
 function btnVisible(btn) {
-	btn.classList.replace('invisible', 'visible');
+	btn.style.color = 'var(--color-font-1)';
 	btn.removeAttribute('disabled');
 }
 
 function btnInvisible(btn) {
-	btn.classList.replace('visible', 'invisible');
+	btn.style.color = 'var(--color-font-2)';
 	btn.setAttribute('disabled', true);
+}
+
+function showEnd() {
+	endBox.style.zIndex = '10';
+}
+
+function offEnd() {
+	endBox.style.zIndex = '-1';
 }
