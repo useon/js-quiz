@@ -1,23 +1,35 @@
-const nextButton = document.querySelector('.btn-menual');
-
+const nextButton = document.querySelector('.btn-menual-next');
+const prevButton = document.querySelector('.btn-menual-prev');
+const menualContent = document.querySelector('.box-manual > p');
 // 다음 버튼 이벤트 리스너
 nextButton.addEventListener('click', nextMenual);
-
+prevButton.addEventListener('click', prevMenual);
 let menualArr = [
+  'JS 퀴즈에 오신것을 환영합니다.',
   'JS 입문과 관련된 문제를 준비했습니다.',
-  '다음 페이지에서 시작! 버튼을 누르면 문제가 시작됩니다.',
-  '제한시간내에 문제를 최대한 푸셔야합니다. 제한시간은 5분입니다.',
-  '문제 유형은 ~와 ~가 있습니다(관련사진이나 문구)',
-  '자! 이제 아래 문제풀러가기 버튼을 눌러 시작해주세요.',
+  '[문제 출력] 버튼을 누르면 시작됩니다.',
+  '제한시간내에 문제를 최대한 푸셔야합니다. 제한시간은 3분입니다.',
+  '엔터키 입력으로도 답안 제출이 가능합니다.',
+  '자! 이제 아래 [문제 출력] 버튼을 눌러 시작하세요!',
 ];
 
 let menualCount = 0;
+menualContent.innerHTML = menualArr[0];
 
 function nextMenual() {
-  document.querySelector('.box-manual > p').innerHTML = menualArr[menualCount];
-  menualCount++;
   // 마지막 메뉴얼일때 다음 버튼 삭제
-  if (menualCount == menualArr.length) {
-    nextButton.remove();
+  if (menualCount == menualArr.length - 2) {
+    nextButton.style.display = 'none';
   }
+  menualContent.innerHTML = menualArr[++menualCount];
+  prevButton.style.display = 'block';
+}
+
+function prevMenual() {
+  // 마지막 메뉴얼일때 다음 버튼 삭제
+  if (menualCount == 1) {
+    prevButton.style.display = 'none';
+  }
+  menualContent.innerHTML = menualArr[--menualCount];
+  nextButton.style.display = 'block';
 }
