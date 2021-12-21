@@ -560,6 +560,7 @@ h1 {
   cursor: pointer;
   transition: 0.3s all;
   font-weight: 700;
+  font-size: 36px;
 }
 
 .studyBtn:hover {
