@@ -73,6 +73,7 @@ function updateTimer() {
 
 	if (minute === 0 && second === 0 && centisecond === 0) {
 		pauseTimer();
+		// 종료시 결과 페이지로 이동
 		location.href = 'result.html';
 	}
 }
