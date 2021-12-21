@@ -38,6 +38,20 @@ showBtn.addEventListener('click', function showResult() {
 		nickname: '익명',
 		result: right,
 	});
+
+	const readData = (result) => {
+		return firebase
+			.database()
+			.ref('data')
+			.orderByChild('result')
+			.once('value')
+			.then((snapshot) => {
+				return snapshot.val() || [];
+			});
+	};
+	// 구현 아직 덜 됐어요
+	// 콘솔에서 Promise -> PromiseResult -> Object에서 불러온 데이터가 있습니다
+	console.log(readData());
 });
 
 // 맞은 개수, 틀린 개수 계산
