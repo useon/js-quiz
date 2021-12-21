@@ -75,6 +75,7 @@ body {
   width: 100%;
   justify-content: space-around;
   align-items: center;
+  background-color: var(--color-main-1);
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
     0px 1px 10px 0px rgb(0 0 0 / 12%);
   z-index: 1;
@@ -369,11 +370,6 @@ p {
   margin: 0 auto;
   border: 35px solid rgb(134, 134, 134);
   border-bottom: 20px solid rgb(134, 134, 134);
-  font-family: 'D2Coding', sans-serif;
-  line-height: 25px;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  color: white;
 }
 
 .bettery-area {
@@ -403,10 +399,11 @@ p {
   height: 100%;
   background-color: rgb(32, 32, 32);
   font-family: 'D2Coding', sans-serif;
-  line-height: 25px;
+  line-height: 32px;
   overflow-y: auto;
   white-space: pre-wrap;
   font-size: 24px;
+  color: white;
 }
 
 .answer-wrap {
@@ -610,6 +607,10 @@ h1 {
   padding: 25px;
   height: 250px;
   border-bottom: 1px solid var(--color-main-1);
+  font-family: 'D2Coding', sans-serif;
+  line-height: 25px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 }
 
 .slider_contents > div:nth-child(2) {
