@@ -33,16 +33,32 @@ showBtn.addEventListener('click', function showResult() {
   getData();
   // console.log(questions, inpAnswers);
   calResult();
-  myScore.innerHTML = `<h1>👏 👏 👏</h1><br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
+  myScore.innerHTML = `<br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
 
   // 버튼 누르면 결과보이기
-  showBtn.remove();
+  showBtn.disabled = true;
+  showBtn.classList.remove('btn-join');
+  showBtn.innerHTML = '<h1>👏 👏 👏</h1>';
 
   // 파이어베이스로 결과 전송
   firebase.database().ref('data').push({
     nickname: '익명',
     result: right,
   });
+
+  const readData = (result) => {
+    return firebase
+      .database()
+      .ref('data')
+      .orderByChild('result')
+      .once('value')
+      .then((snapshot) => {
+        return snapshot.val() || [];
+      });
+  };
+  // 구현 아직 덜 됐어요
+  // 콘솔에서 Promise -> PromiseResult -> Object에서 불러온 데이터가 있습니다
+  console.log(readData());
 });
 
 // 맞은 개수, 틀린 개수 계산
