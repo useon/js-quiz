@@ -1,93 +1,89 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>javascript test</title>
-  <!-- 부트스트랩 -->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>javascript test</title>
+		<!-- 부트스트랩 -->
+		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" /> -->
-  <!-- 우진 fontawesome key -->
-  <script src="https://kit.fontawesome.com/2230e227bb.js" crossorigin="anonymous"></script>
-    <!-- reset -->
-  <link rel="stylesheet" href="../css/reset.css" />
-  <!-- css -->
-  <link rel="stylesheet" href="../css/style.css" />
-  <!-- 테스트 css 파일(충돌 X) -->
-  <link rel="stylesheet" href="../css/visible&invisivle.css" />
-  <!-- 테스트 스타일 적용 -->
-  <style></style>
-</head>
+		<!-- 우진 fontawesome key -->
+		<script src="https://kit.fontawesome.com/2230e227bb.js" crossorigin="anonymous"></script>
+		<!-- reset -->
+		<link rel="stylesheet" href="../css/reset.css" />
+		<!-- css -->
+		<link rel="stylesheet" href="../css/style.css" />
+		<!-- 테스트 css 파일(충돌 X) -->
+		<link rel="stylesheet" href="../css/visible&invisivle.css" />
+		<!-- 테스트 스타일 적용 -->
+		<style></style>
+	</head>
 
-<body>
-  <header class="header">자바스크립트 퀴즈</header>
-    <section class="section-test">
-      <article class="timer">03: 00: 00</article>
-      <div class="box-manual">
-        <p></p>
-        <button class="btn-menual btn-menual-prev">Prev</button>
-        <button class="btn-menual btn-menual-next">Next</button>
-      </div>
-      <input class="btn-start visible" type="button" value="문제 출력" />
-      <article class="box-question">
-        <div class="moniter">
-          <div class="bettery-area"><i class="fas fa-battery-full"></i>
-          </div>
-          <div class="question-area"></div>
-        </div>
-        <div class="answer-wrap">
-          <label for="user-answer"></label>
-          <input disabled class="input-box" id="user-answer" type="text" placeholder="답 입력" />
-          <button disabled class="btn-submit"><i class="fas fa-check"></i></button>
+	<body>
+		<header class="header">자바스크립트 퀴즈</header>
+		<section class="section-test">
+			<article class="timer">03: 00: 00</article>
+			<div class="box-manual">
+				<p></p>
+				<button class="btn-menual btn-menual-prev">Prev</button>
+				<button class="btn-menual btn-menual-next">Next</button>
+			</div>
+			<input class="btn-start visible" type="button" value="문제 출력" />
+			<article class="box-question">
+				<div class="moniter">
+					<div class="bettery-area"><i class="fas fa-battery-full"></i></div>
+					<div class="question-area"></div>
+				</div>
+				<div class="answer-wrap">
+					<label for="user-answer"></label>
+					<input disabled class="input-box" id="user-answer" type="text" placeholder="답 입력" />
+					<button disabled class="btn-submit"><i class="fas fa-check"></i></button>
+				</div>
+				<!-- 틀릴경우 정답 출력 -->
+				<div class="right-answer-box">
+					<span class="right-answer">정답은 ㅁㅁㅁ입니다.</span>
+					<input class="btn-confirm" type="button" value="OK" />
+				</div>
 
-        </div>
-        <!-- 틀릴경우 정답 출력 -->
-        <div class="right-answer-box">
-          <span class="right-answer">정답은 ㅁㅁㅁ입니다.</span>
-          <input class="btn-confirm" type="button" value="OK" />
-        </div>
-
-        <button class="go-result">그만 풀래!(지승)</button>
-        <!-- 최종제출버튼은 없엉. 타임아웃 시 result page로 이동 -->
-      </article>
-    </section>
-  <footer class="footer">
-    <p class="footer-title">CONTACT US</p>
-    <div class="team-list">
-      <div>
-        임준홍
-        <a href="https://github.com/tesseractjh" target="_blank" class="fab fa-github-square fa-2x"></a>
-      </div>
-      <div>
-        정우진
-        <a href="https://github.com/woobba94" target="_blank" class="fab fa-github-square fa-2x"></a>
-      </div>
-      <div>
-        강지승
-        <a href="https://github.com/jiseung-kang" target="_blank" class="fab fa-github-square fa-2x"></a>
-      </div>
-      <div>
-        조아라
-        <a href="https://github.com/choar816" target="_blank" class="fab fa-github-square fa-2x"></a>
-      </div>
-      <div>
-        김유선
-        <a href="https://github.com/useon" target="_blank" class="fab fa-github-square fa-2x"></a>
-      </div>
-    </div>
-  </footer>
-  <script src="../js/index-menual.js"></script>
-  <script src="../js/constants.js"></script>
-  <script src="../js/util-func.js"></script>
-  <script src="../js/question.js"></script>
-  <script src="../js/answer.js"></script>
-  <script src="../js/script.js"></script>
-  <script src="../js/timer.js"></script>
-  <script src="../js/menual.js"></script>
-  <!-- <script src="../js/result.js"></script> -->
-  <script src="../js/test-work.js"></script>
-</body>
-
+				<button class="go-result">그만 풀래!(지승)</button>
+				<!-- 최종제출버튼은 없엉. 타임아웃 시 result page로 이동 -->
+			</article>
+		</section>
+		<footer class="footer">
+			<p class="footer-title">CONTACT US</p>
+			<div class="team-list">
+				<div>
+					임준홍
+					<a href="https://github.com/tesseractjh" target="_blank" class="fab fa-github-square fa-2x"></a>
+				</div>
+				<div>
+					정우진
+					<a href="https://github.com/woobba94" target="_blank" class="fab fa-github-square fa-2x"></a>
+				</div>
+				<div>
+					강지승
+					<a href="https://github.com/jiseung-kang" target="_blank" class="fab fa-github-square fa-2x"></a>
+				</div>
+				<div>
+					조아라
+					<a href="https://github.com/choar816" target="_blank" class="fab fa-github-square fa-2x"></a>
+				</div>
+				<div>
+					김유선
+					<a href="https://github.com/useon" target="_blank" class="fab fa-github-square fa-2x"></a>
+				</div>
+			</div>
+		</footer>
+		<script src="../js/index-menual.js"></script>
+		<script src="../js/constants.js"></script>
+		<script src="../js/util-func.js"></script>
+		<script src="../js/question.js"></script>
+		<script src="../js/answer.js"></script>
+		<script src="../js/script.js"></script>
+		<script src="../js/timer.js"></script>
+		<script src="../js/menual.js"></script>
+		<script src="../js/result.js"></script>
+		<script src="../js/test-work.js"></script>
+	</body>
 </html>
