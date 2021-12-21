@@ -37,6 +37,12 @@ showBtn.addEventListener('click', function showResult() {
 
   // 버튼 누르면 결과보이기
   showBtn.remove();
+
+  // 파이어베이스로 결과 전송
+  firebase.database().ref('data').push({
+    nickname: '익명',
+    result: right,
+  });
 });
 
 // 맞은 개수, 틀린 개수 계산
