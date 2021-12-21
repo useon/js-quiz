@@ -53,6 +53,7 @@ const isCorrectArray = function (value, answer) {
 // (그러나 지금 당장은 배열의 value로는 숫자만 들어가게 되어있어서 상관 X)
 const isCorrectObject = function (value, answer) {
   if (!checkStartEnd(answer, '{', '}')) return false;
+  if (Object.keys(value).length === 0) return answer === '{}';
   const entries = Object.entries(value);
   return answer
     .slice(1, answer.length - 1)
