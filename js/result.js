@@ -1,12 +1,8 @@
 let right = 0;
 let wrong = 0;
 
-const resRight = document.querySelector('.right');
-const resWrong = document.querySelector('.wrong');
-const viewRes = document.querySelector('.section-result');
 const showBtn = document.querySelector('.showResult');
 const myScore = document.querySelector('.score');
-// const resTable = document.querySelector('tbody');
 //우진테스트
 const showBtn2 = document.querySelector('.showResult2');
 const resultSlider = document.querySelector('.result-slider');
@@ -31,7 +27,7 @@ showBtn.addEventListener('click', function showResult() {
 	calResult();
 	myScore.innerHTML = `<br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
 
-	// 버튼 누르면 사라지게 하기
+	// 버튼 누르면 결과보이기
 	showBtn.disabled = true;
 	showBtn.classList.remove('btn-join');
 	showBtn.innerHTML = '<h1>👏 👏 👏</h1>';
