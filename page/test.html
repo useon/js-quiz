@@ -26,22 +26,27 @@
     <section class="section-test">
       <article class="timer">03: 00: 00</article>
       <div class="box-manual">
-        <p>JS 퀴즈에 오신것을 환영합니다.</p>
-        <input class="btn-menual" type="button" value="다음">
+        <p></p>
+        <button class="btn-menual btn-menual-prev">Prev</button>
+        <button class="btn-menual btn-menual-next">Next</button>
       </div>
-      <input class="btn-start visible" type="button" value="시작!!" />
-      <article class="invisible box-question">
-        <div class="question-area">문제 출력 박스</div>
-
+      <input class="btn-start visible" type="button" value="문제 출력" />
+      <article class="box-question">
+        <div class="moniter">
+          <div class="bettery-area"><i class="fas fa-battery-full"></i>
+          </div>
+          <div class="question-area"></div>
+        </div>
         <div class="answer-wrap">
           <label for="user-answer"></label>
-          <input class="input-box" id="user-answer" type="text" placeholder="답 입력 박스" />
-          <input class="btn-submit" type="button" value="제출" />
+          <input disabled class="input-box" id="user-answer" type="text" placeholder="답 입력" />
+          <button disabled class="btn-submit"><i class="fas fa-check"></i></button>
+
         </div>
         <!-- 틀릴경우 정답 출력 -->
         <div class="right-answer-box">
           <span class="right-answer">정답은 ㅁㅁㅁ입니다.</span>
-          <input class="btn-confirm" type="button" value="확인" />
+          <input class="btn-confirm" type="button" value="OK" />
         </div>
 
         <button class="go-result">그만 풀래!(지승)</button>

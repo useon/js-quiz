@@ -24,9 +24,10 @@ wrongConfirmBtn.addEventListener('click', next);
 // 최초 시작버튼
 function testStart() {
   // UI 렌더링 > 문제 시작
-  toggleToVisible();
   startBtn.remove();
   menualBox.remove();
+  submitBtn.removeAttribute('disabled');
+  inpAnswer.removeAttribute('disabled');
   next();
 }
 
@@ -115,8 +116,3 @@ goBtn.addEventListener('click', function () {
   // 테스트용 페이지 전환
   location.href = '../page/result.html';
 });
-
-function toggleToVisible() {
-  document.querySelector('.invisible').classList.replace('invisible', 'visible');
-  document.querySelector('.visible').classList.replace('visible', 'invisible');
-}

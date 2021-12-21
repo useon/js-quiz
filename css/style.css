@@ -3,20 +3,43 @@
   src: url('../fonts/D2Coding-Ver1.3.2-20180524.ttf');
   font-family: 'D2Coding', sans-serif;
 }
+
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IBMPlexSansKR-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* root */
 :root {
   --color-main-1: #ffdf92;
   --color-main-2: #fdc842;
   --color-main-3: #fab70c;
-  --color-main-4: #c6bde2;
-  --color-main-5: #dab4da;
+  --color-main-4: #e28215;
+  --color-main-5: #965205;
+  --color-main-6: #6b3900;
+  --color-bettery-1: #00e013;
+  --color-bettery-2: #77d300;
+  --color-bettery-3: #d6b600;
+  --color-bettery-4: #d67200;
+  --color-bettery-5: #d80000;
 }
 /* :root {
-  --color-main-1: #c7268c;
-  --color-main-2: #ff94a1;
-  --color-main-3: #af63ff;
-  --color-main-4: #6a3b8a;
-  --color-main-5: #db50c4;
+  --color-bettery-1: #00e013; 100 ~ 80
+  --color-bettery-2: #77d300; 80 ~ 60
+  --color-bettery-3: #d6b600; 60 ~ 40
+  --color-bettery-4: #d67200; 40 ~ 20
+  --color-bettery-5: #d80000; 20 ~ 10
 }
 :root {
   --color-main-1: #9f5e37;
@@ -41,6 +64,9 @@
 } */
 
 /* 공통 */
+body {
+  font-family: 'DungGeunMo';
+}
 .header {
   display: flex;
   position: fixed;
@@ -64,7 +90,6 @@
   align-items: center;
   background-color: #fdc842;
   bottom: 0;
-  font-family: 'DungGeunMo';
 }
 
 .footer-title {
@@ -111,31 +136,7 @@ p {
   padding: 10px;
 }
 
-article {
-}
-
 /* index.html */
-@font-face {
-  font-family: 'IBMPlexSansKR-Bold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-/* @font-face {
-  font-family: 'Goyang';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Goyang.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-} */
-
-@font-face {
-  font-family: 'DungGeunMo';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
 
 @keyframes runleft {
   from {
@@ -194,6 +195,18 @@ article {
   }
 }
 
+@keyframes left-right {
+  0% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  100% {
+    transform: translateX(3px);
+  }
+}
+
 .section-index {
   display: flex;
   flex-direction: column;
@@ -213,7 +226,6 @@ article {
 
 .title_likelion {
   margin-top: 50px;
-  font-family: 'DungGeunMo';
   font-size: 20px;
 }
 
@@ -223,18 +235,16 @@ article {
   margin-top: 20px;
   width: 900px;
   text-align: center;
-  font-family: 'DungGeunMo';
   animation: up-down 2s linear infinite;
 }
 
 .btn-join {
   margin-top: 50px;
-  padding: 30px 80px;
+  padding: 30px 70px 30px 80px;
   color: white;
   background-color: #fab70c;
   border-radius: 20px;
   font-size: 70px;
-  font-family: 'DungGeunMo';
   letter-spacing: 10px;
   animation: up 2s linear forwards;
   transition: 0.5s all;
@@ -242,43 +252,58 @@ article {
 
 .btn-join:hover {
   letter-spacing: 25px;
-  padding: 30px 100px;
+  padding: 30px 75px 30px 100px;
   background-color: #fdc842;
 }
 
 /* test.html */
 
 .box-manual {
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 200px;
-  border-radius: 50px;
-  padding: 20px;
-  background-color: white;
-  justify-content: center;
+  width: 380px;
+  height: 250px;
+  justify-content: flex-start;
   align-items: center;
+  z-index: 2;
+  color: chartreuse;
+  font-size: 24px;
+}
+
+.box-manual > p {
+  margin: 10px 0 0 0;
 }
 
 .btn-menual {
+  display: block;
   position: absolute;
   border: none;
   width: 80px;
-  height: 80px;
-  right: 0;
-  bottom: 0;
+  height: 40px;
+  margin-top: 100px;
   color: var(--color-main-2);
   cursor: pointer;
-  background-color: white;
-  border-radius: 50px 0px 45px 0px;
-  transition: 0.5s background-color;
+  background-color: rgb(0, 0, 0);
+  transition: 0.2s background-color;
   font-weight: 500;
+  color: chartreuse;
+  font-family: 'DungGeunMo';
+  font-size: 24px;
+}
+.btn-menual-next {
+  right: 0;
+  animation: left-right 1s linear infinite;
 }
 
 .btn-menual:hover {
-  color: white;
-  background-color: var(--color-main-2);
+  color: rgb(255, 255, 255);
+  background-color: chartreuse;
+}
+
+.btn-menual-prev {
+  display: none;
+  left: 0;
 }
 
 .section-test {
@@ -307,48 +332,88 @@ article {
 }
 
 .btn-start {
-  width: 150px;
+  width: 130px;
   border: none;
   border-radius: 20px;
-  padding: 20px;
-  top: 70%;
+  padding: 15px;
+  margin-top: 150px;
   position: absolute;
   color: white;
-  background-color: var(--color-main-3);
+  background-color: var(--color-main-4);
   cursor: pointer;
-  z-index: 1;
-  transition: 0.5s all;
+  z-index: 3;
+  font-family: 'DungGeunMo';
+  transition: 0.5s background-color;
 }
 
 .btn-start:hover {
-  color: var(--color-main-3);
+  color: var(--color-main-4);
   background-color: white;
 }
 
 .box-question {
   position: absolute;
-  top: 30%;
+  top: 25%;
   width: 100%;
 }
 
-.question-area {
-  display: block;
-  width: 400px;
-  height: 300px;
-  background-color: rgb(223, 233, 251);
+.moniter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 450px;
+  height: 350px;
+  background-color: rgb(32, 32, 32);
   border-radius: 20px 20px 0 0;
-  padding: 20px 30px;
+  padding: 8px 0px 0px 25px;
   margin: 0 auto;
-  border: none;
+  border: 35px solid rgb(134, 134, 134);
+  border-bottom: 20px solid rgb(134, 134, 134);
   font-family: 'D2Coding', sans-serif;
   line-height: 25px;
   overflow-y: auto;
   white-space: pre-wrap;
+  color: white;
+}
+
+.bettery-area {
+  padding-right: 15px;
+  text-align: end;
+  height: 26px;
+  font-size: 30px;
+  color: var(--color-bettery-1);
+}
+
+.fa-battery-three-quarters {
+  color: var(--color-bettery-2);
+}
+.fa-battery-half {
+  color: var(--color-bettery-3);
+}
+.fa-battery-quarter {
+  color: var(--color-bettery-4);
+}
+.fa-battery-empty {
+  color: var(--color-bettery-5);
+}
+
+.question-area {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(32, 32, 32);
+  font-family: 'D2Coding', sans-serif;
+  line-height: 25px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-size: 24px;
 }
 
 .answer-wrap {
+  background-color: var(--color-main-4);
+  border-bottom: 10px solid var(--color-main-6);
   display: flex;
-  width: 460px;
+  width: 545.5px;
   margin: 0 auto;
 }
 
@@ -360,8 +425,12 @@ article {
   border: none;
   width: 80%;
   height: 40px;
-  border-radius: 0 0 0 20px;
   padding: 10px 0 10px 20px;
+  font-family: 'DungGeunMo';
+  font-size: 24px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(29, 255, 29);
+  font-weight: 500;
 }
 
 .input-box:focus {
@@ -369,17 +438,33 @@ article {
 }
 
 .btn-submit {
-  width: 20%;
-  height: 60px;
+  width: 70px;
+  height: 50px;
   background-color: var(--color-main-3);
   color: white;
-  border: none;
-  border-radius: 0 0 20px 0;
-  cursor: pointer;
+  border-bottom: 10px solid #522e06;
+  border-radius: 50%;
   transition: 0.2s all;
+  font-family: 'DungGeunMo';
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.btn-submit:disabled {
+  border-bottom: 3px solid #522e06;
+  background-color: var(--color-main-2);
+  color: white;
+}
+
+.btn-submit:active {
+  cursor: pointer;
+  border-bottom: 3px solid #522e06;
+  background-color: var(--color-main-2);
+  color: white;
 }
 
 .btn-submit:hover {
+  border-bottom: 3px solid #522e06;
   background-color: var(--color-main-2);
   color: white;
 }
@@ -391,24 +476,36 @@ article {
 .right-answer-box {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 460px;
+  justify-content: space-between;
+  width: 545.5px;
   margin: 5px auto;
   padding: 0px;
   background-color: white;
   height: 0;
   overflow: hidden;
-  border-radius: 20px;
   transition: height 0.3s ease-out;
-  box-shadow: inset 0px 0px 3px 3px rgb(192, 94, 77);
+  box-shadow: inset 0px 0px 1px 3px var(--color-main-4);
+  font-size: 24px;
 }
 
 .right-answer-box span {
-  margin: 20px;
+  margin: 30px;
   width: fit-content;
 }
 
-.right-answer-box input {
+.btn-confirm {
+  width: 55px;
+  height: 35px;
+  margin-right: 30px;
+  background-color: var(--color-main-4);
+  border: 3px solid rgb(77, 77, 77);
+  font-size: 20px;
+  font-family: 'DungGeunMo';
+  cursor: pointer;
+}
+
+.btn-confirm:hover {
+  color: white;
 }
 
 /* result.html */
