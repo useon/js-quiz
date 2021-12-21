@@ -72,8 +72,11 @@ function updateTimer() {
 	TIME--;
 
 	if (minute === 0 && second === 0 && centisecond === 0) {
-		pauseTimer();
-		// 종료시 결과 페이지로 이동
+		localStorage.setItem('questions', JSON.stringify(questions));
+		localStorage.setItem('inpAnswers', JSON.stringify(inpAnswers));
+		localStorage.setItem('rightAnswers', JSON.stringify(rightAnswers));
+		// 테스트용 페이지 전환
 		location.href = 'result.html';
+		pauseTimer();
 	}
 }
