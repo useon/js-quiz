@@ -38,6 +38,7 @@ function reStartTimer() {
     clearInterval(interval);
     clearInterval(betteryInterval);
   }
+  resetTimer();
   interval = setInterval(updateTimer, 10);
   betteryInterval = setInterval(updateBettery, 1000);
 }
