@@ -27,11 +27,11 @@ function testStart() {
   startBtn.remove();
   menualBox.remove();
   submitBtn.removeAttribute('disabled');
-  inpAnswer.removeAttribute('disabled');
+  inpAnswer.removeAttribute('readonly');
   next();
 }
 
-// 엔터키 입력 시 문제 제출 (오답보여줄때 작동 안되도록 수정필요)
+// 엔터키 입력 시 문제 제출
 function enterKeydown(e) {
   if (e.key == 'Enter') {
     // 정지상태라면 엔터 -> next()
@@ -61,7 +61,7 @@ function next() {
   reStartTimer();
   isPause = false;
   submitBtn.removeAttribute('disabled');
-  inpAnswer.removeAttribute('disabled');
+  inpAnswer.removeAttribute('readonly');
   rightAnswerBox.style.height = null;
   showQuestion();
   clearInputBox();
@@ -74,7 +74,7 @@ function showRightAnswer() {
   pauseTimer();
   isPause = true;
   submitBtn.setAttribute('disabled', true);
-  inpAnswer.setAttribute('disabled', true);
+  inpAnswer.setAttribute('readonly', true);
   rightAnswerBox.style.height = '70px';
   // 정답박스 준비 (테스트용)
   rightAnswerOutput.innerHTML = `정답 : ${getAnswer(questions[questions.length - 1])}`;
