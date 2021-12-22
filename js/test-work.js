@@ -41,7 +41,7 @@ function testStart() {
 
 // 엔터키 입력 시 문제 제출
 function enterKeydown(e) {
-  if (e.code === 13) {
+  if (e.code === 'Enter') {
     // 정지상태라면 엔터 -> next()
     if (isPause) {
       next();
