@@ -43,7 +43,15 @@ function rank() {
 	console.log(rankScore[2]);
 	console.log(rankScore[3]);
 	console.log(rankScore[4]);
+
+	for (let r of rankScore) {
+		scores[r.score]++;
+	}
+
+	const myChart = new Chart(document.getElementById('myChart'), config);
 }
+
+loadData();
 
 // 버튼 누르면 결과보기
 showBtn.addEventListener('click', () => {

@@ -1,8 +1,8 @@
 // 1등 점수 가져와야함
-const MAX_SCORE = 100;
+let MAX_SCORE = 100;
 
 // 1등점수까지의 배열
-const scores = Array.from({ length: MAX_SCORE }, () => 0);
+let scores = Array.from({ length: MAX_SCORE }, () => 0);
 
 // 파이어베이스에서 점수가 index인 사람있다면 scores 해당 index 값++;
 // 구현 필요
@@ -16,27 +16,28 @@ const myLabel = [];
 getMyLabel(myLabel);
 
 const data = {
-  labels: myLabel,
-  datasets: [
-    {
-      label: '점수 분포',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: scores,
-    },
-  ],
+	labels: myLabel,
+	datasets: [
+		{
+			label: '점수 분포',
+			backgroundColor: 'rgb(255, 99, 132)',
+			borderColor: 'rgb(255, 99, 132)',
+			data: scores,
+		},
+	],
 };
 
 const config = {
-  type: 'line', // pie, bar, line, doughnut, polarArea
-  data: data,
-  options: {},
+	type: 'line', // pie, bar, line, doughnut, polarArea
+	data: data,
+	options: {},
 };
 
-const myChart = new Chart(document.getElementById('myChart'), config);
+// 데이터가 로드된 후 차트 실행
+// const myChart = new Chart(document.getElementById('myChart'), config);
 
 function getMyLabel(myLabel) {
-  for (let i = 0; i < MAX_SCORE; i++) {
-    myLabel.push(i);
-  }
+	for (let i = 0; i < MAX_SCORE; i++) {
+		myLabel.push(i);
+	}
 }
