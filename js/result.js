@@ -28,17 +28,15 @@ function getData() {
   rightAnswers = JSON.parse(localStorage.getItem('rightAnswers'));
 }
 
-// 결과
+// 버튼 누르면 결과
 showBtn.addEventListener('click', function showResult() {
-  getData();
+  //getData();
   // console.log(questions, inpAnswers);
   calResult();
-  myScore.innerHTML = `<br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
 
-  // 버튼 누르면 결과보이기
-  showBtn.disabled = true;
-  showBtn.classList.remove('btn-join');
-  showBtn.innerHTML = '<h1>👏 👏 👏</h1>';
+  // 버튼 삭제 > 결과 내용 추가
+  showBtn.remove();
+  myScore.innerHTML = `<h1>👏 👏 👏</h1><br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
 
   // 파이어베이스로 결과 전송
   firebase.database().ref('data').push({
@@ -99,7 +97,7 @@ function createStudyList(resultSlider) {
 }
 
 function showStudy() {
-  getData();
+  //getData();
   calResult();
   studyBtn.style.display = 'none';
   // 틀린 문제가 없을 경우
