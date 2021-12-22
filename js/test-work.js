@@ -28,6 +28,9 @@ const comboBackground = document.querySelector('.section-test');
 const comboDisplay = document.querySelector('.combo-box');
 const comboPlusText = document.querySelector('.combo-plus');
 
+// 엔터키 버그 수정
+const intervalCall300 = intervalCall(300);
+
 // 최초 시작버튼
 function testStart() {
   // UI 렌더링 > 문제 시작
@@ -42,11 +45,29 @@ function testStart() {
 // 엔터키 입력 시 문제 제출
 function enterKeydown(e) {
   if (e.code === 'Enter') {
-    // 정지상태라면 엔터 -> next()
-    if (isPause) {
-      next();
-    } else successCheck();
+    intervalCall300(() => {
+      // 정지상태라면 엔터 -> next()
+      if (isPause) {
+        next();
+      } else {
+        successCheck();
+      }
+    });
   }
+}
+function intervalCall(interval) {
+  // interval 시간 안에 다시 호출된 함수 콜은 무시한다
+  let elapsed = true;
+  return (fn) => {
+    if (!elapsed) {
+      return; // 마지막 호출 후 제한된 경과시간이 지나지 않은 경우 리턴
+    }
+    elapsed = false;
+    fn();
+    setTimeout(() => {
+      elapsed = true;
+    }, interval);
+  };
 }
 
 // 제출
