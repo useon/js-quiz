@@ -3,7 +3,6 @@ let wrong = 0; // 오답 개수
 let rankScore = []; // 랭킹 배열
 
 const showBtn = document.querySelector('.showResult'); // 결과보기 버튼
-const myScore = document.querySelector('.score'); // 결과출력
 
 //우진테스트
 const studyBtn = document.querySelector('.studyBtn');
@@ -49,12 +48,10 @@ function rank() {
 showBtn.addEventListener('click', function showResult() {
 	// getData(); // 데이터 불러오기
 	calResult(); // 현재 문제풀때/풀고나서 중복 채점 중..
-	myScore.innerHTML = `<br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
 
-	// 버튼 누르면 버튼이 비활성화되고 결과보이기
+	// 버튼 삭제 > 결과 내용 추가
 	showBtn.disabled = true;
-	showBtn.classList.remove('btn-join');
-	showBtn.innerHTML = '<h1>👏 👏 👏</h1>';
+	showBtn.innerHTML = `<h1>👏 👏 👏</h1><br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
 
 	// 파이어베이스로 유저 결과 전송
 	firebase.database().ref('data').push({
