@@ -2,6 +2,8 @@
 const questions = [];
 const inpAnswers = [];
 const rightAnswers = [];
+let right = 0;
+let wrong = 0;
 
 let isPause = false;
 
@@ -57,11 +59,13 @@ function successCheck() {
   if (isAnswer(questionBox.innerText, inpAnswer.value)) {
     floatingText.style.animation = null;
     combo++;
+    right++;
     showCombo(comboPlusText);
     checkCombo(combo);
     next();
   } else {
     combo = 0;
+    wrong++;
     comboDisplay.style.color = 'white';
     checkCombo(combo);
     showRightAnswer();
@@ -124,13 +128,19 @@ function clearInputBox() {
 
 // 최종 제출시 로컬스토리지에 데이터 저장 (버튼 클릭으로 테스트 -> 타이머 종료 구현시 수정)
 const goBtn = document.querySelector('.go-result');
-goBtn.addEventListener('click', function () {
+goBtn.addEventListener('click', saveandLoad);
+
+// 입력 저장, 전송 후 결과 페이지로 전환
+function saveandLoad() {
   localStorage.setItem('questions', JSON.stringify(questions));
   localStorage.setItem('inpAnswers', JSON.stringify(inpAnswers));
   localStorage.setItem('rightAnswers', JSON.stringify(rightAnswers));
+  localStorage.setItem('right', JSON.stringify(right));
+  localStorage.setItem('wrong', JSON.stringify(wrong));
   // 테스트용 페이지 전환
   location.href = 'result.html';
-});
+  loadData();
+}
 
 function checkCombo(combo) {
   comboDisplay.textContent = `${combo}`;
