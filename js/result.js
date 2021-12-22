@@ -51,8 +51,6 @@ function rank() {
 	const myChart = new Chart(document.getElementById('myChart'), config);
 }
 
-loadData();
-
 // 버튼 누르면 결과보기
 showBtn.addEventListener('click', () => {
 	// 버튼 삭제 > 결과 내용 추가
