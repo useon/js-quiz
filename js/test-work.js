@@ -24,7 +24,7 @@ submitBtn.addEventListener('click', successCheck);
 wrongConfirmBtn.addEventListener('click', next);
 
 // 콤보이펙트 준비
-const comboBackground = document.querySelector('.section-test');
+const comboMoniter = document.querySelector('.moniter');
 const comboDisplay = document.querySelector('.combo-box');
 const comboPlusText = document.querySelector('.combo-plus');
 
@@ -168,18 +168,18 @@ function checkCombo(combo) {
   if (3 <= combo && combo < 7) {
     // effect-1
     comboDisplay.style.color = 'var(--color-font-1)';
-    comboBackground.classList += ' combo-1';
+    comboMoniter.classList += ' combo-1';
   } else if (7 <= combo) {
     // effect-2, TIME += 300 (3초);
     floating(floatingText);
     comboDisplay.style.color = 'var(--color-font-2)';
-    comboBackground.classList.remove('combo-1');
-    comboBackground.classList += ' combo-2';
+    comboMoniter.classList.remove('combo-1');
+    comboMoniter.classList += ' combo-2';
     TIME += 300;
   } else {
     // 0~2 combo -> no effect
-    comboBackground.classList.remove('combo-1');
-    comboBackground.classList.remove('combo-2');
+    comboMoniter.classList.remove('combo-1');
+    comboMoniter.classList.remove('combo-2');
   }
 }
 

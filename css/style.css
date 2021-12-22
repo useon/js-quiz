@@ -37,13 +37,10 @@
   --color-moniter-2: #202020;
   --color-font-1: #00e013;
   --color-font-2: #c85000;
-  --color-combo-1: #ad4343;
-  --color-combo-2: #ad7f43;
-  --color-combo-3: #6aad43;
-  --color-combo-4: #4394ad;
-  --color-combo-5: #4345ad;
-  --color-combo-6: #8f43ad;
-  --color-combo-7: #ad4396;
+  --color-combo-1: #5bbd52;
+  --color-combo-2: #69b44b;
+  --color-combo-3: #b47e4b;
+  --color-combo-4: #b4644b;
 }
 /* :root {
   --color-bettery-1: #00e013; 100 ~ 80
@@ -231,30 +228,27 @@ p {
   }
 }
 
-@keyframes combo-effect {
+@keyframes combo-effect-1 {
   0% {
-    background-color: var(--color-combo-1);
+    border-color: var(--color-combo-1);
   }
-  15% {
-    background-color: var(--color-combo-2);
-  }
-  30% {
-    background-color: var(--color-combo-3);
-  }
-  45% {
-    background-color: var(--color-combo-4);
-  }
-  60% {
-    background-color: var(--color-combo-5);
-  }
-  75% {
-    background-color: var(--color-combo-6);
-  }
-  90% {
-    background-color: var(--color-combo-7);
+  50% {
+    border-color: var(--color-combo-2);
   }
   100% {
-    background-color: var(--color-combo-1);
+    border-color: var(--color-combo-1);
+  }
+}
+
+@keyframes combo-effect-2 {
+  0% {
+    border-color: var(--color-combo-3);
+  }
+  50% {
+    border-color: var(--color-combo-4);
+  }
+  100% {
+    border-color: var(--color-combo-3);
   }
 }
 
@@ -387,11 +381,11 @@ p {
 }
 
 .combo-1 {
-  animation: combo-effect 5s infinite;
+  animation: combo-effect-1 1s infinite;
 }
 
 .combo-2 {
-  animation: combo-effect 1s infinite;
+  animation: combo-effect-2 1s infinite;
 }
 
 .floating-text {
