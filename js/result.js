@@ -1,5 +1,3 @@
-// let right = 0; // 정답 개수
-// let wrong = 0; // 오답 개수
 let rankScore = []; // 랭킹 배열
 
 const showBtn = document.querySelector('.showResult'); // 결과보기 버튼
@@ -27,8 +25,8 @@ function getData() {
 	questions = JSON.parse(localStorage.getItem('questions')); // 문제
 	inpAnswers = JSON.parse(localStorage.getItem('inpAnswers')); // 유저의 정답
 	rightAnswers = JSON.parse(localStorage.getItem('rightAnswers')); // 올바른 정답
-	right = JSON.parse(localStorage.getItem('right')); // 올바른 정답
-	wrong = JSON.parse(localStorage.getItem('wrong')); // 올바른 정답
+	right = JSON.parse(localStorage.getItem('right')); // 정답 개수
+	wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
 }
 
 // 데이터로드가 끝나면 랭킹 계산
@@ -37,9 +35,9 @@ function rank() {
 	rankScore = rankScore.sort(function (a, b) {
 		return b.score - a.score;
 	});
-	MAX_SCORE = rankScore[0].score;
 
 	// 임시 테스트 코드 (1등~5등 출력)
+	// show_rank
 	console.log(rankScore[0]);
 	console.log(rankScore[1]);
 	console.log(rankScore[2]);
@@ -47,43 +45,37 @@ function rank() {
 	console.log(rankScore[4]);
 }
 
-// 버튼 누르면 결과
-showBtn.addEventListener('click', showResult);
-
-function showResult() {
-	// calResult(); // 현재 문제풀때/풀고나서 중복 채점 중.. 수정해야함
-
+// 버튼 누르면 결과보기
+showBtn.addEventListener('click', () => {
 	// 버튼 삭제 > 결과 내용 추가
 	showBtn.disabled = true;
 	showBtn.innerHTML = `${right} / ${right + wrong}`;
-}
+});
 
+// 비동기 처리 .. 최적화 필요
 function loadData() {
 	// 파이어베이스로 유저 결과 전송
-	firebase.database().ref('data').push({
-		nickname: '익명',
-		result: right,
-	});
-
-	// 파이어베이스 JSON 파일로 불러오기
 	firebase
 		.database()
-		.ref('data/')
-		.once('value', function (snap) {
-			// rankScore에 배열형태로 닉네임(nick)과 점수(score) 저장
-			for (var i in snap.val()) {
-				rankScore.push({ nick: snap.val()[i].nickname, score: snap.val()[i].result });
-			}
+		.ref('data')
+		.push({
+			nickname: '익명',
+			result: right,
 		})
-		.then(() => rank()); // 비동기 처리
+		.then(() => {
+			// 전송하고 파이어베이스 JSON 파일로 불러오기
+			firebase
+				.database()
+				.ref('data/')
+				.once('value', function (snap) {
+					// rankScore에 배열형태로 닉네임(nick)과 점수(score) 저장
+					for (var i in snap.val()) {
+						rankScore.push({ nick: snap.val()[i].nickname, score: snap.val()[i].result });
+					}
+				})
+				.then(() => rank()); // 비동기 처리
+		});
 }
-
-// 맞은 개수, 틀린 개수 계산
-// function calResult() {
-// 	for (let i = 0; i < inpAnswers.length; i++) {
-// 		isAnswer(questions[i], inpAnswers[i]) ? (right += 1) : (wrong += 1);
-// 	}
-// }
 
 // 여기부터 우진테스트
 
