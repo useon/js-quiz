@@ -18,6 +18,8 @@ let minute = checkMinutes % 6000;
 let second = Math.floor((TIME % 6000) / 100);
 let centisecond = TIME % 100;
 
+let combo = 0;
+
 // 타이머 리셋 (남은 시간을 3분으로 설정)
 function resetTimer() {
   TIME = MAX_TIME;

@@ -37,6 +37,13 @@
   --color-moniter-2: #202020;
   --color-font-1: #00e013;
   --color-font-2: #c85000;
+  --color-combo-1: #ad4343;
+  --color-combo-2: #ad7f43;
+  --color-combo-3: #6aad43;
+  --color-combo-4: #4394ad;
+  --color-combo-5: #4345ad;
+  --color-combo-6: #8f43ad;
+  --color-combo-7: #ad4396;
 }
 /* :root {
   --color-bettery-1: #00e013; 100 ~ 80
@@ -224,6 +231,51 @@ p {
   }
 }
 
+@keyframes combo-effect {
+  0% {
+    background-color: var(--color-combo-1);
+  }
+  15% {
+    background-color: var(--color-combo-2);
+  }
+  30% {
+    background-color: var(--color-combo-3);
+  }
+  45% {
+    background-color: var(--color-combo-4);
+  }
+  60% {
+    background-color: var(--color-combo-5);
+  }
+  75% {
+    background-color: var(--color-combo-6);
+  }
+  90% {
+    background-color: var(--color-combo-7);
+  }
+  100% {
+    background-color: var(--color-combo-1);
+  }
+}
+
+@keyframes floating {
+  0% {
+    opacity: 0;
+    transform: translatey(0px);
+  }
+  1% {
+    opacity: 1;
+  }
+  50% {
+    transform: translatey(-80px);
+  }
+  100% {
+    transform: translatey(-80px);
+    font-size: 64px;
+    opacity: 0;
+  }
+}
+
 .section-index {
   display: flex;
   flex-direction: column;
@@ -334,17 +386,42 @@ p {
   background-color: var(--color-main-1);
 }
 
+.combo-1 {
+  animation: combo-effect 5s infinite;
+}
+
+.combo-2 {
+  animation: combo-effect 1s infinite;
+}
+
+.floating-text {
+  position: absolute;
+  display: flex;
+  top: 12%;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 80px;
+  margin-left: -7px;
+  color: var(--color-font-1);
+  font-size: 38px;
+  z-index: 2;
+  opacity: 0;
+  font-weight: 700;
+}
+
 .timer {
   position: absolute;
   display: flex;
-  top: 15%;
+  top: 12%;
   align-items: center;
   justify-content: center;
   width: 200px;
   height: 80px;
-  background-color: var(--color-main-2);
+  background-color: var(--color-moniter-2);
   border-radius: 10px;
-  color: black;
+  border: 10px solid var(--color-main-6);
+  color: rgb(255, 255, 255);
   font-size: 32px;
 }
 
@@ -441,7 +518,7 @@ p {
 
 .input-box {
   border: none;
-  width: 80%;
+  width: 60%;
   height: 40px;
   padding: 10px 0 10px 20px;
   font-family: 'DungGeunMo';
@@ -453,6 +530,30 @@ p {
 
 .input-box:focus {
   outline: none;
+}
+
+.combo-box {
+  border-left: 2px solid var(--color-main-4);
+  width: 20%;
+  height: 60px;
+  background-color: var(--color-moniter-2);
+  color: white;
+  font-size: 36px;
+  text-align: center;
+  line-height: 60px;
+}
+
+.combo-plus {
+  position: absolute;
+  left: 62%;
+  width: 17%;
+  height: 60px;
+  background-color: var(--color-moniter-2);
+  color: var(--color-font-2);
+  font-size: 26px;
+  text-align: center;
+  line-height: 60px;
+  z-index: -1;
 }
 
 .btn-submit {
@@ -765,6 +866,7 @@ h1 {
   background-color: var(--color-bettery-5);
   transition: 0.3s all;
   transform: translateY(-5%);
+  cursor: pointer;
 }
 
 .btn-end:hover {

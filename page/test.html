@@ -23,7 +23,8 @@
 	<body>
 		<header class="header">자바스크립트 퀴즈</header>
 		<section class="section-test">
-			<article class="timer">03: 00: 00</article>
+      <div class="floating-text"> +03:00</div>
+			<article class="timer">03:00:00</article>
 			<div class="box-manual">
 				<p></p>
 				<button class="btn-menual btn-menual-prev">Prev</button>
@@ -37,7 +38,9 @@
 				</div>
 				<div class="answer-wrap">
 					<label for="user-answer"></label>
-					<input readonly autocomplete="off" class="input-box" id="user-answer" type="text" placeholder="답 입력" />
+					<input spellcheck="false" readonly autocomplete="off" class="input-box" id="user-answer" type="text" placeholder="답 입력" />
+          <div class="combo-box"></div>
+          <div class="combo-plus">combo+</div>
 					<button disabled class="btn-submit"><i class="fas fa-check"></i></button>
 				</div>
 				<!-- 틀릴경우 정답 출력 -->

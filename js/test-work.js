@@ -14,12 +14,17 @@ const submitBtn = document.querySelector('.btn-submit');
 const rightAnswerBox = document.querySelector('.right-answer-box');
 const rightAnswerOutput = document.querySelector('.right-answer');
 const wrongConfirmBtn = document.querySelector('.btn-confirm');
-
+const floatingText = document.querySelector('.floating-text');
 // 시작 > 제출(=input) > 오답확인
 startBtn.addEventListener('click', testStart);
 inpAnswer.addEventListener('keydown', enterKeydown);
 submitBtn.addEventListener('click', successCheck);
 wrongConfirmBtn.addEventListener('click', next);
+
+// 콤보이펙트 준비
+const comboBackground = document.querySelector('.section-test');
+const comboDisplay = document.querySelector('.combo-box');
+const comboPlusText = document.querySelector('.combo-plus');
 
 // 최초 시작버튼
 function testStart() {
@@ -28,6 +33,7 @@ function testStart() {
   menualBox.remove();
   submitBtn.removeAttribute('disabled');
   inpAnswer.removeAttribute('readonly');
+  comboDisplay.textContent = '0';
   next();
 }
 
@@ -49,8 +55,15 @@ function successCheck() {
   inpAnswers.push(inpAnswer.value);
   // 정/오답 분기
   if (isAnswer(questionBox.innerText, inpAnswer.value)) {
+    floatingText.style.animation = null;
+    combo++;
+    showCombo(comboPlusText);
+    checkCombo(combo);
     next();
   } else {
+    combo = 0;
+    comboDisplay.style.color = 'white';
+    checkCombo(combo);
     showRightAnswer();
   }
 }
@@ -118,3 +131,47 @@ goBtn.addEventListener('click', function () {
   // 테스트용 페이지 전환
   location.href = 'result.html';
 });
+
+function checkCombo(combo) {
+  comboDisplay.textContent = `${combo}`;
+  if (3 <= combo && combo < 7) {
+    // effect-1
+    comboDisplay.style.color = 'var(--color-font-1)';
+    comboBackground.classList += ' combo-1';
+  } else if (7 <= combo) {
+    // effect-2, TIME += 300 (3초);
+    floating(floatingText);
+    comboDisplay.style.color = 'var(--color-font-2)';
+    comboBackground.classList.remove('combo-1');
+    comboBackground.classList += ' combo-2';
+    TIME += 300;
+  } else {
+    // 0~2 combo -> no effect
+    comboBackground.classList.remove('combo-1');
+    comboBackground.classList.remove('combo-2');
+  }
+}
+
+function floating(element) {
+  var y = 100;
+  function frame() {
+    y--;
+    element.style.top = y + 50 + 'px';
+    element.style.opacity = y / 100;
+    if (y == 0) clearInterval(id);
+  }
+  var id = setInterval(frame, 10);
+}
+
+function showCombo(element) {
+  var y = 10;
+  function frame() {
+    y--;
+    element.style.zIndex = 1;
+    if (y == 0) {
+      element.style.zIndex = -1;
+      clearInterval(id);
+    }
+  }
+  var id = setInterval(frame, 100);
+}
