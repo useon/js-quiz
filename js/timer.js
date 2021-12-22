@@ -83,6 +83,8 @@ function updateTimer() {
 		localStorage.setItem('questions', JSON.stringify(questions));
 		localStorage.setItem('inpAnswers', JSON.stringify(inpAnswers));
 		localStorage.setItem('rightAnswers', JSON.stringify(rightAnswers));
+		localStorage.setItem('right', JSON.stringify(right));
+		localStorage.setItem('wrong', JSON.stringify(wrong));
 		// 테스트용 페이지 전환
 		loadData();
 		location.href = 'result.html';
