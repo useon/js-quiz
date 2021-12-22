@@ -13,6 +13,11 @@ const MAX_TIME = 18000;
 // centisecond 단위로 입력하면 됩니다
 let TIME = MAX_TIME; // -> time limit 3분으로 설정
 
+let checkMinutes = Math.floor(TIME / 6000);
+let minute = checkMinutes % 6000;
+let second = Math.floor((TIME % 6000) / 100);
+let centisecond = TIME % 100;
+
 // 타이머 리셋 (남은 시간을 3분으로 설정)
 function resetTimer() {
   TIME = MAX_TIME;
@@ -22,7 +27,8 @@ function resetTimer() {
 function startTimer() {
   resetTimer();
   interval = setInterval(updateTimer, 10);
-  betteryInterval = setInterval(updateBettery, 1000);
+  // 성능을 위해 변경 : 1초마다 수행 -> 3초 마다 수행
+  betteryInterval = setInterval(updateBettery, 3000);
   // 10ms(10centisecond)마다 updateTimer 실행
 }
 
@@ -39,7 +45,7 @@ function reStartTimer() {
     clearInterval(betteryInterval);
   }
   interval = setInterval(updateTimer, 10);
-  betteryInterval = setInterval(updateBettery, 1000);
+  betteryInterval = setInterval(updateBettery, 3000);
 }
 
 function updateBettery() {
@@ -60,10 +66,10 @@ function updateBettery() {
 
 // 타이머 업데이트 (시간 html에 표시 및 남은시간 줄이기)
 function updateTimer() {
-  const checkMinutes = Math.floor(TIME / 6000);
-  const minute = checkMinutes % 6000;
-  const second = Math.floor((TIME % 6000) / 100);
-  const centisecond = TIME % 100;
+  checkMinutes = Math.floor(TIME / 6000);
+  minute = checkMinutes % 6000;
+  second = Math.floor((TIME % 6000) / 100);
+  centisecond = TIME % 100;
 
   timer.textContent = `
     ${minute < 10 ? `0${minute}` : minute}:

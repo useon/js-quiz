@@ -45,10 +45,10 @@ function rank() {
 	console.log(rankScore[4]);
 }
 
-// 결과
+// 버튼 누르면 결과
 showBtn.addEventListener('click', function showResult() {
-	getData(); // 데이터 불러오기
-	calResult(); // 채점 => 현재 문제풀때/풀고나서 중복 채점 중..
+	// getData(); // 데이터 불러오기
+	calResult(); // 현재 문제풀때/풀고나서 중복 채점 중..
 	myScore.innerHTML = `<br/>${right} 개 맞추고<br /> ${wrong} 개 틀렸습니다!`;
 
 	// 버튼 누르면 버튼이 비활성화되고 결과보이기
@@ -114,7 +114,7 @@ function createStudyList(resultSlider) {
 }
 
 function showStudy() {
-	getData();
+	//getData();
 	calResult();
 	studyBtn.style.display = 'none';
 	// 틀린 문제가 없을 경우
