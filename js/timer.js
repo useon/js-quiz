@@ -79,15 +79,8 @@ function updateTimer() {
 
 	TIME--;
 
-	if (minute === 0 && second === 0 && centisecond === 0) {
-		localStorage.setItem('questions', JSON.stringify(questions));
-		localStorage.setItem('inpAnswers', JSON.stringify(inpAnswers));
-		localStorage.setItem('rightAnswers', JSON.stringify(rightAnswers));
-		localStorage.setItem('right', JSON.stringify(right));
-		localStorage.setItem('wrong', JSON.stringify(wrong));
-		// 테스트용 페이지 전환
-		loadData();
-		location.href = 'result.html';
+	if (TIME < 0) {
 		pauseTimer();
+		saveandLoad();
 	}
 }
