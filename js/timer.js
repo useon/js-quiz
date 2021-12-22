@@ -13,10 +13,10 @@ const MAX_TIME = 18000;
 // centisecond 단위로 입력하면 됩니다
 let TIME = MAX_TIME; // -> time limit 3분으로 설정
 
-const checkMinutes = 0;
-const minute = 0;
-const second = 0;
-const centisecond = 0;
+let checkMinutes = Math.floor(TIME / 6000);
+let minute = checkMinutes % 6000;
+let second = Math.floor((TIME % 6000) / 100);
+let centisecond = TIME % 100;
 
 // 타이머 리셋 (남은 시간을 3분으로 설정)
 function resetTimer() {
