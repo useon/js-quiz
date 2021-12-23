@@ -27,6 +27,7 @@ function getData() {
 	rightAnswers = JSON.parse(localStorage.getItem('rightAnswers')); // 올바른 정답
 	right = JSON.parse(localStorage.getItem('right')); // 정답 개수
 	wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
+	nickName = JSON.parse(localStorage.getItem('nickName')); // 닉네임
 }
 
 // 데이터로드가 끝나면 랭킹 계산
@@ -65,7 +66,7 @@ function loadData() {
 		.database()
 		.ref('data')
 		.push({
-			nickname: '익명',
+			nickname: nickName,
 			result: right,
 		})
 		.then(() => {
