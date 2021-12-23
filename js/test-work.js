@@ -31,7 +31,22 @@ const comboPlusText = document.querySelector('.combo-plus');
 // 엔터키 버그 수정
 const intervalCall300 = intervalCall(300);
 
-// 최초 시작버튼
+// 닉네임 입력
+const nickNameBox = document.querySelector('.box-nick-name');
+const nickNameInput = document.querySelector('.nick-name-input');
+const nickNameBtn = document.querySelector('.btn-nick-name');
+nickNameBtn.addEventListener('click', nickNameConfirm);
+
+let nickName = '';
+// 닉네임 제출
+function nickNameConfirm() {
+  // input이 비어있다면 실행 X
+  if (isEmpty(nickNameInput)) return;
+  nickName = nickNameInput.value;
+  nickNameBox.style.zIndex = -3;
+  goBtn.classList.remove('invisible');
+}
+// 게임 시작버튼
 function testStart() {
   // UI 렌더링 > 문제 시작
   startBtn.remove();
@@ -73,7 +88,7 @@ function intervalCall(interval) {
 // 제출
 function successCheck() {
   // 답란이 비어있다면 실행 X
-  if (isEmpty()) return;
+  if (isEmpty(inpAnswer)) return;
   // 사용자 입력 데이터 저장
   inpAnswers.push(inpAnswer.value);
   // 정/오답 분기
@@ -134,9 +149,9 @@ function showQuestion() {
 }
 
 // input 비어있는지 체크
-function isEmpty() {
-  if (inpAnswer.value === '') {
-    inpAnswer.focus();
+function isEmpty(inputField) {
+  if (inputField.value === '') {
+    inputField.focus();
     return true;
   }
   return false;
