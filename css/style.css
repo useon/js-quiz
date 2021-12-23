@@ -321,6 +321,43 @@ p {
 
 /* test.html */
 
+.box-nick-name {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 250px;
+  justify-content: start;
+  align-items: center;
+  z-index: 5;
+  background-color: var(--color-moniter-2);
+}
+
+.box-nick-name > p {
+  margin-top: 30px;
+  color: chartreuse;
+  font-size: 36px;
+}
+
+.nick-name-input {
+  width: 250px;
+  margin-top: 20px;
+  height: 40px;
+  font-size: 28px;
+}
+
+.btn-nick-name {
+  margin-top: 20px;
+  width: 80px;
+  font-size: 36px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.btn-nick-name:hover {
+  background-color: black;
+}
+
 .box-manual {
   position: absolute;
   display: flex;
