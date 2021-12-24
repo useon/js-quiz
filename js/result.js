@@ -1,15 +1,17 @@
 let rankScore = []; // 랭킹 배열
 
 const showBtn = document.querySelector('.showResult'); // 결과보기 버튼
-
+const resultBox = document.querySelector('.result-box');
 // 차트 동적생성 준비
 const chartBox = document.querySelector('.chart');
 
 // 버튼 누르면 결과보기
 showBtn.addEventListener('click', () => {
   // 버튼 삭제 > 결과 내용 추가
-  showBtn.disabled = true;
-  showBtn.innerHTML = `${right} / ${right + wrong}`;
+  showBtn.remove();
+  resultBox.innerHTML = `총 ${
+    right + wrong
+  }문제 중 ${right}문제를맞추었습니다. 최종 점수는 ${myScore}점 입니다.`;
 });
 
 // 틀린문제복습 관련 오브젝트와 이벤트리스너
@@ -33,6 +35,7 @@ endNo.addEventListener('click', offEnd);
 const selectBox = document.querySelector('.select-box');
 const rankingBtn = document.querySelector('.show-lanking-btn');
 const goSelectBoxBtn = document.querySelector('.go-select-box');
+const lankingTitle = document.querySelector('.lanking-title');
 const lankingBox = document.querySelector('.lanking-box');
 rankingBtn.addEventListener('click', showLanking);
 goSelectBoxBtn.addEventListener('click', goSelectBox);
@@ -45,11 +48,13 @@ function getData() {
   right = JSON.parse(localStorage.getItem('right')); // 정답 개수
   wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
   nickName = JSON.parse(localStorage.getItem('nickName')); // 닉네임
+  myScore = JSON.parse(localStorage.getItem('myScore')); // 닉네임
 }
 
 function goSelectBox() {
   selectBox.style.display = 'block';
   lankingBox.style.display = 'none';
+  lankingTitle.style.display = 'none';
   btnInvisible(prevSlideBtn);
   btnInvisible(nextSlideBtn);
   countBox.textContent = `hello :)`;
@@ -58,6 +63,7 @@ function goSelectBox() {
 function showLanking() {
   selectBox.style.display = 'none';
   lankingBox.style.display = 'flex';
+  lankingTitle.style.display = 'flex';
   countBox.textContent = `Top Lank`;
 }
 
@@ -161,14 +167,14 @@ function loadData() {
       // 중복이면
       if (isOverlap) {
         // 높은 점수 갱신
-        let maxScore = getMax(overlapScore, right);
+        let maxScore = getMax(overlapScore, myScore);
         setData(nickName, maxScore);
         rankScore.push({ nick: nickName, score: maxScore });
       }
       // 중복 아니면
       else {
-        setData(nickName, right);
-        rankScore.push({ nick: nickName, score: right });
+        setData(nickName, myScore);
+        rankScore.push({ nick: nickName, score: myScore });
       }
     })
     .then(() => rank()); // 완료되면 랭킹을 내자
