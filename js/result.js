@@ -78,10 +78,11 @@ function rank() {
   chartBox.innerHTML = '<canvas id="myChart"></canvas>';
   // 차트 데이터 로드하기
   const myChart = new Chart(document.getElementById('myChart'), config);
+  createLankingList();
 }
 
 // 틀린문제복습 관련 오브젝트와 이벤트리스너
-const studyBtn = document.querySelector('.studyBtn');
+const studyBtn = document.querySelector('.show-study-btn');
 const resultSlider = document.querySelector('.result-slider');
 studyBtn.addEventListener('click', showStudy);
 const sliderItemWidth = 400;
@@ -97,6 +98,14 @@ const endNo = document.querySelector('.end-btn-no');
 endBtn.addEventListener('click', showEnd);
 endNo.addEventListener('click', offEnd);
 
+// 랭킹관련
+const selectBox = document.querySelector('.select-box');
+const rankingBtn = document.querySelector('.show-lanking-btn');
+const goSelectBoxBtn = document.querySelector('.go-select-box');
+const lankingBox = document.querySelector('.lanking-box');
+rankingBtn.addEventListener('click', showLanking);
+goSelectBoxBtn.addEventListener('click', goSelectBox);
+
 // 로컬스토리지에서 데이터 불러오기
 function getData() {
   questions = JSON.parse(localStorage.getItem('questions')); // 문제
@@ -107,7 +116,35 @@ function getData() {
   nickName = JSON.parse(localStorage.getItem('nickName')); // 닉네임
 }
 
-// 여기서부터 틀린문제 복습 로직
+function goSelectBox() {
+  selectBox.style.display = 'block';
+  lankingBox.style.display = 'none';
+  btnInvisible(prevSlideBtn);
+  btnInvisible(nextSlideBtn);
+  countBox.textContent = `hello :)`;
+}
+
+function showLanking() {
+  selectBox.style.display = 'none';
+  lankingBox.style.display = 'flex';
+  countBox.textContent = `Top Lank`;
+}
+
+function showStudy() {
+  // getData();
+  // calResult();
+  selectBox.style.display = 'none';
+  // 틀린 문제가 없을 경우
+  if (!wrong) {
+    resultSlider.innerHTML = '<p>틀린 문제가 없습니다.</p>';
+    return;
+  }
+  btnInvisible(prevSlideBtn);
+  btnVisible(nextSlideBtn);
+  countBox.textContent = `1 / ${childCount}`;
+}
+
+// 틀린문제 리스트 생성
 function createStudyList(resultSlider) {
   for (let i = 0; i < inpAnswers.length; i++) {
     // 틀린 문제만 요소로 생성
@@ -131,24 +168,38 @@ function createStudyList(resultSlider) {
     // 한 문제의 결과박스 슬라이더에 추가
     resultSlider.appendChild(resultChild);
   }
-  btnVisible(nextSlideBtn);
   resultSlider.style.width = childCount * sliderItemWidth + 'px';
-  countBox.textContent = `1 / ${childCount}`;
 }
 
-function showStudy() {
-  //getData();
-  // calResult();
-  studyBtn.style.display = 'none';
-  // 틀린 문제가 없을 경우
-  if (!wrong) {
-    resultSlider.innerHTML = '<p>틀린 문제가 없습니다.</p>';
-    return;
+// 랭킹 리스트 생성
+function createLankingList() {
+  let size = 99;
+  if (rankScore.length < size) size = rankScore.length;
+  for (let i = 1; i <= size; i++) {
+    // 들어갈 요소 생성
+    const lankCount = document.createElement('div');
+    const lankNickName = document.createElement('div');
+    const lankScore = document.createElement('div');
+    const child = document.createElement('div');
+    child.className += 'lanking-box-child';
+    // 등수
+    if (i == 1) lankCount.textContent = '👑';
+    else if (i == 2) lankCount.textContent = '🥇';
+    else if (i == 3) lankCount.textContent = '🥈';
+    else if (i == 4) lankCount.textContent = '🥉';
+    else lankCount.textContent = i;
+    child.appendChild(lankCount);
+    // 닉네임
+    lankNickName.textContent = `${rankScore[i - 1].nick}`;
+    child.appendChild(lankNickName);
+    // 점수
+    lankScore.textContent = `${rankScore[i - 1].score}`;
+    child.appendChild(lankScore);
+    // 한 문제의 결과박스 슬라이더에 추가
+    lankingBox.appendChild(child);
   }
-  btnInvisible(prevSlideBtn);
-  btnVisible(nextSlideBtn);
-  createStudyList(resultSlider);
 }
+
 function prevSlider() {
   nowCount--;
   left += sliderItemWidth;
