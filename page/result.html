@@ -22,7 +22,7 @@
 		<style></style>
 	</head>
 
-	<body onload="getData(); loadData()">
+	<body onload="getData(); loadData(); createStudyList(resultSlider); createLankingList();">
 		<header class="header">자바스크립트 퀴즈</header>
 		<section class="section-result">
 			<div class="result-box">
@@ -30,9 +30,24 @@
 			</div>
 			<div class="slider-wrap">
 				<div class="slider-display-area">
-					<button class="studyBtn">
-						<p>틀린 문제 복습!</p>
-					</button>
+          <div class="select-box">
+            <button class="show-study-btn">
+              <p>틀린 문제 복습!</p>
+            </button>
+            <button class="show-lanking-btn">
+              <p>👑명예의 전당👑</p>
+            </button>
+          </div>
+          <button class="go-select-box">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="lanking-box">
+            <div class="lanking-box-label">
+              <div>Lank</div>
+              <div>Name</div>
+              <div>High score</div>
+            </div>
+          </div>
 					<div class="result-slider"></div>
 					<div class="end-box">
 						<p>정말 종료하시겠습니까?</p>
