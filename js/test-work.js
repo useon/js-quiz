@@ -44,13 +44,13 @@ function nickNameConfirm() {
   if (isEmpty(nickNameInput)) return;
   nickName = nickNameInput.value;
   nickNameBox.style.zIndex = -3;
-  goBtn.classList.remove('invisible');
 }
 // 게임 시작버튼
 function testStart() {
   // UI 렌더링 > 문제 시작
   startBtn.remove();
   menualBox.remove();
+  goBtn.classList.remove('invisible');
   submitBtn.removeAttribute('disabled');
   inpAnswer.removeAttribute('readonly');
   comboDisplay.textContent = '0';

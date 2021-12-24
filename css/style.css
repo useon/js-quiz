@@ -35,6 +35,7 @@
   --color-bettery-5: #d80000;
   --color-moniter-1: #7c7c7c;
   --color-moniter-2: #202020;
+  --color-moniter-3: #4b4b4b;
   --color-font-1: #00e013;
   --color-font-2: #c85000;
   --color-combo-1: #5bbd52;
@@ -325,37 +326,39 @@ p {
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 250px;
-  justify-content: start;
+  width: 450px;
+  height: 300px;
+  justify-content: center;
   align-items: center;
   z-index: 5;
   background-color: var(--color-moniter-2);
 }
 
 .box-nick-name > p {
-  margin-top: 30px;
+  margin: 10px 0;
   color: chartreuse;
   font-size: 36px;
 }
 
 .nick-name-input {
   width: 250px;
-  margin-top: 20px;
+  margin: 10px 0;
   height: 40px;
   font-size: 28px;
 }
 
 .btn-nick-name {
-  margin-top: 20px;
+  margin: 10px 0;
   width: 80px;
   font-size: 36px;
   padding: 5px;
   cursor: pointer;
+  color: white;
 }
 
 .btn-nick-name:hover {
-  background-color: black;
+  color: black;
+  background-color: white;
 }
 
 .box-manual {
@@ -367,7 +370,7 @@ p {
   justify-content: flex-start;
   align-items: center;
   z-index: 2;
-  color: chartreuse;
+  color: var(--color-font-1);
   font-size: 24px;
 }
 
@@ -461,21 +464,23 @@ p {
 }
 
 .btn-start {
-  width: 130px;
-  border: none;
-  border-radius: 20px;
-  padding: 15px;
-  margin-top: 150px;
+  width: 120px;
+  border: 5px solid var(--color-main-5);
+  padding: 10px;
+  margin-top: 220px;
   position: absolute;
   color: white;
   background-color: var(--color-main-4);
   cursor: pointer;
   z-index: 3;
   font-family: 'DungGeunMo';
-  transition: 0.5s background-color;
+  transition: 0.3s background-color;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .btn-start:hover {
+  border-color: var(--color-main-4);
   color: var(--color-main-4);
   background-color: white;
 }
@@ -487,6 +492,7 @@ p {
 }
 
 .moniter {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -519,6 +525,29 @@ p {
 }
 .fa-battery-empty {
   color: var(--color-bettery-5);
+}
+
+.go-result {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  right: -40px;
+  bottom: 5px;
+  font-size: 14px;
+  color: black;
+  background-color: var(--color-main-4);
+
+  border: 3px solid var(--color-moniter-3);
+  transform: translateX(-50%);
+  font-weight: 500;
+  z-index: 4;
+}
+
+.go-result:hover {
+  color: white;
 }
 
 .question-area {
@@ -650,7 +679,7 @@ p {
   height: 35px;
   margin-right: 30px;
   background-color: var(--color-main-4);
-  border: 3px solid rgb(77, 77, 77);
+  border: 3px solid var(--color-moniter-3);
   font-size: 20px;
   font-family: 'DungGeunMo';
   cursor: pointer;
@@ -658,27 +687,6 @@ p {
 
 .btn-confirm:hover {
   color: white;
-}
-
-.go-result {
-  position: absolute;
-  left: 50%;
-  margin-top: 5px;
-  font-size: 24px;
-  color: white;
-  background-color: #e38821;
-  width: 150px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  transform: translateX(-50%);
-}
-
-.go-result:hover {
-  color: #e38821;
-  background-color: white;
 }
 
 /* result.html */
