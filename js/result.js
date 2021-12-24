@@ -2,6 +2,9 @@ let rankScore = []; // 랭킹 배열
 
 const showBtn = document.querySelector('.showResult'); // 결과보기 버튼
 
+// 차트 동적생성 준비
+const chartBox = document.querySelector('.chart');
+
 // 버튼 누르면 결과보기
 showBtn.addEventListener('click', () => {
   // 버튼 삭제 > 결과 내용 추가
@@ -35,11 +38,11 @@ function loadData() {
             rankScore.push({ nick: key, score: value });
           }
         }
-        // 중복된 닉네임이 없으면 DB데이터를 랭킹배열에 가져오고,
-        // 현재 유저 데이터를 파이어베이스에 저장한다.
+        // 중복된 닉네임이 없으면 현재 유저 데이터를 파이어베이스에 저장하고,
+        // DB데이터를 랭킹배열에 가져온다.
         else {
-          rankScore.push({ nick: key, score: value });
           setData(nickName, right);
+          rankScore.push({ nick: key, score: value });
         }
       }
     })
@@ -71,8 +74,9 @@ function rank() {
   for (let r of rankScore) {
     scores[r.score]++;
   }
-
-  // 차트 로드하기
+  // 차트 생성
+  chartBox.innerHTML = '<canvas id="myChart"></canvas>';
+  // 차트 데이터 로드하기
   const myChart = new Chart(document.getElementById('myChart'), config);
 }
 
