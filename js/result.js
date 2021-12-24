@@ -12,6 +12,127 @@ showBtn.addEventListener('click', () => {
   showBtn.innerHTML = `${right} / ${right + wrong}`;
 });
 
+// 틀린문제복습 관련 오브젝트와 이벤트리스너
+const studyBtn = document.querySelector('.show-study-btn');
+const resultSlider = document.querySelector('.result-slider');
+studyBtn.addEventListener('click', showStudy);
+const sliderItemWidth = 400;
+let left = 0;
+let childCount = 0;
+let nowCount = 0;
+const nextSlideBtn = document.querySelector('.btn-next-slide');
+const prevSlideBtn = document.querySelector('.btn-prev-slide');
+const countBox = document.querySelector('.count-box');
+const endBtn = document.querySelector('.btn-end');
+const endBox = document.querySelector('.end-box');
+const endNo = document.querySelector('.end-btn-no');
+endBtn.addEventListener('click', showEnd);
+endNo.addEventListener('click', offEnd);
+
+// 랭킹관련
+const selectBox = document.querySelector('.select-box');
+const rankingBtn = document.querySelector('.show-lanking-btn');
+const goSelectBoxBtn = document.querySelector('.go-select-box');
+const lankingBox = document.querySelector('.lanking-box');
+rankingBtn.addEventListener('click', showLanking);
+goSelectBoxBtn.addEventListener('click', goSelectBox);
+
+// 로컬스토리지에서 데이터 불러오기
+function getData() {
+  questions = JSON.parse(localStorage.getItem('questions')); // 문제
+  inpAnswers = JSON.parse(localStorage.getItem('inpAnswers')); // 유저의 정답
+  rightAnswers = JSON.parse(localStorage.getItem('rightAnswers')); // 올바른 정답
+  right = JSON.parse(localStorage.getItem('right')); // 정답 개수
+  wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
+  nickName = JSON.parse(localStorage.getItem('nickName')); // 닉네임
+}
+
+function goSelectBox() {
+  selectBox.style.display = 'block';
+  lankingBox.style.display = 'none';
+  btnInvisible(prevSlideBtn);
+  btnInvisible(nextSlideBtn);
+  countBox.textContent = `hello :)`;
+}
+
+function showLanking() {
+  selectBox.style.display = 'none';
+  lankingBox.style.display = 'flex';
+  countBox.textContent = `Top Lank`;
+}
+
+function showStudy() {
+  // getData();
+  // calResult();
+  selectBox.style.display = 'none';
+  // 틀린 문제가 없을 경우
+  if (!wrong) {
+    resultSlider.innerHTML = '<p>틀린 문제가 없습니다.</p>';
+    resultSlider.style.width = sliderItemWidth + 'px';
+    return;
+  }
+  if (1 < wrong) btnVisible(nextSlideBtn);
+  else btnInvisible(nextSlideBtn);
+  btnInvisible(prevSlideBtn);
+  countBox.textContent = `1 / ${childCount}`;
+}
+
+// 틀린문제 리스트 생성
+function createStudyList(resultSlider) {
+  for (let i = 0; i < inpAnswers.length; i++) {
+    // 틀린 문제만 요소로 생성
+    if (isAnswer(questions[i], inpAnswers[i])) continue;
+    childCount++;
+    // 들어갈 요소 생성
+    const resultQuestions = document.createElement('div');
+    const resultRightAnswers = document.createElement('div');
+    const resultInpAnswers = document.createElement('div');
+    const resultChild = document.createElement('div');
+    resultChild.className += 'slider_contents';
+    // 문제
+    resultQuestions.textContent = questions[i];
+    resultChild.appendChild(resultQuestions);
+    // 정답
+    resultRightAnswers.textContent = `정답 : ${rightAnswers[i]}`;
+    resultChild.appendChild(resultRightAnswers);
+    // 답변
+    resultInpAnswers.textContent = `내 제출 : ${inpAnswers[i]}`;
+    resultChild.appendChild(resultInpAnswers);
+    // 한 문제의 결과박스 슬라이더에 추가
+    resultSlider.appendChild(resultChild);
+  }
+  resultSlider.style.width = childCount * sliderItemWidth + 'px';
+}
+
+// 랭킹 리스트 생성
+function createLankingList() {
+  let size = 99;
+  if (rankScore.length < size) size = rankScore.length;
+  for (let i = 1; i <= size; i++) {
+    // 들어갈 요소 생성
+    const lankCount = document.createElement('div');
+    const lankNickName = document.createElement('div');
+    const lankScore = document.createElement('div');
+    const child = document.createElement('div');
+    child.className += 'lanking-box-child';
+    // 등수
+    if (i == 1) lankCount.textContent = '👑';
+    else if (i == 2) lankCount.textContent = '🥇';
+    else if (i == 3) lankCount.textContent = '🥈';
+    else if (i == 4) lankCount.textContent = '🥉';
+    else lankCount.textContent = i;
+    child.appendChild(lankCount);
+    // 닉네임
+    lankNickName.textContent = `${rankScore[i - 1].nick}`;
+    child.appendChild(lankNickName);
+    // 점수
+    lankScore.textContent = `${rankScore[i - 1].score}`;
+    child.appendChild(lankScore);
+    // 한 문제의 결과박스 슬라이더에 추가
+    lankingBox.appendChild(child);
+  }
+}
+
 // 데이터를 로드하며 갱신
 function loadData() {
   // 중복확인
@@ -31,7 +152,6 @@ function loadData() {
 
         // 중복 체크
         if (nickName === key) {
-          console.log('중복입니다.');
           isOverlap = true;
           overlapScore = value;
         } else {
@@ -90,7 +210,13 @@ function rank() {
   for (let r of rankScore) {
     scores[r.score]++;
   }
-  // 차트 생성
+
+  loadChart(scores, MAX_SCORE);
+  createLankingList();
+}
+
+// 차트 생성
+function loadChart(dataSet, MAX_SCORE) {
   chartBox.innerHTML = '<canvas id="myChart"></canvas>';
 
   const data = {
@@ -98,141 +224,93 @@ function rank() {
     datasets: [
       {
         label: '점수 분포',
+        borderColor: 'rgb(255, 255, 255)',
+        data: dataSet,
         backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: scores,
+        // fill: true,
       },
     ],
   };
 
+  //animation
+  const totalDuration = 2500;
+  const delayBetweenPoints = totalDuration / data.labels.length;
+  const previousY = (ctx) =>
+    ctx.index === 0
+      ? ctx.chart.scales.y.getPixelForValue(100)
+      : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+  const animation = {
+    x: {
+      type: 'number',
+      easing: 'linear',
+      duration: delayBetweenPoints,
+      from: NaN, // the point is initially skipped
+      delay(ctx) {
+        if (ctx.type !== 'data' || ctx.xStarted) {
+          return 0;
+        }
+        ctx.xStarted = true;
+        return ctx.index * delayBetweenPoints;
+      },
+    },
+    y: {
+      type: 'number',
+      easing: 'linear',
+      duration: delayBetweenPoints,
+      from: previousY,
+      delay(ctx) {
+        if (ctx.type !== 'data' || ctx.yStarted) {
+          return 0;
+        }
+        ctx.yStarted = true;
+        return ctx.index * delayBetweenPoints;
+      },
+    },
+  };
+
   const config = {
-    type: 'line', // pie, bar, line, doughnut, polarArea
+    type: 'line',
     data: data,
-    options: {},
+    options: {
+      animation,
+      interaction: {
+        intersect: false,
+      },
+      plugins: {
+        legend: false,
+      },
+      radius: 0,
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+          ticks: {
+            font: {
+              family: 'DungGeunMo', // Your font family
+              size: 18,
+            },
+          },
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            font: {
+              family: 'DungGeunMo', // Your font family
+              size: 20,
+            },
+            // Include a dollar sign in the ticks
+            // callback: function (value, index, values) {
+            //   return value + '명';
+            // },
+          },
+        },
+      },
+    },
   };
 
   // 차트 데이터 로드하기
-  const myChart = new Chart(document.getElementById('myChart'), config);
-  createLankingList();
-}
-
-// 틀린문제복습 관련 오브젝트와 이벤트리스너
-const studyBtn = document.querySelector('.show-study-btn');
-const resultSlider = document.querySelector('.result-slider');
-studyBtn.addEventListener('click', showStudy);
-const sliderItemWidth = 400;
-let left = 0;
-let childCount = 0;
-let nowCount = 0;
-const nextSlideBtn = document.querySelector('.btn-next-slide');
-const prevSlideBtn = document.querySelector('.btn-prev-slide');
-const countBox = document.querySelector('.count-box');
-const endBtn = document.querySelector('.btn-end');
-const endBox = document.querySelector('.end-box');
-const endNo = document.querySelector('.end-btn-no');
-endBtn.addEventListener('click', showEnd);
-endNo.addEventListener('click', offEnd);
-
-// 랭킹관련
-const selectBox = document.querySelector('.select-box');
-const rankingBtn = document.querySelector('.show-lanking-btn');
-const goSelectBoxBtn = document.querySelector('.go-select-box');
-const lankingBox = document.querySelector('.lanking-box');
-rankingBtn.addEventListener('click', showLanking);
-goSelectBoxBtn.addEventListener('click', goSelectBox);
-
-// 로컬스토리지에서 데이터 불러오기
-function getData() {
-  questions = JSON.parse(localStorage.getItem('questions')); // 문제
-  inpAnswers = JSON.parse(localStorage.getItem('inpAnswers')); // 유저의 정답
-  rightAnswers = JSON.parse(localStorage.getItem('rightAnswers')); // 올바른 정답
-  right = JSON.parse(localStorage.getItem('right')); // 정답 개수
-  wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
-  nickName = JSON.parse(localStorage.getItem('nickName')); // 닉네임
-}
-
-function goSelectBox() {
-  selectBox.style.display = 'block';
-  lankingBox.style.display = 'none';
-  btnInvisible(prevSlideBtn);
-  btnInvisible(nextSlideBtn);
-  countBox.textContent = `hello :)`;
-}
-
-function showLanking() {
-  selectBox.style.display = 'none';
-  lankingBox.style.display = 'flex';
-  countBox.textContent = `Top Lank`;
-}
-
-function showStudy() {
-  // getData();
-  // calResult();
-  selectBox.style.display = 'none';
-  // 틀린 문제가 없을 경우
-  if (!wrong) {
-    resultSlider.innerHTML = '<p>틀린 문제가 없습니다.</p>';
-    return;
-  }
-  btnInvisible(prevSlideBtn);
-  btnVisible(nextSlideBtn);
-  countBox.textContent = `1 / ${childCount}`;
-}
-
-// 틀린문제 리스트 생성
-function createStudyList(resultSlider) {
-  for (let i = 0; i < inpAnswers.length; i++) {
-    // 틀린 문제만 요소로 생성
-    if (isAnswer(questions[i], inpAnswers[i])) continue;
-    childCount++;
-    // 들어갈 요소 생성
-    const resultQuestions = document.createElement('div');
-    const resultRightAnswers = document.createElement('div');
-    const resultInpAnswers = document.createElement('div');
-    const resultChild = document.createElement('div');
-    resultChild.className += 'slider_contents';
-    // 문제
-    resultQuestions.textContent = questions[i];
-    resultChild.appendChild(resultQuestions);
-    // 정답
-    resultRightAnswers.textContent = `정답 : ${rightAnswers[i]}`;
-    resultChild.appendChild(resultRightAnswers);
-    // 답변
-    resultInpAnswers.textContent = `내 제출 : ${inpAnswers[i]}`;
-    resultChild.appendChild(resultInpAnswers);
-    // 한 문제의 결과박스 슬라이더에 추가
-    resultSlider.appendChild(resultChild);
-  }
-  resultSlider.style.width = childCount * sliderItemWidth + 'px';
-}
-
-// 랭킹 리스트 생성
-function createLankingList() {
-  let size = 99;
-  if (rankScore.length < size) size = rankScore.length;
-  for (let i = 1; i <= size; i++) {
-    // 들어갈 요소 생성
-    const lankCount = document.createElement('div');
-    const lankNickName = document.createElement('div');
-    const lankScore = document.createElement('div');
-    const child = document.createElement('div');
-    child.className += 'lanking-box-child';
-    // 등수
-    if (i == 1) lankCount.textContent = '👑';
-    else if (i == 2) lankCount.textContent = '🥇';
-    else if (i == 3) lankCount.textContent = '🥈';
-    else if (i == 4) lankCount.textContent = '🥉';
-    else lankCount.textContent = i;
-    child.appendChild(lankCount);
-    // 닉네임
-    lankNickName.textContent = `${rankScore[i - 1].nick}`;
-    child.appendChild(lankNickName);
-    // 점수
-    lankScore.textContent = `${rankScore[i - 1].score}`;
-    child.appendChild(lankScore);
-    // 한 문제의 결과박스 슬라이더에 추가
-    lankingBox.appendChild(child);
-  }
+  const myChart = new Chart(document.querySelector('#myChart'), config);
 }
 
 function prevSlider() {
