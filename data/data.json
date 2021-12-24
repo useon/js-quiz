@@ -477,5 +477,16 @@
         "order": [ "globalTop", "func", "block", "globalBottom", "tryCatch" ]
       }
     ]
+  },
+  {
+    "category": "생성자함수",
+    "patterns": [
+      [ "method" ],
+      [ "normal", "prototype" ],
+      [ "normal", "static" ],
+      [ "method", "static" ],
+      [ "normal", "prototype", "static" ],
+      [ "method", "prototype", "static" ]
+    ]
   }
 ]

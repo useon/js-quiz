@@ -83,6 +83,7 @@ const insert = function (elem, index) {
 };
 Array.prototype.insert = insert;
 
+const getTryCatch = exp => `try {\n  ${exp}\n} catch {\n  'error'\n}`;
 
 
 const getBoolean = function () {

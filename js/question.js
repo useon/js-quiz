@@ -382,7 +382,7 @@ const getScopeQuestion = function ({ patterns }) {
   const { global, local, local2, block, order } = randElem(patterns);
 
   if (local2) {
-    const [ name1, name2 ] = randArray(FUNCTION_NAME, 2);
+    const [ name1, name2 ] = randArray(FUNCTION_NAME, 2).map(v => v.toLowerCase());
     const options = {
       type: randNum(0, 1),
       name: name1,
@@ -400,7 +400,7 @@ const getScopeQuestion = function ({ patterns }) {
   
   const options = {
     type: randNum(0, 1),
-    name: randElem(FUNCTION_NAME)
+    name: randElem(FUNCTION_NAME).toLowerCase()
   };
   const tryCatchExp = `try {\n  ${options.name}();\n} catch {\n  'error'\n}`;
   if (block) {
@@ -410,6 +410,73 @@ const getScopeQuestion = function ({ patterns }) {
   } else {
     const expressions = { tryCatchExp, ...getExpressions(global, local, options) };
     return order.map(v => expressions[`${v}Exp`]).filter(v => v).join('\n\n');
+  }
+};
+
+const getConstructorQuestion = ({ patterns }) => {
+  const pattern = randElem(patterns);
+  const funcName = randElem(FUNCTION_NAME);
+  const funcExp = [];
+  const expression = [];
+
+  pattern.forEach(v => {
+    switch (v) {
+      case 'normal':
+        funcExp.push(`this.prop = prop;`);
+        break;
+      case 'method':
+        funcExp.push(`this.prop = prop;`);
+        funcExp.push(`this.method = ${randElem(FUNC_TYPE).replace(/\n/g, '\n  ')};`);
+        break;
+      case 'prototype':
+        expression.push(`${funcName}.prototype.prop = ${randNum(0, 9)};`);
+        expression.push(`${funcName}.prototype.method = ${randElem(FUNC_TYPE)};`);
+        break;
+      case 'static':
+        expression.push(`${funcName}.prop = ${randNum(0, 9)};`);
+        expression.push(`${funcName}.method = ${randElem(FUNC_TYPE)};`);
+    }
+  });
+
+  const func = `function ${funcName}(prop) {\n${funcExp.map(v => '  ' + v).join('\n')}\n}`;
+  const exp = expression.join('\n');
+  const [ aName, bName ] = randArray(FUNCTION_NAME, 2).map(v => v.toLowerCase());
+  const aExp = `const ${aName} = new ${funcName}(${randNum(0, 9)});`;
+  const bExp = `const ${bName} = new ${funcName}(${randNum(0, 9)});`;
+  const constructor = [ 'Object', 'Function', funcName ];
+  const rand = randNum(0, 6);
+  const enter = pattern.length === 1 ? '' : '\n\n';
+  
+
+  switch (rand) {
+    case 0: {
+      const question = `${aName}.method === ${bName}.method`;
+      return `${func}\n\n${exp + enter}${aExp}\n${bExp}\n\n${getTryCatch(question)}`;
+    }
+    case 1: {
+      const question = `new ${funcName}().prototype === ${funcName}.prototype`;
+      return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
+    }
+    case 2: {
+      const question = `new ${funcName}().method === ${funcName}.method`;
+      return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
+    }
+    case 3: {
+      const question = `new ${funcName}().method()`;
+      return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
+    }
+    case 4: {
+      const question = `${funcName}.method()`;
+      return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
+    }
+    case 5: {
+      const question = `new ${funcName}() instanceof ${randElem(constructor)}`;
+      return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
+    }
+    case 6: {
+      const question = `new ${funcName}().method instanceof ${randElem(constructor)}`;
+      return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
+    }
   }
 };
 
@@ -433,6 +500,8 @@ const getQuestion = function (data) {
       return getIndexQuestion(randQuestion);
     case '스코프':
       return getScopeQuestion(randQuestion);
+    case '생성자함수':
+      return getConstructorQuestion(randQuestion);
   }
 };
 
