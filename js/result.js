@@ -2,55 +2,6 @@ let rankScore = []; // 랭킹 배열
 
 const showBtn = document.querySelector('.showResult'); // 결과보기 버튼
 
-// 틀린문제복습 관련 오브젝트와 이벤트리스너
-const studyBtn = document.querySelector('.studyBtn');
-const resultSlider = document.querySelector('.result-slider');
-studyBtn.addEventListener('click', showStudy);
-const sliderItemWidth = 400;
-let left = 0;
-let childCount = 0;
-let nowCount = 0;
-const nextSlideBtn = document.querySelector('.btn-next-slide');
-const prevSlideBtn = document.querySelector('.btn-prev-slide');
-const countBox = document.querySelector('.count-box');
-const endBtn = document.querySelector('.btn-end');
-const endBox = document.querySelector('.end-box');
-const endNo = document.querySelector('.end-btn-no');
-
-endBtn.addEventListener('click', showEnd);
-endNo.addEventListener('click', offEnd);
-
-// 로컬스토리지에서 데이터 불러오기
-function getData() {
-  questions = JSON.parse(localStorage.getItem('questions')); // 문제
-  inpAnswers = JSON.parse(localStorage.getItem('inpAnswers')); // 유저의 정답
-  rightAnswers = JSON.parse(localStorage.getItem('rightAnswers')); // 올바른 정답
-  right = JSON.parse(localStorage.getItem('right')); // 정답 개수
-  wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
-}
-
-// 데이터로드가 끝나면 랭킹 계산
-function rank() {
-  // 점수별 내림차순 정렬
-  rankScore = rankScore.sort(function (a, b) {
-    return b.score - a.score;
-  });
-
-  // 임시 테스트 코드 (1등~5등 출력)
-  // show_rank
-  console.log(rankScore[0]);
-  console.log(rankScore[1]);
-  console.log(rankScore[2]);
-  console.log(rankScore[3]);
-  console.log(rankScore[4]);
-
-  for (let r of rankScore) {
-    scores[r.score]++;
-  }
-
-  const myChart = new Chart(document.getElementById('myChart'), config);
-}
-
 // 버튼 누르면 결과보기
 showBtn.addEventListener('click', () => {
   // 버튼 삭제 > 결과 내용 추가
@@ -58,7 +9,6 @@ showBtn.addEventListener('click', () => {
   showBtn.innerHTML = `${right} / ${right + wrong}`;
 });
 
-// 비동기 처리 .. 최적화 필요
 // 데이터를 로드하며 갱신
 function loadData() {
   // 파이어베이스 데이터 저장소
@@ -126,8 +76,34 @@ function rank() {
   const myChart = new Chart(document.getElementById('myChart'), config);
 }
 
-// 여기부터 틀린문제복습 로직
+// 틀린문제복습 관련 오브젝트와 이벤트리스너
+const studyBtn = document.querySelector('.studyBtn');
+const resultSlider = document.querySelector('.result-slider');
+studyBtn.addEventListener('click', showStudy);
+const sliderItemWidth = 400;
+let left = 0;
+let childCount = 0;
+let nowCount = 0;
+const nextSlideBtn = document.querySelector('.btn-next-slide');
+const prevSlideBtn = document.querySelector('.btn-prev-slide');
+const countBox = document.querySelector('.count-box');
+const endBtn = document.querySelector('.btn-end');
+const endBox = document.querySelector('.end-box');
+const endNo = document.querySelector('.end-btn-no');
+endBtn.addEventListener('click', showEnd);
+endNo.addEventListener('click', offEnd);
 
+// 로컬스토리지에서 데이터 불러오기
+function getData() {
+  questions = JSON.parse(localStorage.getItem('questions')); // 문제
+  inpAnswers = JSON.parse(localStorage.getItem('inpAnswers')); // 유저의 정답
+  rightAnswers = JSON.parse(localStorage.getItem('rightAnswers')); // 올바른 정답
+  right = JSON.parse(localStorage.getItem('right')); // 정답 개수
+  wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
+  nickName = JSON.parse(localStorage.getItem('nickName')); // 닉네임
+}
+
+// 여기서부터 틀린문제 복습 로직
 function createStudyList(resultSlider) {
   for (let i = 0; i < inpAnswers.length; i++) {
     // 틀린 문제만 요소로 생성
@@ -176,7 +152,6 @@ function prevSlider() {
   resultSlider.style.left = left + 'px';
   countBox.textContent = `${nowCount + 1} / ${childCount}`;
 }
-
 function nextSlider() {
   nowCount++;
   left -= sliderItemWidth;
@@ -184,31 +159,25 @@ function nextSlider() {
   resultSlider.style.left = left + 'px';
   countBox.textContent = `${nowCount + 1} / ${childCount}`;
 }
-
 function checkListCount() {
   // 마지막 카운트
   if (nowCount === childCount - 1) {
     btnInvisible(nextSlideBtn);
   } else btnVisible(nextSlideBtn);
-
   if (nowCount === 0) btnInvisible(prevSlideBtn);
   else btnVisible(prevSlideBtn);
 }
-
 function btnVisible(btn) {
   btn.style.color = 'var(--color-font-1)';
   btn.removeAttribute('disabled');
 }
-
 function btnInvisible(btn) {
   btn.style.color = 'var(--color-font-2)';
   btn.setAttribute('disabled', true);
 }
-
 function showEnd() {
   endBox.style.zIndex = '10';
 }
-
 function offEnd() {
   endBox.style.zIndex = '-1';
 }
