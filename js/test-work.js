@@ -4,7 +4,7 @@ const inpAnswers = [];
 const rightAnswers = [];
 let right = 0;
 let wrong = 0;
-
+let myScore = 0;
 let isPause = false;
 
 // 시작 > 출력 > input > 제출 > 정답박스 > 오답확인
@@ -36,6 +36,9 @@ const nickNameBox = document.querySelector('.box-nick-name');
 const nickNameInput = document.querySelector('.nick-name-input');
 const nickNameBtn = document.querySelector('.btn-nick-name');
 nickNameBtn.addEventListener('click', nickNameConfirm);
+
+// 점수 산출
+const scoreArea = document.querySelector('.score-area');
 
 let nickName = '';
 // 닉네임 제출
@@ -95,18 +98,30 @@ function successCheck() {
   // 정/오답 분기
   if (isAnswer(questionBox.innerText, inpAnswer.value)) {
     floatingText.style.animation = null;
+    myScore += 10 + combo;
     combo++;
     right++;
     showCombo(comboPlusText);
     checkCombo(combo);
     next();
   } else {
+    myScore -= 10;
+    if (myScore < 0) myScore = 0;
     combo = 0;
     wrong++;
     comboDisplay.style.color = 'white';
     checkCombo(combo);
     showRightAnswer();
   }
+  scoreArea.innerHTML = `score : ${myScore}`;
+  // 점수에따라 폰트변화
+  if (1000 <= myScore) scoreArea.style.color = 'var(--color-font-2)';
+  else if (500 <= myScore) scoreArea.style.color = 'var(--color-main-5)';
+  else if (300 <= myScore) scoreArea.style.color = 'var(--color-main-4)';
+  else if (100 <= myScore) scoreArea.style.color = 'var(--color-main-3)';
+  else if (50 <= myScore) scoreArea.style.color = 'var(--color-main-2)';
+  else if (25 <= myScore) scoreArea.style.color = 'var(--color-main-1)';
+  else scoreArea.style.color = 'white';
 }
 
 // 정답일 경우
