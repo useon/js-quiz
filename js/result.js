@@ -59,28 +59,71 @@ showBtn.addEventListener('click', () => {
 });
 
 // 비동기 처리 .. 최적화 필요
+// 데이터를 로드하며 갱신
 function loadData() {
-  // 파이어베이스로 유저 결과 전송
-  firebase
-    .database()
-    .ref('data')
-    .push({
-      nickname: '익명',
-      result: right,
-    })
-    .then(() => {
-      // 전송하고 파이어베이스 JSON 파일로 불러오기
-      firebase
-        .database()
-        .ref('data/')
-        .once('value', function (snap) {
-          // rankScore에 배열형태로 닉네임(nick)과 점수(score) 저장
-          for (var i in snap.val()) {
-            rankScore.push({ nick: snap.val()[i].nickname, score: snap.val()[i].result });
+  // 파이어베이스 데이터 저장소
+  const ref = firebase.database().ref('data');
+  // DB 데이터를 순회하며 갱신할 데이터를 갱신하면서
+  // 랭킹 배열에 갱신된(유지된) 데이터를 저장한다.
+  ref
+    .once('value', (snapshot) => {
+      const userData = snapshot.val(); // 현재 순회중인 유저데이터
+      for (let i in userData) {
+        let key = userData[i].nickname; // 현재 순회중인 유저의 닉네임
+        let value = userData[i].score; // 현재 순회중인 유저의 점수
+
+        // 중복된 닉네임이 존재하면 기록을 갱신할지 살피기
+        if (nickName == key) {
+          // 최고 기록을 달성했으면 갱신해야한다
+          if (right > value) {
+            // 파이어베이스에 업데이트
+            setData(key, right);
+            // 현재 데이터를 랭킹배열에 저장한다
+            rankScore.push({ nick: nickName, score: right });
+          } else {
+            // DB에 있는 최댓값을 랭킹배열에 가져온다.
+            rankScore.push({ nick: key, score: value });
           }
-        })
-        .then(() => rank()); // 비동기 처리
-    });
+        }
+        // 중복된 닉네임이 없으면 DB데이터를 랭킹배열에 가져오고,
+        // 현재 유저 데이터를 파이어베이스에 저장한다.
+        else {
+          rankScore.push({ nick: key, score: value });
+          setData(nickName, right);
+        }
+      }
+    })
+    .then(() => rank()); // 완료되면 랭킹을 내자
+}
+
+// 데이터 저장 함수
+function setData(name, newScore) {
+  // 갱신된 데이터로 중복없이 푸시한다.
+  firebase.database().ref('data').child(nickName).set({
+    nickname: name,
+    score: newScore,
+  });
+}
+
+// 데이터로드가 끝나면 랭킹 계산, 차트 출력
+function rank() {
+  // 점수별 내림차순 정렬
+  rankScore = rankScore.sort(function (a, b) {
+    return b.score - a.score;
+  });
+
+  // 랭킹 콘솔출력
+  for (let v of rankScore) {
+    console.log(v);
+  }
+
+  // 점수별 분포 더하기
+  for (let r of rankScore) {
+    scores[r.score]++;
+  }
+
+  // 차트 로드하기
+  const myChart = new Chart(document.getElementById('myChart'), config);
 }
 
 // 여기부터 틀린문제복습 로직
