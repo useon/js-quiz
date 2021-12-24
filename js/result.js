@@ -65,6 +65,12 @@ function rank() {
     return b.score - a.score;
   });
 
+  // 1등 점수 가져와야함
+  const MAX_SCORE = rankScore[0].score + 1;
+
+  // 1등점수까지의 배열
+  let scores = Array.from({ length: MAX_SCORE }, () => 0);
+
   // 랭킹 콘솔출력
   for (let v of rankScore) {
     console.log(v);
@@ -76,6 +82,25 @@ function rank() {
   }
   // 차트 생성
   chartBox.innerHTML = '<canvas id="myChart"></canvas>';
+
+  const data = {
+    labels: [...Array(MAX_SCORE)].map((_, i) => i),
+    datasets: [
+      {
+        label: '점수 분포',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: scores,
+      },
+    ],
+  };
+
+  const config = {
+    type: 'line', // pie, bar, line, doughnut, polarArea
+    data: data,
+    options: {},
+  };
+
   // 차트 데이터 로드하기
   const myChart = new Chart(document.getElementById('myChart'), config);
   createLankingList();
