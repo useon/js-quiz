@@ -356,6 +356,7 @@ p {
 }
 
 .nick-name-input {
+  font-family: 'DungGeunMo';
   width: 250px;
   margin: 10px 0;
   height: 40px;
