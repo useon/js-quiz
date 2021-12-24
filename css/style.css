@@ -42,6 +42,7 @@
   --color-combo-2: #69b44b;
   --color-combo-3: #b47e4b;
   --color-combo-4: #b4644b;
+  --color-board-1: rgb(4, 73, 7);
 }
 /* :root {
   --color-bettery-1: #00e013; 100 ~ 80
@@ -84,7 +85,7 @@ body {
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  background-color: var(--color-main-1);
+  background-color: var(--color-main-2);
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
     0px 1px 10px 0px rgb(0 0 0 / 12%);
   z-index: 100;
@@ -356,6 +357,7 @@ p {
 }
 
 .nick-name-input {
+  font-family: 'DungGeunMo';
   width: 250px;
   margin: 10px 0;
   height: 40px;
@@ -733,10 +735,34 @@ p {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 400px;
+  height: 500px;
   top: 50px;
   justify-content: center;
   align-items: center;
+  background-color: var(--color-main-1);
+}
+
+.chart-wrap {
+  height: 400px;
+  width: 800px;
+  background-color: var(--color-board-1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 10px solid var(--color-main-6);
+  border-radius: 10px;
+}
+
+.chart {
+  width: 650px;
+  height: 290px;
+}
+
+.chart-title {
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: white;
 }
 
 h1 {
@@ -748,25 +774,29 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 180px;
-  width: 100%;
+  height: 150px;
+  width: 300px;
+  background-color: var(--color-board-1);
+  margin: 50px 0 20px 0;
+  border: 5px solid var(--color-main-6);
+  border-radius: 5px;
+  color: white;
+  font-size: 24px;
+  padding: 0 25px;
 }
 
 .showResult {
-  width: 150px;
-  height: 70px;
+  width: 270px;
+  height: 130px;
   padding: 15px;
-  border-radius: 20px;
   color: white;
-  background-color: var(--color-main-3);
-  transition: 0.3s all;
+  transition: 0.5s all;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 38px;
 }
 
 .showResult:hover {
-  color: var(--color-main-3);
-  background-color: white;
+  font-size: 24px;
 }
 
 .select-box {
@@ -821,18 +851,30 @@ h1 {
 .lanking-box {
   display: none;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 25px;
   padding-bottom: 50px;
   height: 300px;
   overflow-y: scroll;
 }
 
+.lanking-title {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin: 15px 0 0 20px;
+  animation: lanking-text 5s infinite;
+  font-size: 28px;
+  padding-bottom: 10px;
+  border-bottom: 5px dotted gold;
+}
+
 .lanking-box-label {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 30px 0;
+  padding: 0;
 }
 .lanking-box-label > div:nth-child(1) {
   display: flex;
@@ -862,7 +904,7 @@ h1 {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 .lanking-box-child > div:nth-child(1) {

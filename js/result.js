@@ -1,85 +1,18 @@
 let rankScore = []; // 랭킹 배열
 
 const showBtn = document.querySelector('.showResult'); // 결과보기 버튼
-
+const resultBox = document.querySelector('.result-box');
 // 차트 동적생성 준비
 const chartBox = document.querySelector('.chart');
 
 // 버튼 누르면 결과보기
 showBtn.addEventListener('click', () => {
   // 버튼 삭제 > 결과 내용 추가
-  showBtn.disabled = true;
-  showBtn.innerHTML = `${right} / ${right + wrong}`;
+  showBtn.remove();
+  resultBox.innerHTML = `총 ${
+    right + wrong
+  }문제 중 ${right}문제를맞추었습니다. 최종 점수는 ${myScore}점 입니다.`;
 });
-
-// 데이터를 로드하며 갱신
-function loadData() {
-  // 파이어베이스 데이터 저장소
-  const ref = firebase.database().ref('data');
-  // DB 데이터를 순회하며 갱신할 데이터를 갱신하면서
-  // 랭킹 배열에 갱신된(유지된) 데이터를 저장한다.
-  ref
-    .once('value', (snapshot) => {
-      const userData = snapshot.val(); // 현재 순회중인 유저데이터
-      for (let i in userData) {
-        let key = userData[i].nickname; // 현재 순회중인 유저의 닉네임
-        let value = userData[i].score; // 현재 순회중인 유저의 점수
-
-        // 중복된 닉네임이 존재하면 기록을 갱신할지 살피기
-        if (nickName == key) {
-          // 최고 기록을 달성했으면 갱신해야한다
-          if (right > value) {
-            // 파이어베이스에 업데이트
-            setData(key, right);
-            // 현재 데이터를 랭킹배열에 저장한다
-            rankScore.push({ nick: nickName, score: right });
-          } else {
-            // DB에 있는 최댓값을 랭킹배열에 가져온다.
-            rankScore.push({ nick: key, score: value });
-          }
-        }
-        // 중복된 닉네임이 없으면 현재 유저 데이터를 파이어베이스에 저장하고,
-        // DB데이터를 랭킹배열에 가져온다.
-        else {
-          setData(nickName, right);
-          rankScore.push({ nick: key, score: value });
-        }
-      }
-    })
-    .then(() => rank()); // 완료되면 랭킹을 내자
-}
-
-// 데이터 저장 함수
-function setData(name, newScore) {
-  // 갱신된 데이터로 중복없이 푸시한다.
-  firebase.database().ref('data').child(nickName).set({
-    nickname: name,
-    score: newScore,
-  });
-}
-
-// 데이터로드가 끝나면 랭킹 계산, 차트 출력
-function rank() {
-  // 점수별 내림차순 정렬
-  rankScore = rankScore.sort(function (a, b) {
-    return b.score - a.score;
-  });
-
-  // 랭킹 콘솔출력
-  for (let v of rankScore) {
-    console.log(v);
-  }
-
-  // 점수별 분포 더하기
-  for (let r of rankScore) {
-    scores[r.score]++;
-  }
-  // 차트 생성
-  chartBox.innerHTML = '<canvas id="myChart"></canvas>';
-  // 차트 데이터 로드하기
-  const myChart = new Chart(document.getElementById('myChart'), config);
-  createLankingList();
-}
 
 // 틀린문제복습 관련 오브젝트와 이벤트리스너
 const studyBtn = document.querySelector('.show-study-btn');
@@ -102,6 +35,7 @@ endNo.addEventListener('click', offEnd);
 const selectBox = document.querySelector('.select-box');
 const rankingBtn = document.querySelector('.show-lanking-btn');
 const goSelectBoxBtn = document.querySelector('.go-select-box');
+const lankingTitle = document.querySelector('.lanking-title');
 const lankingBox = document.querySelector('.lanking-box');
 rankingBtn.addEventListener('click', showLanking);
 goSelectBoxBtn.addEventListener('click', goSelectBox);
@@ -114,11 +48,13 @@ function getData() {
   right = JSON.parse(localStorage.getItem('right')); // 정답 개수
   wrong = JSON.parse(localStorage.getItem('wrong')); // 오답 개수
   nickName = JSON.parse(localStorage.getItem('nickName')); // 닉네임
+  myScore = JSON.parse(localStorage.getItem('myScore')); // 닉네임
 }
 
 function goSelectBox() {
   selectBox.style.display = 'block';
   lankingBox.style.display = 'none';
+  lankingTitle.style.display = 'none';
   btnInvisible(prevSlideBtn);
   btnInvisible(nextSlideBtn);
   countBox.textContent = `hello :)`;
@@ -127,6 +63,7 @@ function goSelectBox() {
 function showLanking() {
   selectBox.style.display = 'none';
   lankingBox.style.display = 'flex';
+  lankingTitle.style.display = 'flex';
   countBox.textContent = `Top Lank`;
 }
 
@@ -137,10 +74,12 @@ function showStudy() {
   // 틀린 문제가 없을 경우
   if (!wrong) {
     resultSlider.innerHTML = '<p>틀린 문제가 없습니다.</p>';
+    resultSlider.style.width = sliderItemWidth + 'px';
     return;
   }
+  if (1 < wrong) btnVisible(nextSlideBtn);
+  else btnInvisible(nextSlideBtn);
   btnInvisible(prevSlideBtn);
-  btnVisible(nextSlideBtn);
   countBox.textContent = `1 / ${childCount}`;
 }
 
@@ -198,6 +137,186 @@ function createLankingList() {
     // 한 문제의 결과박스 슬라이더에 추가
     lankingBox.appendChild(child);
   }
+}
+
+// 데이터를 로드하며 갱신
+function loadData() {
+  // 중복확인
+  let isOverlap = false;
+  let overlapScore = 0;
+  // 파이어베이스 데이터 저장소
+  const ref = firebase.database().ref('data');
+  // DB 데이터를 순회하며 갱신할 데이터를 갱신하면서
+  // 랭킹 배열에 갱신된(유지된) 데이터를 저장한다.
+  ref
+    .once('value', (snapshot) => {
+      const userData = snapshot.val(); // 현재 순회중인 유저데이터
+      for (let i in userData) {
+        let key = userData[i].nickname; // 현재 순회중인 유저의 닉네임
+        let value = userData[i].score; // 현재 순회중인 유저의 점수
+        // 랭크배열에 넣기
+
+        // 중복 체크
+        if (nickName === key) {
+          isOverlap = true;
+          overlapScore = value;
+        } else {
+          rankScore.push({ nick: key, score: value });
+        }
+      }
+      // 중복이면
+      if (isOverlap) {
+        // 높은 점수 갱신
+        let maxScore = getMax(overlapScore, myScore);
+        setData(nickName, maxScore);
+        rankScore.push({ nick: nickName, score: maxScore });
+      }
+      // 중복 아니면
+      else {
+        setData(nickName, myScore);
+        rankScore.push({ nick: nickName, score: myScore });
+      }
+    })
+    .then(() => rank()); // 완료되면 랭킹을 내자
+}
+
+function getMax(a, b) {
+  if (a < b) return b;
+  return a;
+}
+
+// 데이터 저장 함수
+function setData(name, newScore) {
+  // 갱신된 데이터로 중복없이 푸시한다.
+  firebase.database().ref('data').child(nickName).set({
+    nickname: name,
+    score: newScore,
+  });
+}
+
+// 데이터로드가 끝나면 랭킹 계산, 차트 출력
+function rank() {
+  // 점수별 내림차순 정렬
+  rankScore = rankScore.sort(function (a, b) {
+    return b.score - a.score;
+  });
+
+  // 1등 점수 가져와야함
+  const MAX_SCORE = rankScore[0].score + 1;
+
+  // 1등점수까지의 배열
+  let scores = Array.from({ length: MAX_SCORE }, () => 0);
+
+  // 랭킹 콘솔출력
+  for (let v of rankScore) {
+    console.log(v);
+  }
+
+  // 점수별 분포 더하기
+  for (let r of rankScore) {
+    scores[r.score]++;
+  }
+
+  loadChart(scores, MAX_SCORE);
+  createLankingList();
+}
+
+// 차트 생성
+function loadChart(dataSet, MAX_SCORE) {
+  chartBox.innerHTML = '<canvas id="myChart"></canvas>';
+
+  const data = {
+    labels: [...Array(MAX_SCORE)].map((_, i) => i),
+    datasets: [
+      {
+        label: '점수 분포',
+        borderColor: 'rgb(255, 255, 255)',
+        data: dataSet,
+        backgroundColor: 'rgb(255, 99, 132)',
+        // fill: true,
+      },
+    ],
+  };
+
+  //animation
+  const totalDuration = 2500;
+  const delayBetweenPoints = totalDuration / data.labels.length;
+  const previousY = (ctx) =>
+    ctx.index === 0
+      ? ctx.chart.scales.y.getPixelForValue(100)
+      : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+  const animation = {
+    x: {
+      type: 'number',
+      easing: 'linear',
+      duration: delayBetweenPoints,
+      from: NaN, // the point is initially skipped
+      delay(ctx) {
+        if (ctx.type !== 'data' || ctx.xStarted) {
+          return 0;
+        }
+        ctx.xStarted = true;
+        return ctx.index * delayBetweenPoints;
+      },
+    },
+    y: {
+      type: 'number',
+      easing: 'linear',
+      duration: delayBetweenPoints,
+      from: previousY,
+      delay(ctx) {
+        if (ctx.type !== 'data' || ctx.yStarted) {
+          return 0;
+        }
+        ctx.yStarted = true;
+        return ctx.index * delayBetweenPoints;
+      },
+    },
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {
+      animation,
+      interaction: {
+        intersect: false,
+      },
+      plugins: {
+        legend: false,
+      },
+      radius: 0,
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+          ticks: {
+            font: {
+              family: 'DungGeunMo', // Your font family
+              size: 18,
+            },
+          },
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            font: {
+              family: 'DungGeunMo', // Your font family
+              size: 20,
+            },
+            // Include a dollar sign in the ticks
+            // callback: function (value, index, values) {
+            //   return value + '명';
+            // },
+          },
+        },
+      },
+    },
+  };
+
+  // 차트 데이터 로드하기
+  const myChart = new Chart(document.querySelector('#myChart'), config);
 }
 
 function prevSlider() {
