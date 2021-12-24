@@ -14,6 +14,9 @@ showBtn.addEventListener('click', () => {
 
 // 데이터를 로드하며 갱신
 function loadData() {
+  // 중복확인
+  let isOverlap = false;
+  let overlapScore = 0;
   // 파이어베이스 데이터 저장소
   const ref = firebase.database().ref('data');
   // DB 데이터를 순회하며 갱신할 데이터를 갱신하면서
@@ -24,29 +27,36 @@ function loadData() {
       for (let i in userData) {
         let key = userData[i].nickname; // 현재 순회중인 유저의 닉네임
         let value = userData[i].score; // 현재 순회중인 유저의 점수
+        // 랭크배열에 넣기
 
-        // 중복된 닉네임이 존재하면 기록을 갱신할지 살피기
-        if (nickName == key) {
-          // 최고 기록을 달성했으면 갱신해야한다
-          if (right > value) {
-            // 파이어베이스에 업데이트
-            setData(key, right);
-            // 현재 데이터를 랭킹배열에 저장한다
-            rankScore.push({ nick: nickName, score: right });
-          } else {
-            // DB에 있는 최댓값을 랭킹배열에 가져온다.
-            rankScore.push({ nick: key, score: value });
-          }
-        }
-        // 중복된 닉네임이 없으면 현재 유저 데이터를 파이어베이스에 저장하고,
-        // DB데이터를 랭킹배열에 가져온다.
-        else {
-          setData(nickName, right);
+        // 중복 체크
+        if (nickName === key) {
+          console.log('중복입니다.');
+          isOverlap = true;
+          overlapScore = value;
+        } else {
           rankScore.push({ nick: key, score: value });
         }
       }
+      // 중복이면
+      if (isOverlap) {
+        // 높은 점수 갱신
+        let maxScore = getMax(overlapScore, right);
+        setData(nickName, maxScore);
+        rankScore.push({ nick: nickName, score: maxScore });
+      }
+      // 중복 아니면
+      else {
+        setData(nickName, right);
+        rankScore.push({ nick: nickName, score: right });
+      }
     })
     .then(() => rank()); // 완료되면 랭킹을 내자
+}
+
+function getMax(a, b) {
+  if (a < b) return b;
+  return a;
 }
 
 // 데이터 저장 함수
