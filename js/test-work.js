@@ -40,21 +40,21 @@ nickNameBtn.addEventListener('click', nickNameConfirm);
 let nickName = '';
 // 닉네임 제출
 function nickNameConfirm() {
-	// input이 비어있다면 실행 X
-	if (isEmpty(nickNameInput)) return;
-	nickName = nickNameInput.value;
-	nickNameBox.style.zIndex = -3;
-	goBtn.classList.remove('invisible');
+  // input이 비어있다면 실행 X
+  if (isEmpty(nickNameInput)) return;
+  nickName = nickNameInput.value;
+  nickNameBox.style.zIndex = -3;
 }
 // 게임 시작버튼
 function testStart() {
-	// UI 렌더링 > 문제 시작
-	startBtn.remove();
-	menualBox.remove();
-	submitBtn.removeAttribute('disabled');
-	inpAnswer.removeAttribute('readonly');
-	comboDisplay.textContent = '0';
-	next();
+  // UI 렌더링 > 문제 시작
+  startBtn.remove();
+  menualBox.remove();
+  goBtn.classList.remove('invisible');
+  submitBtn.removeAttribute('disabled');
+  inpAnswer.removeAttribute('readonly');
+  comboDisplay.textContent = '0';
+  next();
 }
 
 // 엔터키 입력 시 문제 제출
