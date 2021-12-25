@@ -484,6 +484,32 @@ const getConstructorQuestion = ({ patterns }) => {
   }
 };
 
+const getSpreadQuestion = ({ patterns }) => {
+  const { varType, answerType, form } = randElem(patterns);
+  const varName = randElem(FUNCTION_NAME).toLowerCase();
+  let varValue;
+  if (varType === "string") varValue = str([...Array(randNum(3, 5))].map(() => randNum(0, 9)).join(''));
+  else varValue = getValue(form);
+
+  if (answerType === 'object') {
+    const declaration = `const ${varName} = ${varValue};`;
+    const props = randArray(ALPHABET, randNum(0, 3))
+      .map(v => `${v}: ${randNum(0, 9)}`)
+      .concat(`...${varName}`);
+    return `${declaration}\n\n({${props.shuffle().join(', ')}})`;
+  }
+
+  let declaration;
+  const rand = randNum(0, 2);
+  if (rand) declaration = `const ${varName} = ${varValue};`;
+  else declaration = `const ${varName} = new Set(${varValue});`;
+  const props = randRange(0, 9, randNum(2, 3))
+    .concat(`...${varName}`);
+  
+  if (answerType === 'array') return `${declaration}\n\n[${props.shuffle().join(', ')}]`;
+  return `${declaration}\n\n[...new Set([${props.shuffle().join(', ')}])]`;
+};
+
 const getQuestion = function (data) {
   const randQuestion = randElem(data);
   const { category } = randQuestion;
@@ -506,6 +532,8 @@ const getQuestion = function (data) {
       return getScopeQuestion(randQuestion);
     case '생성자함수':
       return getConstructorQuestion(randQuestion);
+    case '스프레드':
+      return getSpreadQuestion(randQuestion);
   }
 };
 

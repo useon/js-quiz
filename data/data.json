@@ -488,5 +488,34 @@
       [ "normal", "prototype", "static" ],
       [ "method", "prototype", "static" ]
     ]
+  },
+  {
+    "category": "스프레드",
+    "patterns": [
+      {
+        "varType": "array",
+        "answerType": "array",
+        "form": { "type": "array", "0": [0, 5] }
+      },
+      {
+        "varType": "string",
+        "answerType": "array",
+        "form": { "type": "array", "0": [0, 5] }
+      },
+      {
+        "varType": "array",
+        "answerType": "set",
+        "form": { "type": "array", "0": [0, 5] }
+      },
+      {
+        "varType": "string",
+        "answerType": "set",
+        "form": { "type": "array", "0": [0, 5] }
+      },
+      {
+        "answerType": "object",
+        "form": { "type": "object", "0": [0, 3] }
+      }
+    ]
   }
 ]
