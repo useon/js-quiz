@@ -54,11 +54,21 @@ const isCorrectArray = function (value, answer) {
 const isCorrectObject = function (value, answer) {
   if (!checkStartEnd(answer, '{', '}')) return false;
   if (Object.keys(value).length === 0) return answer === '{}';
-  const entries = Object.entries(value);
+  const entries = Object.entries(value)
+    .sort((a, b) => {
+      if (a[0] === b[0]) return a[1] - b[1];
+      else if (a[0] > b[0]) return 1;
+      else return -1;
+    });
   return answer
     .slice(1, answer.length - 1)
     .split(',')
     .map(v => v.trim().split(':').map(v => deleteQuotes(v.trim())))
+    .sort((a, b) => {
+      if (a[0] === b[0]) return a[1] - b[1];
+      else if (a[0] > b[0]) return 1;
+      else return -1;
+    })
     .every(([ k, v ], i) => k === entries?.[i]?.[0] && v === entries?.[i]?.[1] + '');
 };
 
