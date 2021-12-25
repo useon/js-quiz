@@ -36,13 +36,14 @@ const getFunction = function (expression, paramType, options) {
       }
     }
     case 'SORT': {
-      const rand = randNum(0, 4);
+      const rand = randNum(0, 5);
       switch (rand) {
         case 0: return '';
         case 1: return 'function (a, b) {\n  return a - b;\n}';
         case 2: return 'function (a, b) {\n  return b - a;\n}';
         case 3: return '(a, b) => a - b';
         case 4: return '(a, b) => b - a';
+        case 5: return '(a, b) => {\n  if (a > b) return 1;\n  else if (a < b) return -1;\n  else return 0;\n}';
       }
     }
   }
