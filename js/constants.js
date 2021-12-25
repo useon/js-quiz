@@ -10,7 +10,6 @@ const INITIAL_ACC = [ 0, '' ];
 const COMPARISON_OPERATOR = [ '>', '<', '>=', '<=' ];
 const FUNCTION_NAME = [ 'Foo', 'Bar', 'Baz', 'Qux' ];
 const FUNC_TYPE = [
-  'function (prop) {\n  return this.prop;\n}',
-  '(prop) => this.prop',
-  'prop => this.prop'
+  'function () {\n  return this.prop;\n}',
+  '() => this.prop'
 ];

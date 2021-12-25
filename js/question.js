@@ -444,7 +444,7 @@ const getConstructorQuestion = ({ patterns }) => {
   const aExp = `const ${aName} = new ${funcName}(${randNum(0, 9)});`;
   const bExp = `const ${bName} = new ${funcName}(${randNum(0, 9)});`;
   const constructor = [ 'Object', 'Function', funcName ];
-  const rand = randNum(0, 6);
+  const rand = randNum(0, 7);
   const enter = pattern.length === 1 ? '' : '\n\n';
   
 
@@ -462,18 +462,22 @@ const getConstructorQuestion = ({ patterns }) => {
       return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
     }
     case 3: {
-      const question = `new ${funcName}().method()`;
+      const question = `new ${funcName}().method === ${funcName}.prototype.method`;
       return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
     }
     case 4: {
-      const question = `${funcName}.method()`;
+      const question = `new ${funcName}().method()`;
       return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
     }
     case 5: {
-      const question = `new ${funcName}() instanceof ${randElem(constructor)}`;
+      const question = `${funcName}.method()`;
       return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
     }
     case 6: {
+      const question = `new ${funcName}() instanceof ${randElem(constructor)}`;
+      return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
+    }
+    case 7: {
       const question = `new ${funcName}().method instanceof ${randElem(constructor)}`;
       return `${func}\n\n${exp + enter}${getTryCatch(question)}`;
     }
