@@ -540,10 +540,10 @@ const getQuestion = function (data) {
 
 // console 에서 확인하기 위해 임시로 넣은 코드
 // test.html에서 console에 문제 출력
-fetch("/data/data.json")
-  .then((response) => response.json())
-  .then(data => {
-    const question = getQuestion(data);
-    console.log(`문제: ${question}`);
-    console.log(`정답: ${getAnswer(question)}`);
-  });
+// fetch("/data/data.json")
+//   .then((response) => response.json())
+//   .then(data => {
+//     const question = getQuestion(data);
+//     console.log(`문제: ${question}`);
+//     console.log(`정답: ${getAnswer(question)}`);
+//   });

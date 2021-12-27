@@ -183,7 +183,6 @@ function showQuestion() {
       // 결과에 사용 할 배열에 문제저장
       questions.push(question);
       rightAnswers.push(getAnswer(question));
-      console.log(rightAnswers);
     });
 }
 
