@@ -11,7 +11,7 @@ showBtn.addEventListener('click', () => {
   showBtn.remove();
   resultBox.innerHTML = `총 ${
     right + wrong
-  }문제 중 ${right}문제를맞추었습니다. 최종 점수는 ${myScore}점 입니다.`;
+  }문제 중 ${right}문제를 맞추었습니다. 최종 점수는 ${myScore}점 입니다.`;
 });
 
 // 틀린문제복습 관련 오브젝트와 이벤트리스너
