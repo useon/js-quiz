@@ -44,7 +44,7 @@ function counterFactory() {
   var _myScore = 0;
 
   function count(value) {
-    _myScore = value || _myScore;
+    _myScore = value ?? _myScore;
     if (_myScore < 0) _myScore = 0;
     return _myScore;
   }
@@ -129,7 +129,7 @@ function successCheck() {
     checkCombo(combo);
     next();
   } else {
-    scoreCounter.dec(combo);
+    scoreCounter.dec();
     combo = 0;
     wrong++;
     comboDisplay.style.color = 'white';
