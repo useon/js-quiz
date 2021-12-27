@@ -208,9 +208,9 @@ function rank() {
   let scores = Array.from({ length: MAX_SCORE }, () => 0);
 
   // 랭킹 콘솔출력
-  for (let v of rankScore) {
-    console.log(v);
-  }
+  // for (let v of rankScore) {
+  //   console.log(v);
+  // }
 
   // 점수별 분포 더하기
   for (let r of rankScore) {
