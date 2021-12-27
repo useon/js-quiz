@@ -126,7 +126,6 @@ const getObject = function (form) {
 
 const getFalsy = function () {
   const rand = randNum(0, 6);
-  console.log('falsy', rand);
   switch (rand) {
     case 0: return str(FALSY[rand]);
     case 3: return arr(FALSY[rand]);

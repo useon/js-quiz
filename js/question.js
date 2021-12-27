@@ -445,7 +445,7 @@ const getConstructorQuestion = ({ patterns }) => {
   const aExp = `const ${aName} = new ${funcName}(${randNum(0, 9)});`;
   const bExp = `const ${bName} = new ${funcName}(${randNum(0, 9)});`;
   const constructor = [ 'Object', 'Function', funcName ];
-  const rand = randNum(0, 8);
+  const rand = randNum(0, 7);
   const enter = pattern.length === 1 ? '' : '\n\n';
   
 
