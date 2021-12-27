@@ -545,6 +545,7 @@ p {
   text-align: end;
   height: 26px;
   font-size: 30px;
+  padding-bottom: 15px;
   color: var(--color-bettery-1);
 }
 
