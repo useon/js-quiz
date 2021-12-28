@@ -1,5 +1,6 @@
 // 결과값 저장 배열선언
 const questions = [];
+const subjects = [];
 const inpAnswers = [];
 const rightAnswers = [];
 let right = 0;
@@ -178,10 +179,11 @@ function showQuestion() {
     .then((response) => response.json())
     .then((data) => {
       // 문제 데이터 저장 및 출력
-      let question = getQuestion(data);
+      const [ question, subject ] = getQuestion(data);
       questionBox.innerHTML = question;
       // 결과에 사용 할 배열에 문제저장
       questions.push(question);
+      subjects.push(subject);
       rightAnswers.push(getAnswer(question));
     });
 }
@@ -207,6 +209,7 @@ goBtn.addEventListener('click', saveandLoad);
 // 입력 저장, 전송 후 결과 페이지로 전환
 function saveandLoad() {
   localStorage.setItem('questions', JSON.stringify(questions));
+  localStorage.setItem('subjects', JSON.stringify(subjects));
   localStorage.setItem('inpAnswers', JSON.stringify(inpAnswers));
   localStorage.setItem('rightAnswers', JSON.stringify(rightAnswers));
   localStorage.setItem('right', JSON.stringify(right));

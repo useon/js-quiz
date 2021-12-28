@@ -516,25 +516,25 @@ const getQuestion = function (data) {
   const { category } = randQuestion;
   switch (category) {
     case '단항연산자':
-      return getUnaryOperatorQuestion(randQuestion);
+      return [ getUnaryOperatorQuestion(randQuestion), '단항연산자' ];
     case '연산자1개':
-      return getOperatorQuestion(randQuestion);
+      return [ getOperatorQuestion(randQuestion), '이항연산자' ];
     case '연산자2개':
-      return getTwoOperatorsQuestion(randQuestion, data);
+      return [ getTwoOperatorsQuestion(randQuestion, data), '연산자 우선순위' ];
     case '연산자3개':
-      return getThreeOperatorsQuestion(randQuestion, data);
+      return [ getThreeOperatorsQuestion(randQuestion, data), '단축 평가, 연산자 우선순위' ];
     case '배열메서드':
-      return getArrayQuestion(randQuestion, data);
+      return [ getArrayQuestion(randQuestion, data), 'Array 메서드' ];
     case '문자열메서드':
-      return getStringQuestion(randQuestion, data);
+      return [ getStringQuestion(randQuestion, data), 'String 메서드' ];
     case '인덱스':
-      return getIndexQuestion(randQuestion);
+      return [ getIndexQuestion(randQuestion), '인덱스' ];
     case '스코프':
-      return getScopeQuestion(randQuestion);
+      return [ getScopeQuestion(randQuestion), '스코프, 호이스팅' ];
     case '생성자함수':
-      return getConstructorQuestion(randQuestion);
+      return [ getConstructorQuestion(randQuestion), '생성자 함수, 프로토타입' ];
     case '스프레드':
-      return getSpreadQuestion(randQuestion);
+      return [ getSpreadQuestion(randQuestion), '스프레드 문법' ];
   }
 };
 

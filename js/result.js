@@ -43,6 +43,7 @@ goSelectBoxBtn.addEventListener('click', goSelectBox);
 // 로컬스토리지에서 데이터 불러오기
 function getData() {
   questions = JSON.parse(localStorage.getItem('questions')); // 문제
+  subjects = JSON.parse(localStorage.getItem('subjects')); // 주제
   inpAnswers = JSON.parse(localStorage.getItem('inpAnswers')); // 유저의 정답
   rightAnswers = JSON.parse(localStorage.getItem('rightAnswers')); // 올바른 정답
   right = JSON.parse(localStorage.getItem('right')); // 정답 개수
