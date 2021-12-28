@@ -96,8 +96,8 @@ function createStudyList(resultSlider) {
     const resultInpAnswers = document.createElement('div');
     const resultChild = document.createElement('div');
     resultChild.className += 'slider_contents';
-    // 문제
-    resultQuestions.textContent = questions[i];
+    // 유형과 문제
+    resultQuestions.innerHTML = `<p>💡 ${subjects[i]}</p><div>${questions[i]}</div>`;
     resultChild.appendChild(resultQuestions);
     // 정답
     resultRightAnswers.textContent = `정답 : ${rightAnswers[i]}`;
