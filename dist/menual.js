@@ -1,1 +1,103 @@
-const _0x1d3dd5=_0x3228;(function(_0x265c76,_0x179482){const _0x444a91=_0x3228,_0x5d7e33=_0x265c76();while(!![]){try{const _0x2fadc1=parseInt(_0x444a91(0x95))/0x1+parseInt(_0x444a91(0x98))/0x2*(parseInt(_0x444a91(0x9d))/0x3)+-parseInt(_0x444a91(0xaa))/0x4*(-parseInt(_0x444a91(0xa1))/0x5)+-parseInt(_0x444a91(0x8f))/0x6*(-parseInt(_0x444a91(0x9b))/0x7)+-parseInt(_0x444a91(0x93))/0x8+parseInt(_0x444a91(0x99))/0x9*(-parseInt(_0x444a91(0xa9))/0xa)+parseInt(_0x444a91(0xa7))/0xb;if(_0x2fadc1===_0x179482)break;else _0x5d7e33['push'](_0x5d7e33['shift']());}catch(_0x38ed7e){_0x5d7e33['push'](_0x5d7e33['shift']());}}}(_0x29f3,0xb508e));const nextButton=document['querySelector'](_0x1d3dd5(0xa3)),prevButton=document[_0x1d3dd5(0xa6)](_0x1d3dd5(0xa2)),menualContent=document[_0x1d3dd5(0xa6)](_0x1d3dd5(0x92));function _0x29f3(){const _0x5b4efc=['102mdTObp','문제에\x20주어진\x20자바스크립트\x20표현식의\x20값을\x20답안으로\x20제출하시면\x20됩니다.','block','.box-manual\x20>\x20p','6989032xIoXLS','addEventListener','228749XbjXqQ','display','문자열은\x20따옴표로,\x20배열은\x20대괄호로,\x20객체는\x20중괄호로\x20감싸야\x20정답으로\x20인정됩니다.','14602wgfjYC','13260699NFlwgC','정답을\x20연속으로\x20맞추면\x20추가\x20점수를\x20얻을\x20수\x20있습니다.','223118jyFmrV','length','444aQufLp','click','정답은\x20+10점,\x20오답은\x20-10점입니다.','style','180xsAwjG','.btn-menual-prev','.btn-menual-next','제한시간\x203분이고,\x20정답을\x20맞추면\x20점수를\x20얻습니다.','JS\x20퀴즈에서는\x20자바스크립트\x20문법을\x20활용한\x20문제가\x20출제됩니다.','querySelector','6784789wSIXCb','none','10RMFRes','68956TzkMbV','JS\x20퀴즈에\x20오신것을\x20환영합니다.\x20:)','innerHTML'];_0x29f3=function(){return _0x5b4efc;};return _0x29f3();}nextButton[_0x1d3dd5(0x94)](_0x1d3dd5(0x9e),nextMenual),prevButton[_0x1d3dd5(0x94)](_0x1d3dd5(0x9e),prevMenual);let menualArr=[_0x1d3dd5(0xab),_0x1d3dd5(0xa5),'[엔터키]를\x20사용하여\x20답안\x20제출이\x20가능합니다.',_0x1d3dd5(0x90),_0x1d3dd5(0x97),_0x1d3dd5(0xa4),_0x1d3dd5(0x9f),_0x1d3dd5(0x9a),'7연속\x20이상\x20정답을\x20맞추면\x20추가\x20시간을\x20얻을\x20수\x20있습니다.','[문제\x20출력]\x20버튼을\x20눌러\x20시작하세요!'],menualCount=0x0;function _0x3228(_0x588087,_0x2c9601){const _0x29f380=_0x29f3();return _0x3228=function(_0x3228da,_0x25e128){_0x3228da=_0x3228da-0x8f;let _0x55319b=_0x29f380[_0x3228da];return _0x55319b;},_0x3228(_0x588087,_0x2c9601);}menualContent[_0x1d3dd5(0xac)]=menualArr[0x0];function nextMenual(){const _0x14d587=_0x1d3dd5;menualCount==menualArr[_0x14d587(0x9c)]-0x2&&(nextButton[_0x14d587(0xa0)][_0x14d587(0x96)]=_0x14d587(0xa8)),menualContent[_0x14d587(0xac)]=menualArr[++menualCount],prevButton[_0x14d587(0xa0)][_0x14d587(0x96)]=_0x14d587(0x91);}function prevMenual(){const _0x13ee6c=_0x1d3dd5;menualCount==0x1&&(prevButton[_0x13ee6c(0xa0)][_0x13ee6c(0x96)]=_0x13ee6c(0xa8)),menualContent[_0x13ee6c(0xac)]=menualArr[--menualCount],nextButton['style'][_0x13ee6c(0x96)]='block';}
+const _0x56e5e6 = _0xea6c;
+(function (_0xc61420, _0x613e05) {
+  const _0x227ffa = _0xea6c,
+    _0x75030 = _0xc61420();
+  while (!![]) {
+    try {
+      const _0x51743e =
+        (parseInt(_0x227ffa(0x9a)) / 0x1) * (-parseInt(_0x227ffa(0xa6)) / 0x2) +
+        (parseInt(_0x227ffa(0x98)) / 0x3) * (parseInt(_0x227ffa(0xa3)) / 0x4) +
+        (-parseInt(_0x227ffa(0xa0)) / 0x5) * (parseInt(_0x227ffa(0xa8)) / 0x6) +
+        (parseInt(_0x227ffa(0x9d)) / 0x7) * (parseInt(_0x227ffa(0xa7)) / 0x8) +
+        -parseInt(_0x227ffa(0x92)) / 0x9 +
+        (parseInt(_0x227ffa(0xad)) / 0xa) * (parseInt(_0x227ffa(0x91)) / 0xb) +
+        (-parseInt(_0x227ffa(0x97)) / 0xc) * (-parseInt(_0x227ffa(0x9b)) / 0xd);
+      if (_0x51743e === _0x613e05) break;
+      else _0x75030['push'](_0x75030['shift']());
+    } catch (_0x24f5d5) {
+      _0x75030['push'](_0x75030['shift']());
+    }
+  }
+})(_0x32fb, 0x193b5);
+const nextButton = document['querySelector']('.btn-menual-next'),
+  prevButton = document['querySelector'](_0x56e5e6(0xa1)),
+  menualContent = document[_0x56e5e6(0x9c)](_0x56e5e6(0x90));
+nextButton[_0x56e5e6(0x96)]('click', nextMenual),
+  prevButton[_0x56e5e6(0x96)](_0x56e5e6(0xa2), prevMenual);
+function _0x32fb() {
+  const _0x1e192a = [
+    'click',
+    '28yTVjBT',
+    'innerHTML',
+    'style',
+    '104380neekhS',
+    '1616YKITMC',
+    '32550nmBnCu',
+    '[문제\x20출력]\x20버튼을\x20눌러\x20시작하세요!',
+    'block',
+    '정답은\x20+10점,\x20오답은\x20-5점입니다.',
+    '문제에\x20주어진\x20자바스크립트\x20표현식의\x20값을\x20답안으로\x20제출하시면\x20됩니다.',
+    '210ZnTJvx',
+    'none',
+    '.box-manual\x20>\x20p',
+    '62392KmATLu',
+    '1648485zQqfUf',
+    '제한시간\x203분이고,\x20정답을\x20맞추면\x20점수를\x20얻습니다.',
+    'display',
+    '[엔터키]를\x20사용하여\x20답안\x20제출이\x20가능합니다.',
+    'addEventListener',
+    '408xaudTR',
+    '47847XDWAta',
+    'length',
+    '2ncajjX',
+    '48971WvPkLb',
+    'querySelector',
+    '2051XPQLRc',
+    '7연속\x20이상\x20정답을\x20맞추면\x20추가\x20시간을\x20얻을\x20수\x20있습니다.',
+    'JS\x20퀴즈에서는\x20자바스크립트\x20문법을\x20활용한\x20문제가\x20출제됩니다.',
+    '25kJJlzD',
+    '.btn-menual-prev',
+  ];
+  _0x32fb = function () {
+    return _0x1e192a;
+  };
+  return _0x32fb();
+}
+function _0xea6c(_0x297511, _0x56975f) {
+  const _0x32fb1b = _0x32fb();
+  return (
+    (_0xea6c = function (_0xea6c52, _0x2c4047) {
+      _0xea6c52 = _0xea6c52 - 0x8f;
+      let _0x3f3098 = _0x32fb1b[_0xea6c52];
+      return _0x3f3098;
+    }),
+    _0xea6c(_0x297511, _0x56975f)
+  );
+}
+let menualArr = [
+    'JS\x20퀴즈에\x20오신것을\x20환영합니다.\x20:)',
+    _0x56e5e6(0x9f),
+    _0x56e5e6(0x95),
+    _0x56e5e6(0xac),
+    '문자열은\x20따옴표로,\x20배열은\x20대괄호로,\x20객체는\x20중괄호로\x20감싸야\x20정답으로\x20인정됩니다.',
+    _0x56e5e6(0x93),
+    _0x56e5e6(0xab),
+    '정답을\x20연속으로\x20맞추면\x20추가\x20점수를\x20얻을\x20수\x20있습니다.',
+    _0x56e5e6(0x9e),
+    _0x56e5e6(0xa9),
+  ],
+  menualCount = 0x0;
+menualContent['innerHTML'] = menualArr[0x0];
+function nextMenual() {
+  const _0x79fda9 = _0x56e5e6;
+  menualCount == menualArr[_0x79fda9(0x99)] - 0x2 &&
+    (nextButton['style'][_0x79fda9(0x94)] = _0x79fda9(0x8f)),
+    (menualContent[_0x79fda9(0xa4)] = menualArr[++menualCount]),
+    (prevButton[_0x79fda9(0xa5)][_0x79fda9(0x94)] = _0x79fda9(0xaa));
+}
+function prevMenual() {
+  const _0x2f3f7c = _0x56e5e6;
+  menualCount == 0x1 && (prevButton[_0x2f3f7c(0xa5)][_0x2f3f7c(0x94)] = 'none'),
+    (menualContent[_0x2f3f7c(0xa4)] = menualArr[--menualCount]),
+    (nextButton[_0x2f3f7c(0xa5)][_0x2f3f7c(0x94)] = _0x2f3f7c(0xaa));
+}

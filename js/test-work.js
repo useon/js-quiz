@@ -54,7 +54,7 @@ function counterFactory() {
       return count(count() + 10 + combo);
     },
     dec: function () {
-      return count(count() - 10);
+      return count(count() - 5);
     },
     result: function () {
       return _myScore;
