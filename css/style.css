@@ -1012,6 +1012,17 @@ h1 {
   color: white;
 }
 
+.slider_contents > div:nth-child(1) > p {
+  padding: 10px 0;
+  text-align: start;
+  margin-top: -30px;
+  margin-left: -10px;
+  font-size: 20px;
+  font-family: 'DungGeunMo';
+  color: var(--color-main-2);
+  margin-bottom: 10px;
+}
+
 .slider_contents > div:nth-child(2) {
   display: flex;
   align-items: center;
